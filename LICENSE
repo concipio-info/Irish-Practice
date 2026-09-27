@@ -1,6 +1,41 @@
+IRISH PRACTICE APP COLLECTION
+LICENSING SCOPE AND THIRD-PARTY NOTICES
+
+1. Scope
+
+The MIT License in section 2 applies to the original launcher, application
+code and documentation in this collection to the extent that the copyright
+is held by John Zigman and no separate licence is identified for that material.
+It grants permission only in rights held by that copyright holder.
+
+Third-party code, databases, data, images and other separately licensed
+material remain governed by their respective original licences. They are
+not relicensed under the MIT License below. Existing copyright notices,
+attributions, permission notices and licence files must be retained as
+required by the applicable licences.
+
+You may use, copy, modify and redistribute the collection, including for
+commercial purposes, subject to the licences applicable to each included
+component. Permission under the MIT License does not waive or replace any
+obligations under those separate licences. Where a component has its own
+licence, that licence governs that component.
+
+The notices in section 3 reproduce the supplied notices for one included
+sub-app. Other notices supplied elsewhere in the collection also continue
+to apply. This file does not replace the licence files within sub-app folders.
+
+In particular, the BuNaMo-derived database is not covered by the application
+code's MIT licence. Its Open Database License requirements, including
+attribution, share-alike and access to a derivative database or alterations
+where applicable, must be followed. Rights in its individual contents are
+licensed under the Database Contents License. Consult those licences for
+their full conditions; this paragraph is a summary, not a replacement.
+
+2. MIT LICENSE FOR ORIGINAL MATERIAL
+
 MIT License
 
-Copyright (c) 2026 John
+Copyright (c) 2026 John Zigman
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +54,71 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+3. EXISTING COMPONENT NOTICES (REPRODUCED AS SUPPLIED)
+
+
+--- App-MIT.txt ---
+
+MIT License
+
+Copyright (c) 2026 Briathra contributors
+
+This licence covers original application code, not the BuNaMo-derived database.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+--- BuNaMo.txt ---
+
+Copyright (c) 2017 Foras na Gaeilge
+
+The Irish National Morphology Database is made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
+
+
+--- GramadAn-MIT.txt ---
+
+MIT License
+
+Copyright (c) 2017 Foras na Gaeilge
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Official licence references:
+MIT: https://opensource.org/license/mit
+ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/
+DbCL 1.0: https://opendatacommons.org/licenses/dbcl/1-0/

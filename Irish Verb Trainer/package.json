@@ -1,0 +1,1 @@
+{"name":"briathra-irish-verb-trainer","version":"1.0.0","private":true,"description":"Offline Irish conjugation practice: 11 irregular and 50 common regular verbs","scripts":{"test":"node tests/engine.test.cjs","sync-data":"node tools/sync-data.cjs"}}
