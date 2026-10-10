@@ -1,77 +1,488 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prepositional Scavenger Hunt · Irish</title>
-<style>
-:root{color-scheme:light;--ink:#17332f;--muted:#526a65;--green:#126858;--light:#e7f5ef;--gold:#ffcc63;--red:#a63432;--line:#d5e3dc;--paper:#fbfaf5}*{box-sizing:border-box}body{margin:0;background:#eff4ef;color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}header{background:#123d36;color:white;padding:28px max(22px,calc((100vw - 990px)/2)) 24px}header p{margin:5px 0 0;color:#cfebe1}h1{margin:0;font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.16}main{max-width:990px;margin:22px auto 60px;padding:0 18px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:0 6px 30px #183c2810;padding:22px;margin-bottom:16px}.settings{display:flex;gap:15px;flex-wrap:wrap;align-items:end}.settings label{display:grid;gap:4px;font-size:.85rem;font-weight:700;color:var(--muted)}select{min-width:160px;border:1px solid #b9d0c5;border-radius:10px;padding:9px;background:white;color:var(--ink)}.button{border:0;border-radius:11px;padding:11px 17px;background:var(--green);color:white;font-weight:750}.button:hover,.button:focus-visible{background:#0a4d41}.button.secondary{background:#e7eee9;color:var(--ink)}.button.secondary:hover{background:#d3e6dc}.button:disabled{opacity:.5;cursor:not-allowed}.stats{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;color:var(--muted);font-size:.9rem}.pill{border-radius:99px;background:#e4efe9;padding:4px 11px}.track{height:8px;background:#e0e8df;border-radius:99px;margin:14px 0 0;overflow:hidden}.fill{height:100%;background:var(--green);width:0%;transition:width .25s}.tag{font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--green);font-weight:800}.question{font-size:clamp(1.5rem,4vw,2.15rem);line-height:1.27;margin:14px 0 8px}.prompt{margin:0 0 14px;color:var(--muted)}.pieces{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:15px 0 20px}.piece{padding:9px 13px;background:#e4f2eb;border:1px solid #b7d8c5;border-radius:11px;font-size:1.07rem}.plus{color:var(--muted);font-weight:bold}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice{min-height:55px;text-align:left;background:white;border:1.5px solid #bdd2c7;border-radius:12px;padding:12px 14px;color:var(--ink);font-weight:650}.choice:hover:not(:disabled),.choice:focus-visible:not(:disabled){border-color:var(--green);background:#f1faf5}.choice.correct{background:#d8f4df;border-color:#228753}.choice.wrong{background:#fff0ee;border-color:#bb5b55}.choice:disabled{cursor:default}.type-row{display:flex;gap:9px}.type-row input{flex:1;min-width:0;border:1.5px solid #b9d0c5;border-radius:11px;padding:11px;background:white;color:var(--ink)}.type-row input:focus{outline:2px solid #55a98b}.feedback{margin-top:18px;padding:17px;background:#e8f4ee;border-left:5px solid var(--green);border-radius:10px}.feedback.error{background:#fff1eb;border-color:var(--red)}.feedback h3{margin:0 0 5px}.feedback p{margin:5px 0}.feedback .answer{font-size:1.22rem;font-weight:800}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.note{font-size:.88rem;color:var(--muted)}details summary{cursor:pointer;font-weight:750}details p{margin-bottom:0}.reference{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;padding:0;margin:13px 0 2px;list-style:none}.reference li{border-bottom:1px solid var(--line);padding-bottom:7px}.reference b{color:var(--green)}.hidden{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:600px){.panel{padding:18px}.choices,.reference{grid-template-columns:1fr}.type-row{flex-wrap:wrap}.type-row input{flex-basis:100%}}
-</style></head><body><header><h1>Prepositional Scavenger Hunt</h1><p>Find the right article form and the right beginning of the noun.</p></header><main>
-<section class="panel settings" aria-label="Practice settings"><label>Topic<select id="topic"><option value="all">Mixed hunt</option><option value="fusions">Article combinations</option><option value="mutations">With the article</option><option value="bare">Without the article</option><option value="gan">Gan + article</option></select></label><label>Answer style<select id="mode"><option value="choice">Choose a phrase</option><option value="type">Type the phrase</option><option value="flash">Flip flashcards</option></select></label><button class="button" id="restart">Start new hunt</button></section>
-<section class="panel" id="game"><div class="stats"><span class="pill" id="count"></span><span class="pill" id="score"></span></div><div class="track" aria-hidden="true"><div class="fill" id="progress"></div></div><div class="tag" id="category"></div><h2 class="question" id="question"></h2><p class="prompt" id="instruction"></p><div class="pieces" id="pieces"></div><div id="choices" class="choices"></div><form id="typeform" class="type-row hidden"><label for="typed" class="sr-only">Complete Irish phrase</label><input id="typed" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the whole Irish phrase"><button class="button" type="submit">Check</button></form><div id="flashControls" class="hidden"><button class="button secondary" id="reveal" type="button">Reveal answer</button></div><div id="feedback" class="feedback hidden" aria-live="polite"></div><div class="actions"><button class="button hidden" id="next" type="button">Next question →</button><button class="button secondary" id="skip" type="button">Skip</button></div></section>
-<section class="panel"><details><summary>Quick reference · the central standard pattern</summary><ul class="reference"><li><b>de + an → den</b> · den chrann</li><li><b>do + an → don</b> · don fhear</li><li><b>faoi + an → faoin</b> · faoin ngrian</li><li><b>i + an → sa / san</b> · sa bhosca; san fharraige</li><li><b>ó + an → ón</b> · ón gcarr</li><li><b>le + an → leis an</b> · leis an mbean</li><li><b>trí + an → tríd an</b> · tríd an bhfuinneog</li><li><b>gan + an → gan an</b> · gan an t-uisce</li></ul><p class="note">After <i>den, don, sa/san</i>, a following singular consonant usually lenites; after most other listed prepositions with <i>an</i>, it usually eclipses. Singular <i>d</i> and <i>t</i> stay unchanged, a feminine <i>s</i> normally gains <i>t</i>, and vowels stay unchanged. <i>Gan an</i> instead keeps the nominative article pattern. The Caighdeán also permits eclipsis after <i>den/don/sa</i>; these cards teach the central pattern.</p></details></section>
-<footer class="note">Offline practice · Irish standard central system · <a href="https://irishlanguage.ie/an-caighdean-oifigiuil-chapter-1-the-article/" target="_blank" rel="noopener">article and dative rules</a> · <a href="https://irishlanguage.ie/an-caighdean-oifigiuil-chapter-10-initial-mutations-pp-171-202/" target="_blank" rel="noopener">simple prepositions</a>. A voice installed on your device may pronounce Irish differently; this app uses text only.</footer></main>
-<script>
-'use strict';
-// Hand-checked examples: the central system for singular definite nouns.
-// Each row: topic, preposition, article, unmutated noun, answer, English cue, explanation.
-const DATA=[
-['fusions','de','an','crann','den chrann','of the tree','De + an becomes den; c lenites to ch.'],
-['fusions','do','an','fear','don fhear','to the man','Do + an becomes don; f lenites to fh.'],
-['fusions','i','an','bosca','sa bhosca','in the box','I + an becomes sa; b lenites to bh.'],
-['fusions','i','an','farraige','san fharraige','in the sea','Before f + vowel use san; f lenites to fh.'],
-['fusions','i','an','áit','san áit','in the place','Before a vowel use san; the vowel stays unchanged.'],
-['fusions','faoi','an','grian','faoin ngrian','under the sun','Faoi + an becomes faoin; g eclipses to ng.'],
-['fusions','ó','an','carr','ón gcarr','from the car','Ó + an becomes ón; c eclipses to gc.'],
-['fusions','le','an','bean','leis an mbean','with the woman','Le + an becomes leis an; b eclipses to mb.'],
-['fusions','trí','an','fuinneog','tríd an bhfuinneog','through the window','Trí + an becomes tríd an; f eclipses to bhf.'],
-['fusions','ag','an','bord','ag an mbord','at the table','Ag an stays separate; b eclipses to mb.'],
-['fusions','ar','an','capall','ar an gcapall','on the horse','Ar an stays separate; c eclipses to gc.'],
-['mutations','de','an','bean','den bhean','of the woman','Den takes lenition in the central system: b → bh.'],
-['mutations','do','an','páiste','don pháiste','to the child','Don takes lenition in the central system: p → ph.'],
-['mutations','i','an','teach','sa teach','in the house','Sa is used before t; d/t stay unchanged here.'],
-['mutations','i','an','sráid','sa tsráid','in the street','Feminine s gets t before it: ts.'],
-['mutations','i','an','scoil','sa scoil','in the school','The sc- cluster resists the t- prefix.'],
-['mutations','i','an','uisce','san uisce','in the water','San precedes a vowel; the masculine t- of an t-uisce drops in the dative.'],
-['mutations','i','an','fhuinneog','san fhuinneog','in the window','The base noun is fuinneog: before f + vowel, san; f lenites to fh.'],
-['mutations','faoi','an','bord','faoin mbord','under the table','Faoin normally eclipses b → mb.'],
-['mutations','faoi','an','doras','faoin doras','under the door','D stays unchanged after the singular article in the central system.'],
-['mutations','ag','an','carr','ag an gcarr','at the car','Ag an normally eclipses c → gc.'],
-['mutations','ag','an','tine','ag an tine','at the fire','T stays unchanged here in the central standard pattern.'],
-['mutations','ar','an','fear','ar an bhfear','on the man','Ar an normally eclipses f → bhf.'],
-['mutations','le','an','sráid','leis an tsráid','with the street','The feminine noun sráid gains t before s.'],
-['mutations','roimh','an','bainis','roimh an mbainis','before the wedding','Roimh an normally eclipses b → mb.'],
-['mutations','trí','an','páirc','tríd an bpáirc','through the park','Tríd an normally eclipses p → bp.'],
-['mutations','ó','an','obair','ón obair','from the work','Ó + an becomes ón; no mutation before a vowel.'],
-['bare','de','','carr','de charr','of a car','De lenites an indefinite noun: c → ch.'],
-['bare','do','','buachaill','do bhuachaill','to a boy','Do lenites an indefinite noun: b → bh.'],
-['bare','faoi','','bord','faoi bhord','under a table','Faoi lenites an indefinite noun: b → bh.'],
-['bare','trí','','páirc','trí pháirc','through a park','Trí lenites an indefinite noun: p → ph.'],
-['bare','roimh','','maidin','roimh mhaidin','before morning','Roimh lenites m → mh.'],
-['bare','i','','bosca','i mbosca','in a box','I eclipses b → mb without the article.'],
-['bare','i','','carr','i gcarr','in a car','I eclipses c → gc without the article.'],
-['bare','i','','teach','i dteach','in a house','I eclipses t → dt without the article.'],
-['bare','ar','','bád','ar bhád','on a boat','Ar lenites in this familiar use: b → bh.'],
-['bare','gan','','carr','gan charr','without a car','Gan lenites an unqualified indefinite c → ch.'],
-['bare','gan','','bord','gan bhord','without a table','Gan lenites an unqualified indefinite b → bh.'],
-['bare','gan','','tine','gan tine','without fire','Gan does not lenite an initial t.'],
-['bare','gan','','fear','gan fear','without a man','Gan does not normally lenite an initial f.'],
-['bare','gan','','pingin rua','gan pingin rua','without a red penny','Gan does not lenite a noun qualified by an adjective.'],
-['gan','gan','an','uisce','gan an t-uisce','without the water','Gan an takes the nominative article pattern: masculine vowel initial nouns gain t-.'],
-['gan','gan','an','carr','gan an carr','without the car','Masculine consonant initial carr has no mutation after an in the nominative.'],
-['gan','gan','an','bean','gan an bhean','without the woman','Feminine singular bean lenites after nominative an.'],
-['gan','gan','an','sráid','gan an tsráid','without the street','Feminine singular sráid gains t before s after nominative an.'],
-['gan','gan','an','áit','gan an áit','without the place','Feminine vowel initial áit remains unchanged after an.'],
-['gan','gan','an','teach','gan an teach','without the house','Masculine consonant initial teach remains unchanged.'],
-['gan','gan','an','fuinneog','gan an fhuinneog','without the window','Feminine singular fuinneog lenites after nominative an.']
-].filter(row=>!(row[0]==='mutations'&&row[3]==='fhuinneog'));
-// Topic examples are intentionally curated; alternatives may occur in dialects.
-const $=id=>document.getElementById(id), els={topic:$('topic'),mode:$('mode'),count:$('count'),score:$('score'),progress:$('progress'),category:$('category'),question:$('question'),instruction:$('instruction'),pieces:$('pieces'),choices:$('choices'),typeform:$('typeform'),typed:$('typed'),flashControls:$('flashControls'),reveal:$('reveal'),feedback:$('feedback'),next:$('next'),skip:$('skip')};
-let deck=[],index=0,correct=0,attempted=0,answered=false;
-function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function norm(s){return s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/[’‘]/g,"'").replace(/\s+/g,' ')}
-function opts(row){let answer=row[4], pool=DATA.filter(r=>r[4]!==answer&&r[3].split(' ')[0]===row[3].split(' ')[0]).map(r=>r[4]);let first=answer.split(' ')[0], noun=row[3].split(' ')[0], variants=[`${row[1]} ${row[2]} ${noun}`.replace(/\s+/g,' ').trim(),`${first} ${noun}`,`${row[1]} ${noun}`];let all=[...new Set([...variants,...shuffle(pool)])].filter(x=>x!==answer&&x!==`${row[1]} ${row[2]}`.trim());while(all.length<3){let other=shuffle(DATA.map(r=>r[4]).filter(x=>x!==answer&&!all.includes(x)))[0];all.push(other)}return shuffle([answer,...all.slice(0,3)])}
-function updateStats(){els.count.textContent=`Card ${Math.min(index+1,deck.length)} / ${deck.length}`;els.score.textContent=`${correct} correct · ${attempted} checked`;els.progress.style.width=`${Math.round(index/deck.length*100)}%`}
-function newHunt(){let selected=els.topic.value;deck=shuffle(DATA.filter(r=>selected==='all'||r[0]===selected));index=correct=attempted=0;render()}
-function render(){answered=false;els.feedback.classList.add('hidden');els.next.classList.add('hidden');els.skip.classList.remove('hidden');els.typed.value='';els.choices.replaceChildren();updateStats();if(index>=deck.length){els.count.textContent=`Finished · ${deck.length} cards`;els.progress.style.width='100%';els.category.textContent='Hunt complete';els.question.textContent=`${correct} correct out of ${attempted} checked`;els.instruction.textContent='Choose a topic or start a new shuffled hunt to practise again.';els.pieces.replaceChildren();els.choices.classList.add('hidden');els.typeform.classList.add('hidden');els.flashControls.classList.add('hidden');els.skip.classList.add('hidden');return}let r=deck[index],mode=els.mode.value;els.category.textContent=({fusions:'Article combinations',mutations:'With the article',bare:'Without the article',gan:'Gan + article'})[r[0]];els.question.textContent=r[5][0].toUpperCase()+r[5].slice(1);els.instruction.textContent=mode==='flash'?'Work out the Irish phrase, then reveal it.':mode==='type'?'Type the full Irish phrase (including the preposition).':'Choose the full Irish phrase.';els.pieces.replaceChildren();for(const [i,s] of [r[1],r[2]||'no article',r[3]].entries()){if(i){let plus=document.createElement('span');plus.className='plus';plus.textContent='+';els.pieces.append(plus)}let p=document.createElement('span');p.className='piece';p.textContent=s;els.pieces.append(p)}els.choices.classList.toggle('hidden',mode!=='choice');els.typeform.classList.toggle('hidden',mode!=='type');els.flashControls.classList.toggle('hidden',mode!=='flash');els.reveal.disabled=false;if(mode==='choice')for(const item of opts(r)){let b=document.createElement('button');b.className='choice';b.type='button';b.textContent=item;b.addEventListener('click',()=>check(item,b));els.choices.append(b)}if(mode==='type')els.typed.focus()}
-function showFeedback(isCorrect,skip=false){const r=deck[index];els.feedback.replaceChildren();els.feedback.className='feedback'+(isCorrect?'':' error');let h=document.createElement('h3');h.textContent=skip?'Card skipped':isCorrect?'Correct!':'Good try — here is the pattern';let a=document.createElement('p');a.className='answer';a.textContent=r[4];let why=document.createElement('p');why.textContent=r[6];els.feedback.append(h,a,why);els.next.classList.remove('hidden');els.next.textContent=index===deck.length-1?'See results →':'Next question →';els.skip.classList.add('hidden');els.choices.querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.textContent===r[4])b.classList.add('correct')});els.reveal.disabled=true;els.typed.disabled=true;els.typeform.querySelector('button').disabled=true;els.next.focus()}
-function check(value,button){if(answered)return;answered=true;attempted++;let ok=norm(value)===norm(deck[index][4]);if(ok)correct++;else if(button)button.classList.add('wrong');updateStats();showFeedback(ok)}
-function advance(){if(!answered)return;index++;els.typed.disabled=false;els.typeform.querySelector('button').disabled=false;render()}
-$('restart').addEventListener('click',newHunt);els.topic.addEventListener('change',newHunt);els.mode.addEventListener('change',newHunt);els.typeform.addEventListener('submit',e=>{e.preventDefault();if(!answered&&els.typed.value.trim())check(els.typed.value)});els.reveal.addEventListener('click',()=>{if(!answered){answered=true;showFeedback(false,true)}});els.skip.addEventListener('click',()=>{if(!answered){answered=true;showFeedback(false,true)}});els.next.addEventListener('click',advance);document.addEventListener('keydown',e=>{if(e.key==='Enter'&&answered&&document.activeElement!==$('restart')){e.preventDefault();advance()}});newHunt();
-</script></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Prepositional Scavenger Hunt · Irish</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #17332f;
+            --muted: #526a65;
+            --green: #126858;
+            --light: #e7f5ef;
+            --gold: #ffcc63;
+            --red: #a63432;
+            --line: #d5e3dc;
+            --paper: #fbfaf5
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: #eff4ef;
+            color: var(--ink);
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, sans-serif
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        header {
+            background: #123d36;
+            color: white;
+            padding: 28px max(22px, calc((100vw - 990px)/2)) 24px
+        }
+
+        header p {
+            margin: 5px 0 0;
+            color: #cfebe1
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 2.7rem);
+            line-height: 1.16
+        }
+
+        main {
+            max-width: 990px;
+            margin: 22px auto 60px;
+            padding: 0 18px
+        }
+
+        .panel {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: 0 6px 30px #183c2810;
+            padding: 22px;
+            margin-bottom: 16px
+        }
+
+        .settings {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: end
+        }
+
+        .settings label {
+            display: grid;
+            gap: 4px;
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--muted)
+        }
+
+        select {
+            min-width: 160px;
+            border: 1px solid #b9d0c5;
+            border-radius: 10px;
+            padding: 9px;
+            background: white;
+            color: var(--ink)
+        }
+
+        .button {
+            border: 0;
+            border-radius: 11px;
+            padding: 11px 17px;
+            background: var(--green);
+            color: white;
+            font-weight: 750
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            background: #0a4d41
+        }
+
+        .button.secondary {
+            background: #e7eee9;
+            color: var(--ink)
+        }
+
+        .button.secondary:hover {
+            background: #d3e6dc
+        }
+
+        .button:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        .pill {
+            border-radius: 99px;
+            background: #e4efe9;
+            padding: 4px 11px
+        }
+
+        .track {
+            height: 8px;
+            background: #e0e8df;
+            border-radius: 99px;
+            margin: 14px 0 0;
+            overflow: hidden
+        }
+
+        .fill {
+            height: 100%;
+            background: var(--green);
+            width: 0%;
+            transition: width .25s
+        }
+
+        .tag {
+            font-size: .72rem;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: var(--green);
+            font-weight: 800
+        }
+
+        .question {
+            font-size: clamp(1.5rem, 4vw, 2.15rem);
+            line-height: 1.27;
+            margin: 14px 0 8px
+        }
+
+        .prompt {
+            margin: 0 0 14px;
+            color: var(--muted)
+        }
+
+        .pieces {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 15px 0 20px
+        }
+
+        .piece {
+            padding: 9px 13px;
+            background: #e4f2eb;
+            border: 1px solid #b7d8c5;
+            border-radius: 11px;
+            font-size: 1.07rem
+        }
+
+        .plus {
+            color: var(--muted);
+            font-weight: bold
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px
+        }
+
+        .choice {
+            min-height: 55px;
+            text-align: left;
+            background: white;
+            border: 1.5px solid #bdd2c7;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: var(--ink);
+            font-weight: 650
+        }
+
+        .choice:hover:not(:disabled),
+        .choice:focus-visible:not(:disabled) {
+            border-color: var(--green);
+            background: #f1faf5
+        }
+
+        .choice.correct {
+            background: #d8f4df;
+            border-color: #228753
+        }
+
+        .choice.wrong {
+            background: #fff0ee;
+            border-color: #bb5b55
+        }
+
+        .choice:disabled {
+            cursor: default
+        }
+
+        .type-row {
+            display: flex;
+            gap: 9px
+        }
+
+        .type-row input {
+            flex: 1;
+            min-width: 0;
+            border: 1.5px solid #b9d0c5;
+            border-radius: 11px;
+            padding: 11px;
+            background: white;
+            color: var(--ink)
+        }
+
+        .type-row input:focus {
+            outline: 2px solid #55a98b
+        }
+
+        .feedback {
+            margin-top: 18px;
+            padding: 17px;
+            background: #e8f4ee;
+            border-left: 5px solid var(--green);
+            border-radius: 10px
+        }
+
+        .feedback.error {
+            background: #fff1eb;
+            border-color: var(--red)
+        }
+
+        .feedback h3 {
+            margin: 0 0 5px
+        }
+
+        .feedback p {
+            margin: 5px 0
+        }
+
+        .feedback .answer {
+            font-size: 1.22rem;
+            font-weight: 800
+        }
+
+        .actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 18px
+        }
+
+        .note {
+            font-size: .88rem;
+            color: var(--muted)
+        }
+
+        details summary {
+            cursor: pointer;
+            font-weight: 750
+        }
+
+        details p {
+            margin-bottom: 0
+        }
+
+        .reference {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px 18px;
+            padding: 0;
+            margin: 13px 0 2px;
+            list-style: none
+        }
+
+        .reference li {
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 7px
+        }
+
+        .reference b {
+            color: var(--green)
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0
+        }
+
+        @media(max-width:600px) {
+            .panel {
+                padding: 18px
+            }
+
+            .choices,
+            .reference {
+                grid-template-columns: 1fr
+            }
+
+            .type-row {
+                flex-wrap: wrap
+            }
+
+            .type-row input {
+                flex-basis: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Prepositional Scavenger Hunt</h1>
+        <p>Find the right article form and the right beginning of the noun.</p>
+    </header>
+    <main>
+        <section class="panel settings" aria-label="Practice settings"><label>Topic<select id="topic">
+                    <option value="all">Mixed hunt</option>
+                    <option value="fusions">Article combinations</option>
+                    <option value="mutations">With the article</option>
+                    <option value="bare">Without the article</option>
+                    <option value="gan">Gan + article</option>
+                </select></label><label>Answer style<select id="mode">
+                    <option value="choice">Choose a phrase</option>
+                    <option value="type">Type the phrase</option>
+                    <option value="flash">Flip flashcards</option>
+                </select></label><button class="button" id="restart">Start new hunt</button></section>
+        <section class="panel" id="game">
+            <div class="stats"><span class="pill" id="count"></span><span class="pill" id="score"></span></div>
+            <div class="track" aria-hidden="true">
+                <div class="fill" id="progress"></div>
+            </div>
+            <div class="tag" id="category"></div>
+            <h2 class="question" id="question"></h2>
+            <p class="prompt" id="instruction"></p>
+            <div class="pieces" id="pieces"></div>
+            <div id="choices" class="choices"></div>
+            <form id="typeform" class="type-row hidden"><label for="typed" class="sr-only">Complete Irish
+                    phrase</label><input id="typed" type="text" autocomplete="off" autocapitalize="off"
+                    spellcheck="false" placeholder="Type the whole Irish phrase"><button class="button"
+                    type="submit">Check</button></form>
+            <div id="flashControls" class="hidden"><button class="button secondary" id="reveal" type="button">Reveal
+                    answer</button></div>
+            <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+            <div class="actions"><button class="button hidden" id="next" type="button">Next question →</button><button
+                    class="button secondary" id="skip" type="button">Skip</button></div>
+        </section>
+        <section class="panel">
+            <details>
+                <summary>Quick reference · the central standard pattern</summary>
+                <ul class="reference">
+                    <li><b>de + an → den</b> · den chrann</li>
+                    <li><b>do + an → don</b> · don fhear</li>
+                    <li><b>faoi + an → faoin</b> · faoin ngrian</li>
+                    <li><b>i + an → sa / san</b> · sa bhosca; san fharraige</li>
+                    <li><b>ó + an → ón</b> · ón gcarr</li>
+                    <li><b>le + an → leis an</b> · leis an mbean</li>
+                    <li><b>trí + an → tríd an</b> · tríd an bhfuinneog</li>
+                    <li><b>gan + an → gan an</b> · gan an t-uisce</li>
+                </ul>
+                <p class="note">After <i>den, don, sa/san</i>, a following singular consonant usually lenites; after
+                    most other listed prepositions with <i>an</i>, it usually eclipses. Singular <i>d</i> and <i>t</i>
+                    stay unchanged, a feminine <i>s</i> normally gains <i>t</i>, and vowels stay unchanged. <i>Gan
+                        an</i> instead keeps the nominative article pattern. The Caighdeán also permits eclipsis after
+                    <i>den/don/sa</i>; these cards teach the central pattern.</p>
+            </details>
+        </section>
+        <footer class="note">Offline practice · Irish standard central system · <a
+                href="https://irishlanguage.ie/an-caighdean-oifigiuil-chapter-1-the-article/" target="_blank"
+                rel="noopener noreferrer">article and dative rules</a> · <a
+                href="https://irishlanguage.ie/an-caighdean-oifigiuil-chapter-10-initial-mutations-pp-171-202/"
+                target="_blank" rel="noopener noreferrer">simple prepositions</a>. A voice installed on your device may
+            pronounce Irish differently; this app uses text only.</footer>
+    </main>
+    <script>
+        'use strict';
+        // Hand-checked examples: the central system for singular definite nouns.
+        // Each row: topic, preposition, article, unmutated noun, answer, English cue, explanation.
+        const DATA = [
+            ['fusions', 'de', 'an', 'crann', 'den chrann', 'of the tree', 'De + an becomes den; c lenites to ch.'],
+            ['fusions', 'do', 'an', 'fear', 'don fhear', 'to the man', 'Do + an becomes don; f lenites to fh.'],
+            ['fusions', 'i', 'an', 'bosca', 'sa bhosca', 'in the box', 'I + an becomes sa; b lenites to bh.'],
+            ['fusions', 'i', 'an', 'farraige', 'san fharraige', 'in the sea', 'Before f + vowel use san; f lenites to fh.'],
+            ['fusions', 'i', 'an', 'áit', 'san áit', 'in the place', 'Before a vowel use san; the vowel stays unchanged.'],
+            ['fusions', 'faoi', 'an', 'grian', 'faoin ngrian', 'under the sun', 'Faoi + an becomes faoin; g eclipses to ng.'],
+            ['fusions', 'ó', 'an', 'carr', 'ón gcarr', 'from the car', 'Ó + an becomes ón; c eclipses to gc.'],
+            ['fusions', 'le', 'an', 'bean', 'leis an mbean', 'with the woman', 'Le + an becomes leis an; b eclipses to mb.'],
+            ['fusions', 'trí', 'an', 'fuinneog', 'tríd an bhfuinneog', 'through the window', 'Trí + an becomes tríd an; f eclipses to bhf.'],
+            ['fusions', 'ag', 'an', 'bord', 'ag an mbord', 'at the table', 'Ag an stays separate; b eclipses to mb.'],
+            ['fusions', 'ar', 'an', 'capall', 'ar an gcapall', 'on the horse', 'Ar an stays separate; c eclipses to gc.'],
+            ['mutations', 'de', 'an', 'bean', 'den bhean', 'of the woman', 'Den takes lenition in the central system: b → bh.'],
+            ['mutations', 'do', 'an', 'páiste', 'don pháiste', 'to the child', 'Don takes lenition in the central system: p → ph.'],
+            ['mutations', 'i', 'an', 'teach', 'sa teach', 'in the house', 'Sa is used before t; d/t stay unchanged here.'],
+            ['mutations', 'i', 'an', 'sráid', 'sa tsráid', 'in the street', 'Feminine s gets t before it: ts.'],
+            ['mutations', 'i', 'an', 'scoil', 'sa scoil', 'in the school', 'The sc- cluster resists the t- prefix.'],
+            ['mutations', 'i', 'an', 'uisce', 'san uisce', 'in the water', 'San precedes a vowel; the masculine t- of an t-uisce drops in the dative.'],
+            ['mutations', 'i', 'an', 'fhuinneog', 'san fhuinneog', 'in the window', 'The base noun is fuinneog: before f + vowel, san; f lenites to fh.'],
+            ['mutations', 'faoi', 'an', 'bord', 'faoin mbord', 'under the table', 'Faoin normally eclipses b → mb.'],
+            ['mutations', 'faoi', 'an', 'doras', 'faoin doras', 'under the door', 'D stays unchanged after the singular article in the central system.'],
+            ['mutations', 'ag', 'an', 'carr', 'ag an gcarr', 'at the car', 'Ag an normally eclipses c → gc.'],
+            ['mutations', 'ag', 'an', 'tine', 'ag an tine', 'at the fire', 'T stays unchanged here in the central standard pattern.'],
+            ['mutations', 'ar', 'an', 'fear', 'ar an bhfear', 'on the man', 'Ar an normally eclipses f → bhf.'],
+            ['mutations', 'le', 'an', 'sráid', 'leis an tsráid', 'with the street', 'The feminine noun sráid gains t before s.'],
+            ['mutations', 'roimh', 'an', 'bainis', 'roimh an mbainis', 'before the wedding', 'Roimh an normally eclipses b → mb.'],
+            ['mutations', 'trí', 'an', 'páirc', 'tríd an bpáirc', 'through the park', 'Tríd an normally eclipses p → bp.'],
+            ['mutations', 'ó', 'an', 'obair', 'ón obair', 'from the work', 'Ó + an becomes ón; no mutation before a vowel.'],
+            ['bare', 'de', '', 'carr', 'de charr', 'of a car', 'De lenites an indefinite noun: c → ch.'],
+            ['bare', 'do', '', 'buachaill', 'do bhuachaill', 'to a boy', 'Do lenites an indefinite noun: b → bh.'],
+            ['bare', 'faoi', '', 'bord', 'faoi bhord', 'under a table', 'Faoi lenites an indefinite noun: b → bh.'],
+            ['bare', 'trí', '', 'páirc', 'trí pháirc', 'through a park', 'Trí lenites an indefinite noun: p → ph.'],
+            ['bare', 'roimh', '', 'maidin', 'roimh mhaidin', 'before morning', 'Roimh lenites m → mh.'],
+            ['bare', 'i', '', 'bosca', 'i mbosca', 'in a box', 'I eclipses b → mb without the article.'],
+            ['bare', 'i', '', 'carr', 'i gcarr', 'in a car', 'I eclipses c → gc without the article.'],
+            ['bare', 'i', '', 'teach', 'i dteach', 'in a house', 'I eclipses t → dt without the article.'],
+            ['bare', 'ar', '', 'bád', 'ar bhád', 'on a boat', 'Ar lenites in this familiar use: b → bh.'],
+            ['bare', 'gan', '', 'carr', 'gan charr', 'without a car', 'Gan lenites an unqualified indefinite c → ch.'],
+            ['bare', 'gan', '', 'bord', 'gan bhord', 'without a table', 'Gan lenites an unqualified indefinite b → bh.'],
+            ['bare', 'gan', '', 'tine', 'gan tine', 'without fire', 'Gan does not lenite an initial t.'],
+            ['bare', 'gan', '', 'fear', 'gan fear', 'without a man', 'Gan does not normally lenite an initial f.'],
+            ['bare', 'gan', '', 'pingin rua', 'gan pingin rua', 'without a red penny', 'Gan does not lenite a noun qualified by an adjective.'],
+            ['gan', 'gan', 'an', 'uisce', 'gan an t-uisce', 'without the water', 'Gan an takes the nominative article pattern: masculine vowel initial nouns gain t-.'],
+            ['gan', 'gan', 'an', 'carr', 'gan an carr', 'without the car', 'Masculine consonant initial carr has no mutation after an in the nominative.'],
+            ['gan', 'gan', 'an', 'bean', 'gan an bhean', 'without the woman', 'Feminine singular bean lenites after nominative an.'],
+            ['gan', 'gan', 'an', 'sráid', 'gan an tsráid', 'without the street', 'Feminine singular sráid gains t before s after nominative an.'],
+            ['gan', 'gan', 'an', 'áit', 'gan an áit', 'without the place', 'Feminine vowel initial áit remains unchanged after an.'],
+            ['gan', 'gan', 'an', 'teach', 'gan an teach', 'without the house', 'Masculine consonant initial teach remains unchanged.'],
+            ['gan', 'gan', 'an', 'fuinneog', 'gan an fhuinneog', 'without the window', 'Feminine singular fuinneog lenites after nominative an.']
+        ].filter(row => !(row[0] === 'mutations' && row[3] === 'fhuinneog'));
+        // Topic examples are intentionally curated; alternatives may occur in dialects.
+        const $ = id => document.getElementById(id), els = { topic: $('topic'), mode: $('mode'), count: $('count'), score: $('score'), progress: $('progress'), category: $('category'), question: $('question'), instruction: $('instruction'), pieces: $('pieces'), choices: $('choices'), typeform: $('typeform'), typed: $('typed'), flashControls: $('flashControls'), reveal: $('reveal'), feedback: $('feedback'), next: $('next'), skip: $('skip') };
+        let deck = [], index = 0, correct = 0, attempted = 0, answered = false;
+        function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { let j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]] } return a }
+        function norm(s) { return s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/[’‘]/g, "'").replace(/\s+/g, ' ') }
+        function opts(row) { let answer = row[4], pool = DATA.filter(r => r[4] !== answer && r[3].split(' ')[0] === row[3].split(' ')[0]).map(r => r[4]); let first = answer.split(' ')[0], noun = row[3].split(' ')[0], variants = [`${row[1]} ${row[2]} ${noun}`.replace(/\s+/g, ' ').trim(), `${first} ${noun}`, `${row[1]} ${noun}`]; let all = [...new Set([...variants, ...shuffle(pool)])].filter(x => x !== answer && x !== `${row[1]} ${row[2]}`.trim()); while (all.length < 3) { let other = shuffle(DATA.map(r => r[4]).filter(x => x !== answer && !all.includes(x)))[0]; all.push(other) } return shuffle([answer, ...all.slice(0, 3)]) }
+        function updateStats() { els.count.textContent = `Card ${Math.min(index + 1, deck.length)} / ${deck.length}`; els.score.textContent = `${correct} correct · ${attempted} checked`; els.progress.style.width = `${Math.round(index / deck.length * 100)}%` }
+        function newHunt() { let selected = els.topic.value; deck = shuffle(DATA.filter(r => selected === 'all' || r[0] === selected)); index = correct = attempted = 0; render() }
+        function render() { answered = false; els.feedback.classList.add('hidden'); els.next.classList.add('hidden'); els.skip.classList.remove('hidden'); els.typed.value = ''; els.choices.replaceChildren(); updateStats(); if (index >= deck.length) { els.count.textContent = `Finished · ${deck.length} cards`; els.progress.style.width = '100%'; els.category.textContent = 'Hunt complete'; els.question.textContent = `${correct} correct out of ${attempted} checked`; els.instruction.textContent = 'Choose a topic or start a new shuffled hunt to practise again.'; els.pieces.replaceChildren(); els.choices.classList.add('hidden'); els.typeform.classList.add('hidden'); els.flashControls.classList.add('hidden'); els.skip.classList.add('hidden'); return } let r = deck[index], mode = els.mode.value; els.category.textContent = ({ fusions: 'Article combinations', mutations: 'With the article', bare: 'Without the article', gan: 'Gan + article' })[r[0]]; els.question.textContent = r[5][0].toUpperCase() + r[5].slice(1); els.instruction.textContent = mode === 'flash' ? 'Work out the Irish phrase, then reveal it.' : mode === 'type' ? 'Type the full Irish phrase (including the preposition).' : 'Choose the full Irish phrase.'; els.pieces.replaceChildren(); for (const [i, s] of [r[1], r[2] || 'no article', r[3]].entries()) { if (i) { let plus = document.createElement('span'); plus.className = 'plus'; plus.textContent = '+'; els.pieces.append(plus) } let p = document.createElement('span'); p.className = 'piece'; p.textContent = s; els.pieces.append(p) } els.choices.classList.toggle('hidden', mode !== 'choice'); els.typeform.classList.toggle('hidden', mode !== 'type'); els.flashControls.classList.toggle('hidden', mode !== 'flash'); els.reveal.disabled = false; if (mode === 'choice') for (const item of opts(r)) { let b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.textContent = item; b.addEventListener('click', () => check(item, b)); els.choices.append(b) } if (mode === 'type') els.typed.focus() }
+        function showFeedback(isCorrect, skip = false) { const r = deck[index]; els.feedback.replaceChildren(); els.feedback.className = 'feedback' + (isCorrect ? '' : ' error'); let h = document.createElement('h3'); h.textContent = skip ? 'Card skipped' : isCorrect ? 'Correct!' : 'Good try — here is the pattern'; let a = document.createElement('p'); a.className = 'answer'; a.textContent = r[4]; let why = document.createElement('p'); why.textContent = r[6]; els.feedback.append(h, a, why); els.next.classList.remove('hidden'); els.next.textContent = index === deck.length - 1 ? 'See results →' : 'Next question →'; els.skip.classList.add('hidden'); els.choices.querySelectorAll('button').forEach(b => { b.disabled = true; if (b.textContent === r[4]) b.classList.add('correct') }); els.reveal.disabled = true; els.typed.disabled = true; els.typeform.querySelector('button').disabled = true; els.next.focus() }
+        function check(value, button) { if (answered) return; answered = true; attempted++; let ok = norm(value) === norm(deck[index][4]); if (ok) correct++; else if (button) button.classList.add('wrong'); updateStats(); showFeedback(ok) }
+        function advance() { if (!answered) return; index++; els.typed.disabled = false; els.typeform.querySelector('button').disabled = false; render() }
+        $('restart').addEventListener('click', newHunt); els.topic.addEventListener('change', newHunt); els.mode.addEventListener('change', newHunt); els.typeform.addEventListener('submit', e => { e.preventDefault(); if (!answered && els.typed.value.trim()) check(els.typed.value) }); els.reveal.addEventListener('click', () => { if (!answered) { answered = true; showFeedback(false, true) } }); els.skip.addEventListener('click', () => { if (!answered) { answered = true; showFeedback(false, true) } }); els.next.addEventListener('click', advance); document.addEventListener('keydown', e => { if (e.key === 'Enter' && answered && document.activeElement !== $('restart')) { e.preventDefault(); advance() } }); newHunt();
+    </script>
+</body>
+
+</html>
