@@ -1,86 +1,485 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Seanfhocail • Match the Meaning</title>
-<style>
-:root{color-scheme:light;--ink:#20342f;--muted:#5b6e68;--green:#17654e;--cream:#f8f6ee;--line:#d4ded5;--good:#e0f3df;--bad:#fff1e7;--gold:#d9a443}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0%,#e7eedc 0,transparent 32%),var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1120px;margin:auto;padding:28px 18px 70px}header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding-bottom:20px}.eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--green)}h1{font:clamp(2.4rem,6vw,4.8rem)/1.05 Georgia,serif;letter-spacing:-.045em;margin:8px 0 12px}p{margin:0;color:var(--muted)}.badge{border:1px solid var(--green);color:var(--green);padding:8px 12px;border-radius:100px;white-space:nowrap;font-weight:700}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 38px #1838280b;padding:22px;margin-top:22px}.controls{display:flex;align-items:end;flex-wrap:wrap;gap:12px}.controls label{font-weight:700;font-size:.9rem}select,button{font:inherit}select{display:block;border:1px solid #aabeb1;background:#fff;border-radius:9px;padding:10px 35px 10px 12px;margin-top:5px;color:var(--ink)}button{cursor:pointer}button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.primary{border:0;background:var(--green);color:white;padding:11px 19px;border-radius:9px;font-weight:750}.primary:hover{background:#0f503e}.secondary{border:1px solid var(--green);background:white;color:var(--green);padding:10px 17px;border-radius:9px;font-weight:750}.secondary:hover{background:#eff6ee}.status{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:18px;font-weight:700}.bar{height:9px;background:#e8eee8;border-radius:9px;overflow:hidden;margin-top:9px}.bar>div{height:100%;background:var(--green);width:0;transition:width .25s}.instructions{margin:16px 0 0}.columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.coltitle{font-size:.8rem;color:var(--green);text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin:0 0 9px}.cards{display:grid;gap:9px}.card{width:100%;min-height:74px;text-align:left;background:white;border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;color:var(--ink);line-height:1.35;transition:transform .12s,background .15s,border-color .15s}.card:hover:not(:disabled){transform:translateY(-2px);border-color:var(--green)}.card.selected{background:#e4f0e6;border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}.card.matched{background:var(--good);border-color:#9bc8a3;color:#376e4c}.card.wrong{background:var(--bad);border-color:#d48669;animation:shake .24s}.card:disabled{cursor:default;opacity:.78}.irish{font-family:Georgia,serif;font-size:1.13rem}.num{color:#779083;font:700 .76rem system-ui;margin-right:9px}@keyframes shake{50%{transform:translateX(4px)}}.feedback{min-height:30px;margin-top:15px;font-weight:700;color:var(--green)}.feedback.error{color:#a33d2e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.hidden{display:none!important}details{margin-top:20px}summary{font-weight:800;cursor:pointer;color:var(--green)}.library{display:grid;gap:9px;margin-top:15px}.entry{border-top:1px solid var(--line);padding:10px 0}.entry strong{font-family:Georgia,serif;font-size:1.05rem}.entry small{display:block;color:var(--muted)}footer{margin-top:24px;color:var(--muted);font-size:.85rem}a{color:var(--green)}@media(max-width:680px){header{display:block}.badge{display:inline-block;margin-top:14px}.columns{gap:9px}.card{min-height:88px;padding:10px;font-size:.88rem}.irish{font-size:.98rem}.num{display:block;margin-bottom:4px}.panel{padding:15px}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Seanfhocail • Match the Meaning</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #20342f;
+            --muted: #5b6e68;
+            --green: #17654e;
+            --cream: #f8f6ee;
+            --line: #d4ded5;
+            --good: #e0f3df;
+            --bad: #fff1e7;
+            --gold: #d9a443
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 90% 0%, #e7eedc 0, transparent 32%), var(--cream);
+            color: var(--ink);
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, sans-serif
+        }
+
+        main {
+            max-width: 1120px;
+            margin: auto;
+            padding: 28px 18px 70px
+        }
+
+        header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 20px
+        }
+
+        .eyebrow {
+            font-size: .75rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: var(--green)
+        }
+
+        h1 {
+            font: clamp(2.4rem, 6vw, 4.8rem)/1.05 Georgia, serif;
+            letter-spacing: -.045em;
+            margin: 8px 0 12px
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        .badge {
+            border: 1px solid var(--green);
+            color: var(--green);
+            padding: 8px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+            font-weight: 700
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 12px 38px #1838280b;
+            padding: 22px;
+            margin-top: 22px
+        }
+
+        .controls {
+            display: flex;
+            align-items: end;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .controls label {
+            font-weight: 700;
+            font-size: .9rem
+        }
+
+        select,
+        button {
+            font: inherit
+        }
+
+        select {
+            display: block;
+            border: 1px solid #aabeb1;
+            background: #fff;
+            border-radius: 9px;
+            padding: 10px 35px 10px 12px;
+            margin-top: 5px;
+            color: var(--ink)
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        select:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 3px
+        }
+
+        .primary {
+            border: 0;
+            background: var(--green);
+            color: white;
+            padding: 11px 19px;
+            border-radius: 9px;
+            font-weight: 750
+        }
+
+        .primary:hover {
+            background: #0f503e
+        }
+
+        .secondary {
+            border: 1px solid var(--green);
+            background: white;
+            color: var(--green);
+            padding: 10px 17px;
+            border-radius: 9px;
+            font-weight: 750
+        }
+
+        .secondary:hover {
+            background: #eff6ee
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+            font-weight: 700
+        }
+
+        .bar {
+            height: 9px;
+            background: #e8eee8;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-top: 9px
+        }
+
+        .bar>div {
+            height: 100%;
+            background: var(--green);
+            width: 0;
+            transition: width .25s
+        }
+
+        .instructions {
+            margin: 16px 0 0
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px
+        }
+
+        .coltitle {
+            font-size: .8rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            font-weight: 800;
+            margin: 0 0 9px
+        }
+
+        .cards {
+            display: grid;
+            gap: 9px
+        }
+
+        .card {
+            width: 100%;
+            min-height: 74px;
+            text-align: left;
+            background: white;
+            border: 1.5px solid var(--line);
+            border-radius: 11px;
+            padding: 13px 15px;
+            color: var(--ink);
+            line-height: 1.35;
+            transition: transform .12s, background .15s, border-color .15s
+        }
+
+        .card:hover:not(:disabled) {
+            transform: translateY(-2px);
+            border-color: var(--green)
+        }
+
+        .card.selected {
+            background: #e4f0e6;
+            border-color: var(--green);
+            box-shadow: inset 0 0 0 1px var(--green)
+        }
+
+        .card.matched {
+            background: var(--good);
+            border-color: #9bc8a3;
+            color: #376e4c
+        }
+
+        .card.wrong {
+            background: var(--bad);
+            border-color: #d48669;
+            animation: shake .24s
+        }
+
+        .card:disabled {
+            cursor: default;
+            opacity: .78
+        }
+
+        .irish {
+            font-family: Georgia, serif;
+            font-size: 1.13rem
+        }
+
+        .num {
+            color: #779083;
+            font: 700 .76rem system-ui;
+            margin-right: 9px
+        }
+
+        @keyframes shake {
+            50% {
+                transform: translateX(4px)
+            }
+        }
+
+        .feedback {
+            min-height: 30px;
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--green)
+        }
+
+        .feedback.error {
+            color: #a33d2e
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        details {
+            margin-top: 20px
+        }
+
+        summary {
+            font-weight: 800;
+            cursor: pointer;
+            color: var(--green)
+        }
+
+        .library {
+            display: grid;
+            gap: 9px;
+            margin-top: 15px
+        }
+
+        .entry {
+            border-top: 1px solid var(--line);
+            padding: 10px 0
+        }
+
+        .entry strong {
+            font-family: Georgia, serif;
+            font-size: 1.05rem
+        }
+
+        .entry small {
+            display: block;
+            color: var(--muted)
+        }
+
+        footer {
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: .85rem
+        }
+
+        a {
+            color: var(--green)
+        }
+
+        @media(max-width:680px) {
+            header {
+                display: block
+            }
+
+            .badge {
+                display: inline-block;
+                margin-top: 14px
+            }
+
+            .columns {
+                gap: 9px
+            }
+
+            .card {
+                min-height: 88px;
+                padding: 10px;
+                font-size: .88rem
+            }
+
+            .irish {
+                font-size: .98rem
+            }
+
+            .num {
+                display: block;
+                margin-bottom: 4px
+            }
+
+            .panel {
+                padding: 15px
+            }
+        }
+    </style>
 </head>
-<body><main>
-<header><div><div class="eyebrow">Irish language practice · Cleachtadh Gaeilge</div><h1>Seanfhocail</h1><p>Match an Irish proverb with its English meaning. Fifty sayings, one round at a time.</p></div><div class="badge">50 seanfhocal</div></header>
-<section class="panel" aria-label="Matching game"><div class="controls"><label>Pairs per round<select id="size"><option value="5">5 pairs</option><option value="8" selected>8 pairs</option><option value="10">10 pairs</option></select></label><label>Theme<select id="theme"><option value="all">All themes</option><option value="wisdom">Wisdom & life</option><option value="nature">Nature & animals</option><option value="people">People & friendship</option><option value="wellbeing">Wellbeing & food</option><option value="language">Language</option></select></label><button class="primary" id="start">Start / reshuffle</button></div>
-<div class="status"><span id="roundLabel">Round 1</span><span id="score">0 / 8 matched · 0 mistakes</span></div><div class="bar" aria-hidden="true"><div id="fill"></div></div><p class="instructions">Choose an Irish card, then choose its English match. You can also choose the English card first.</p><div class="columns"><div><h2 class="coltitle">Gaeilge</h2><div class="cards" id="irishCards"></div></div><div><h2 class="coltitle">English meaning</h2><div class="cards" id="englishCards"></div></div></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="actions"><button id="next" class="primary hidden">Next round →</button><button id="reveal" class="secondary">Reveal this round</button></div></section>
-<section class="panel"><details id="reference"><summary>Study all 50 sayings and meanings</summary><div id="library" class="library"></div></details></section>
-<footer>English entries give a natural sense or equivalent, rather than always a word-for-word translation. Variant spellings and phrasings occur. Source for the Irish forms: <a href="https://www.gaelchultur.com/en/blog/100-irish-proverbs-wisdom-for-every-occasion" target="_blank" rel="noopener noreferrer">Gaelchultúr, 100 Irish Proverbs</a>; see also <a href="https://api.ireland.ie/en/visit/seachtain-na-gaeilge/11-seanfhocail-proverbs-that-unlock-timeless-wisdom-through-the-irish-language/" target="_blank" rel="noopener noreferrer">Ireland.ie’s seanfhocail selection</a>. The game runs entirely in this file.</footer>
-</main>
-<script>
-'use strict';
-const DATA=[
-['Glacann fear críonna comhairle','A wise person accepts advice.','wisdom'],
-['Ní thagann ciall roimh aois','Wisdom comes with age.','wisdom'],
-['Is minic a bhris béal duine a shrón','Careless words can get you into trouble.','wisdom'],
-['Is ait an mac an saol','Life is a strange thing.','wisdom'],
-['Dá fhada an lá, tagann an tráthnóna','Even the longest day eventually ends.','wisdom'],
-['Bíonn siúlach scéalach','Travellers have stories to tell.','wisdom'],
-['An rud is annamh is iontach','Rare things seem wonderful.','wisdom'],
-['Bíonn gach tús lag','Every beginning is difficult.','wisdom'],
-['Is binn béal ina thost','Silence can be golden.','wisdom'],
-['Is fearr lúbadh ná briseadh','Better to bend than break.','wisdom'],
-['Tús maith leath na hoibre','A good start is half the work.','wisdom'],
-['Bíonn cluasa ar na claíocha','Even fences have ears.','wisdom'],
-['Is fearr go mall ná go brách','Better late than never.','wisdom'],
-['Bíonn an fhírinne searbh','The truth can hurt.','wisdom'],
-['Is fada an bóthar nach bhfuil casadh ann','Every long road has a turning.','wisdom'],
-['Is leor nod don eolach','A hint is enough for someone who understands.','wisdom'],
-['Múineann gá seift','Necessity inspires ingenuity.','wisdom'],
-['Níl saoi gan locht','Even wise people have faults.','wisdom'],
-['Níor bhris focal maith fiacail riamh','A kind word costs you nothing.','wisdom'],
-['De réir a chéile a thógtar na caisleáin','Great things are built gradually.','wisdom'],
-['Ní bhíonn in aon rud ach seal','Nothing lasts forever.','wisdom'],
-['Doras feasa fiafraí','Asking questions opens the door to knowledge.','wisdom'],
-['Cleachtadh a dhéanann máistreacht','Practice makes perfect.','wisdom'],
-['Mol an óige agus tiocfaidh sí','Praise young people and they will flourish.','people'],
-['Beart gan leigheas, foighne is fearr air','When there is no remedy, patience is best.','wellbeing'],
-['Is fearr an sláinte ná na táinte','Health is worth more than riches.','wellbeing'],
-['Maireann croí éadrom i bhfad','A light heart lives long.','wellbeing'],
-['Dochtúir na sláinte an codladh','Sleep is a doctor for health.','wellbeing'],
-['Is olc an ghaoth nach séideann maitheas do dhuine éigin','Even an ill wind benefits someone.','nature'],
-['Ní hé lá na gaoithe lá na scolb','A windy day is no time to thatch.','nature'],
-['Ní hé lá na báistí lá na bpáistí','A rainy day is no day for children outside.','nature'],
-['Cuir síoda ar ghabhar agus is gabhar i gcónaí é','Dress a goat in silk and it is still a goat.','nature'],
-['Níl tuile dá mhéad nach dtránn','Every flood eventually subsides.','nature'],
-['Aithníonn ciaróg ciaróg eile','It takes one beetle to recognise another.','nature'],
-['Ar mhaithe leis féin a bhíonn an cat ag crónán','The cat purrs for its own benefit.','nature'],
-['Ní chronaítear an t-uisce go dtriomaítear an tobar','We miss the water only when the well runs dry.','nature'],
-['Ní thagann caonach ar chloch reatha','A rolling stone gathers no moss.','nature'],
-['Bíonn caora dhubh ar an tréad is gile','Even the whitest flock has a black sheep.','nature'],
-['Is dána gach madra i ndoras a thí féin','Every dog is bold at its own door.','nature'],
-['Nuair a bhíonn an cat amuigh bíonn na lucha ag rince','When the cat is away, the mice will play.','nature'],
-['Ní neart go cur le chéile','There is strength in unity.','people'],
-['Ar scáth a chéile a mhaireann na daoine','People depend on one another.','people'],
-['Giorraíonn beirt bóthar','Two people make a journey feel shorter.','people'],
-['Aithnítear cara i gcruatan','A true friend is known in hardship.','people'],
-['Is maith an scáthán súil charad','A friend’s eye is a good mirror.','people'],
-['Níl aon tinteán mar do thinteán féin','There is no place like home.','people'],
-['Is maith an t-anlann an t-ocras','Hunger is the best sauce.','wellbeing'],
-['Tír gan teanga, tír gan anam','A country without a language has no soul.','language'],
-['Beatha teanga í a labhairt','Speaking a language keeps it alive.','language'],
-['Is fearr Gaeilge bhriste ná Béarla cliste','Imperfect Irish is better than polished English.','language']
-].map(([irish,english,theme],id)=>({id,irish,english,theme}));
-const $=id=>document.getElementById(id);let queue=[],round=[],roundNo=0,matched=new Set(),mistakes=0,selected=null,locked=false;
-function shuffle(a){let out=[...a];for(let i=out.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}
-function card(item,side,index){const b=document.createElement('button');b.type='button';b.className='card '+(side==='irish'?'irish':'');b.dataset.id=item.id;b.dataset.side=side;const n=document.createElement('span');n.className='num';n.textContent=String(index+1).padStart(2,'0');b.append(n,document.createTextNode(side==='irish'?item.irish:item.english));b.addEventListener('click',()=>choose(b));return b}
-function message(s,error=false){$('feedback').textContent=s;$('feedback').classList.toggle('error',error)}
-function update(){let total=round.length;$('score').textContent=`${matched.size} / ${total} matched · ${mistakes} mistake${mistakes===1?'':'s'}`;$('fill').style.width=`${total?matched.size/total*100:0}%`;$('roundLabel').textContent=`Round ${roundNo} · ${queue.length} still to come`}
-function render(){matched=new Set();mistakes=0;selected=null;locked=false;$('next').classList.add('hidden');$('reveal').disabled=false;$('irishCards').replaceChildren(...shuffle(round).map((x,i)=>card(x,'irish',i)));$('englishCards').replaceChildren(...shuffle(round).map((x,i)=>card(x,'english',i)));message('Select a card to begin.');update()}
-function begin(){queue=shuffle(DATA.filter(x=>$('theme').value==='all'||x.theme===$('theme').value));roundNo=0;nextRound()}
-function nextRound(){if(!queue.length){queue=shuffle(DATA.filter(x=>$('theme').value==='all'||x.theme===$('theme').value));roundNo=0}round=queue.splice(0,Number($('size').value));roundNo++;render()}
-function choose(button){if(locked||button.disabled)return;if(!selected){selected=button;button.classList.add('selected');message('Now choose its match in the other column.');return}if(selected===button){button.classList.remove('selected');selected=null;message('Selection cleared.');return}if(selected.dataset.side===button.dataset.side){selected.classList.remove('selected');selected=button;button.classList.add('selected');return}
-let previous=selected;selected=null;previous.classList.remove('selected');if(previous.dataset.id===button.dataset.id){let id=Number(button.dataset.id);matched.add(id);document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el=>{el.classList.add('matched');el.disabled=true});message(`Correct: ${DATA[id].irish} — ${DATA[id].english}`);update();if(matched.size===round.length)finish(false)}else{mistakes++;update();locked=true;previous.classList.add('wrong');button.classList.add('wrong');message('Those do not match. Try another pair.',true);setTimeout(()=>{previous.classList.remove('wrong');button.classList.remove('wrong');locked=false},650)}}
-function finish(revealed){$('next').classList.remove('hidden');$('reveal').disabled=true;message(revealed?'Answers shown. Choose Next round to continue.':`Round complete! ${mistakes===0?'Perfect matching.':`${mistakes} mistake${mistakes===1?'':'s'}.`} ${queue.length?'Continue to the next round.':'You have reached the end of this selection. Next round reshuffles it.'}`)}
-$('reveal').addEventListener('click',()=>{if(locked)return;let remaining=round.filter(x=>!matched.has(x.id));for(const item of remaining){let pair=[...document.querySelectorAll('.card')].filter(b=>Number(b.dataset.id)===item.id);pair.forEach(b=>{b.disabled=true;b.classList.add('matched')});matched.add(item.id)}if(selected){selected.classList.remove('selected');selected=null}update();finish(true)});
-$('start').addEventListener('click',begin);$('next').addEventListener('click',nextRound);
-$('library').replaceChildren(...DATA.map((x,i)=>{const div=document.createElement('div');div.className='entry';const strong=document.createElement('strong');strong.textContent=`${i+1}. ${x.irish}`;const small=document.createElement('small');small.textContent=x.english;div.append(strong,small);return div}));begin();
-</script></body></html>
+
+<body>
+    <main>
+        <header>
+            <div>
+                <div class="eyebrow">Irish language practice · Cleachtadh Gaeilge</div>
+                <h1>Seanfhocail</h1>
+                <p>Match an Irish proverb with its English meaning. Fifty sayings, one round at a time.</p>
+            </div>
+            <div class="badge">50 seanfhocal</div>
+        </header>
+        <section class="panel" aria-label="Matching game">
+            <div class="controls"><label>Pairs per round<select id="size">
+                        <option value="5">5 pairs</option>
+                        <option value="8" selected>8 pairs</option>
+                        <option value="10">10 pairs</option>
+                    </select></label><label>Theme<select id="theme">
+                        <option value="all">All themes</option>
+                        <option value="wisdom">Wisdom & life</option>
+                        <option value="nature">Nature & animals</option>
+                        <option value="people">People & friendship</option>
+                        <option value="wellbeing">Wellbeing & food</option>
+                        <option value="language">Language</option>
+                    </select></label><button class="primary" id="start">Start / reshuffle</button></div>
+            <div class="status"><span id="roundLabel">Round 1</span><span id="score">0 / 8 matched · 0 mistakes</span>
+            </div>
+            <div class="bar" aria-hidden="true">
+                <div id="fill"></div>
+            </div>
+            <p class="instructions">Choose an Irish card, then choose its English match. You can also choose the English
+                card first.</p>
+            <div class="columns">
+                <div>
+                    <h2 class="coltitle">Gaeilge</h2>
+                    <div class="cards" id="irishCards"></div>
+                </div>
+                <div>
+                    <h2 class="coltitle">English meaning</h2>
+                    <div class="cards" id="englishCards"></div>
+                </div>
+            </div>
+            <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+            <div class="actions"><button id="next" class="primary hidden">Next round →</button><button id="reveal"
+                    class="secondary">Reveal this round</button></div>
+        </section>
+        <section class="panel">
+            <details id="reference">
+                <summary>Study all 50 sayings and meanings</summary>
+                <div id="library" class="library"></div>
+            </details>
+        </section>
+        <footer>English entries give a natural sense or equivalent, rather than always a word-for-word translation.
+            Variant spellings and phrasings occur. Source for the Irish forms: <a
+                href="https://www.gaelchultur.com/en/blog/100-irish-proverbs-wisdom-for-every-occasion" target="_blank"
+                rel="noopener noreferrer">Gaelchultúr, 100 Irish Proverbs</a>; see also <a
+                href="https://api.ireland.ie/en/visit/seachtain-na-gaeilge/11-seanfhocail-proverbs-that-unlock-timeless-wisdom-through-the-irish-language/"
+                target="_blank" rel="noopener noreferrer">Ireland.ie’s seanfhocail selection</a>. The game runs entirely
+            in this file.</footer>
+    </main>
+    <script>
+        'use strict';
+        const DATA = [
+            ['Glacann fear críonna comhairle', 'A wise person accepts advice.', 'wisdom'],
+            ['Ní thagann ciall roimh aois', 'Wisdom comes with age.', 'wisdom'],
+            ['Is minic a bhris béal duine a shrón', 'Careless words can get you into trouble.', 'wisdom'],
+            ['Is ait an mac an saol', 'Life is a strange thing.', 'wisdom'],
+            ['Dá fhada an lá, tagann an tráthnóna', 'Even the longest day eventually ends.', 'wisdom'],
+            ['Bíonn siúlach scéalach', 'Travellers have stories to tell.', 'wisdom'],
+            ['An rud is annamh is iontach', 'Rare things seem wonderful.', 'wisdom'],
+            ['Bíonn gach tús lag', 'Every beginning is difficult.', 'wisdom'],
+            ['Is binn béal ina thost', 'Silence can be golden.', 'wisdom'],
+            ['Is fearr lúbadh ná briseadh', 'Better to bend than break.', 'wisdom'],
+            ['Tús maith leath na hoibre', 'A good start is half the work.', 'wisdom'],
+            ['Bíonn cluasa ar na claíocha', 'Even fences have ears.', 'wisdom'],
+            ['Is fearr go mall ná go brách', 'Better late than never.', 'wisdom'],
+            ['Bíonn an fhírinne searbh', 'The truth can hurt.', 'wisdom'],
+            ['Is fada an bóthar nach bhfuil casadh ann', 'Every long road has a turning.', 'wisdom'],
+            ['Is leor nod don eolach', 'A hint is enough for someone who understands.', 'wisdom'],
+            ['Múineann gá seift', 'Necessity inspires ingenuity.', 'wisdom'],
+            ['Níl saoi gan locht', 'Even wise people have faults.', 'wisdom'],
+            ['Níor bhris focal maith fiacail riamh', 'A kind word costs you nothing.', 'wisdom'],
+            ['De réir a chéile a thógtar na caisleáin', 'Great things are built gradually.', 'wisdom'],
+            ['Ní bhíonn in aon rud ach seal', 'Nothing lasts forever.', 'wisdom'],
+            ['Doras feasa fiafraí', 'Asking questions opens the door to knowledge.', 'wisdom'],
+            ['Cleachtadh a dhéanann máistreacht', 'Practice makes perfect.', 'wisdom'],
+            ['Mol an óige agus tiocfaidh sí', 'Praise young people and they will flourish.', 'people'],
+            ['Beart gan leigheas, foighne is fearr air', 'When there is no remedy, patience is best.', 'wellbeing'],
+            ['Is fearr an sláinte ná na táinte', 'Health is worth more than riches.', 'wellbeing'],
+            ['Maireann croí éadrom i bhfad', 'A light heart lives long.', 'wellbeing'],
+            ['Dochtúir na sláinte an codladh', 'Sleep is a doctor for health.', 'wellbeing'],
+            ['Is olc an ghaoth nach séideann maitheas do dhuine éigin', 'Even an ill wind benefits someone.', 'nature'],
+            ['Ní hé lá na gaoithe lá na scolb', 'A windy day is no time to thatch.', 'nature'],
+            ['Ní hé lá na báistí lá na bpáistí', 'A rainy day is no day for children outside.', 'nature'],
+            ['Cuir síoda ar ghabhar agus is gabhar i gcónaí é', 'Dress a goat in silk and it is still a goat.', 'nature'],
+            ['Níl tuile dá mhéad nach dtránn', 'Every flood eventually subsides.', 'nature'],
+            ['Aithníonn ciaróg ciaróg eile', 'It takes one beetle to recognise another.', 'nature'],
+            ['Ar mhaithe leis féin a bhíonn an cat ag crónán', 'The cat purrs for its own benefit.', 'nature'],
+            ['Ní chronaítear an t-uisce go dtriomaítear an tobar', 'We miss the water only when the well runs dry.', 'nature'],
+            ['Ní thagann caonach ar chloch reatha', 'A rolling stone gathers no moss.', 'nature'],
+            ['Bíonn caora dhubh ar an tréad is gile', 'Even the whitest flock has a black sheep.', 'nature'],
+            ['Is dána gach madra i ndoras a thí féin', 'Every dog is bold at its own door.', 'nature'],
+            ['Nuair a bhíonn an cat amuigh bíonn na lucha ag rince', 'When the cat is away, the mice will play.', 'nature'],
+            ['Ní neart go cur le chéile', 'There is strength in unity.', 'people'],
+            ['Ar scáth a chéile a mhaireann na daoine', 'People depend on one another.', 'people'],
+            ['Giorraíonn beirt bóthar', 'Two people make a journey feel shorter.', 'people'],
+            ['Aithnítear cara i gcruatan', 'A true friend is known in hardship.', 'people'],
+            ['Is maith an scáthán súil charad', 'A friend’s eye is a good mirror.', 'people'],
+            ['Níl aon tinteán mar do thinteán féin', 'There is no place like home.', 'people'],
+            ['Is maith an t-anlann an t-ocras', 'Hunger is the best sauce.', 'wellbeing'],
+            ['Tír gan teanga, tír gan anam', 'A country without a language has no soul.', 'language'],
+            ['Beatha teanga í a labhairt', 'Speaking a language keeps it alive.', 'language'],
+            ['Is fearr Gaeilge bhriste ná Béarla cliste', 'Imperfect Irish is better than polished English.', 'language']
+        ].map(([irish, english, theme], id) => ({ id, irish, english, theme }));
+        const $ = id => document.getElementById(id); let queue = [], round = [], roundNo = 0, matched = new Set(), mistakes = 0, selected = null, locked = false;
+        function shuffle(a) { let out = [...a]; for (let i = out.length - 1; i > 0; i--) { let j = Math.floor(Math.random() * (i + 1));[out[i], out[j]] = [out[j], out[i]] } return out }
+        function card(item, side, index) { const b = document.createElement('button'); b.type = 'button'; b.className = 'card ' + (side === 'irish' ? 'irish' : ''); b.dataset.id = item.id; b.dataset.side = side; const n = document.createElement('span'); n.className = 'num'; n.textContent = String(index + 1).padStart(2, '0'); b.append(n, document.createTextNode(side === 'irish' ? item.irish : item.english)); b.addEventListener('click', () => choose(b)); return b }
+        function message(s, error = false) { $('feedback').textContent = s; $('feedback').classList.toggle('error', error) }
+        function update() { let total = round.length; $('score').textContent = `${matched.size} / ${total} matched · ${mistakes} mistake${mistakes === 1 ? '' : 's'}`; $('fill').style.width = `${total ? matched.size / total * 100 : 0}%`; $('roundLabel').textContent = `Round ${roundNo} · ${queue.length} still to come` }
+        function render() { matched = new Set(); mistakes = 0; selected = null; locked = false; $('next').classList.add('hidden'); $('reveal').disabled = false; $('irishCards').replaceChildren(...shuffle(round).map((x, i) => card(x, 'irish', i))); $('englishCards').replaceChildren(...shuffle(round).map((x, i) => card(x, 'english', i))); message('Select a card to begin.'); update() }
+        function begin() { queue = shuffle(DATA.filter(x => $('theme').value === 'all' || x.theme === $('theme').value)); roundNo = 0; nextRound() }
+        function nextRound() { if (!queue.length) { queue = shuffle(DATA.filter(x => $('theme').value === 'all' || x.theme === $('theme').value)); roundNo = 0 } round = queue.splice(0, Number($('size').value)); roundNo++; render() }
+        function choose(button) {
+            if (locked || button.disabled) return; if (!selected) { selected = button; button.classList.add('selected'); message('Now choose its match in the other column.'); return } if (selected === button) { button.classList.remove('selected'); selected = null; message('Selection cleared.'); return } if (selected.dataset.side === button.dataset.side) { selected.classList.remove('selected'); selected = button; button.classList.add('selected'); return }
+            let previous = selected; selected = null; previous.classList.remove('selected'); if (previous.dataset.id === button.dataset.id) { let id = Number(button.dataset.id); matched.add(id); document.querySelectorAll(`.card[data-id="${id}"]`).forEach(el => { el.classList.add('matched'); el.disabled = true }); message(`Correct: ${DATA[id].irish} — ${DATA[id].english}`); update(); if (matched.size === round.length) finish(false) } else { mistakes++; update(); locked = true; previous.classList.add('wrong'); button.classList.add('wrong'); message('Those do not match. Try another pair.', true); setTimeout(() => { previous.classList.remove('wrong'); button.classList.remove('wrong'); locked = false }, 650) }
+        }
+        function finish(revealed) { $('next').classList.remove('hidden'); $('reveal').disabled = true; message(revealed ? 'Answers shown. Choose Next round to continue.' : `Round complete! ${mistakes === 0 ? 'Perfect matching.' : `${mistakes} mistake${mistakes === 1 ? '' : 's'}.`} ${queue.length ? 'Continue to the next round.' : 'You have reached the end of this selection. Next round reshuffles it.'}`) }
+        $('reveal').addEventListener('click', () => { if (locked) return; let remaining = round.filter(x => !matched.has(x.id)); for (const item of remaining) { let pair = [...document.querySelectorAll('.card')].filter(b => Number(b.dataset.id) === item.id); pair.forEach(b => { b.disabled = true; b.classList.add('matched') }); matched.add(item.id) } if (selected) { selected.classList.remove('selected'); selected = null } update(); finish(true) });
+        $('start').addEventListener('click', begin); $('next').addEventListener('click', nextRound);
+        $('library').replaceChildren(...DATA.map((x, i) => { const div = document.createElement('div'); div.className = 'entry'; const strong = document.createElement('strong'); strong.textContent = `${i + 1}. ${x.irish}`; const small = document.createElement('small'); small.textContent = x.english; div.append(strong, small); return div })); begin();
+    </script>
+</body>
+
+</html>

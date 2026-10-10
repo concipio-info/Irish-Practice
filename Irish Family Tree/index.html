@@ -1,59 +1,524 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crann Ginealaigh — Irish family words</title>
-<style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#1b3140;background:#f5f7f4}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1510px;margin:auto;padding:24px 20px 60px}header{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}h1{font-size:clamp(1.8rem,4vw,3rem);margin:0;letter-spacing:-.04em}h2{margin:0 0 10px;font-size:1.35rem}.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;color:#346e62;font-weight:800;margin:0 0 6px}.intro{max-width:780px;line-height:1.55;margin:9px 0 19px;color:#526573}.badge{background:#e0ede5;color:#235448;border-radius:999px;padding:8px 13px;font-weight:700}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:17px 0}.tabs button,.pill{border:1px solid #ccdcd5;background:white;color:#275b51;padding:10px 15px;border-radius:12px;font-weight:750}.tabs button[aria-selected=true],.pill.active{background:#126451;color:white;border-color:#126451}.panel{background:#fff;border:1px solid #dce5df;border-radius:18px;padding:18px;box-shadow:0 8px 27px #1836290a}.studybar,.quizbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}.small{color:#667783;font-size:.9rem;line-height:1.45}.modearea{display:flex;align-items:center;gap:8px;flex-wrap:wrap}select,input{border:1px solid #bdcfc7;border-radius:10px;background:#fff;color:#193c34;padding:10px 12px}button:focus-visible,input:focus-visible,select:focus-visible,.person:focus-visible{outline:3px solid #efb95c;outline-offset:3px}.tree-scroll{overflow-x:auto;padding:14px 2px 4px}.tree{width:1200px;height:795px;position:relative;margin:0 auto;background:linear-gradient(#f7faf8,#f2f7f3);border:1px solid #e4ede8;border-radius:18px}.tree svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.generation{position:absolute;left:18px;color:#779187;text-transform:uppercase;font-size:.69rem;letter-spacing:.09em;font-weight:800}.person{position:absolute;transform:translateX(-50%);width:164px;min-height:84px;z-index:1;border:1px solid #cadbd2;background:#fff;border-radius:14px;padding:9px 10px;text-align:left;box-shadow:0 3px 10px #16452d0d;transition:transform .16s,box-shadow .16s,border-color .16s}.person .who{display:block;color:#536c63;font-size:.73rem;line-height:1.25;min-height:28px}.person .irish{display:block;font-weight:800;color:#175a4d;font-size:1.06rem;margin-top:4px}.person.you{background:#d8efe3;border:2px solid #17846a}.person.you .irish{color:#094333}.person.target{border:3px solid #e69b2b;box-shadow:0 0 0 5px #f9dcad}.person.valid{border-color:#299776;background:#edfaf3}.person.invalid{border-color:#cc594d;background:#fff0eb}.person.answerable:hover{transform:translateX(-50%) translateY(-3px);box-shadow:0 9px 18px #163c2928}.person .blank{color:#777;font-weight:700;letter-spacing:.08em}.person .hint{font-size:.74rem;color:#597469;display:block;margin-top:2px}.tree-foot{margin:5px 0 0;color:#607369;font-size:.84rem}.quiz{margin-top:18px}.progress{font-size:.92rem;font-weight:750;color:#42685b}.question{font-size:clamp(1.15rem,2.7vw,1.5rem);font-weight:800;line-height:1.4;margin:15px 0}.choicegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:660px}.choicegrid button{border:1px solid #bbd1c3;background:#f8fbf9;border-radius:11px;padding:14px;text-align:left;font-weight:720;min-height:54px}.choicegrid button:hover:not(:disabled){background:#e5f3ea}.choicegrid button:disabled{cursor:default}.choicegrid .right{background:#d5f2dc;border-color:#3e9c5e}.choicegrid .wrong{background:#fde1dc;border-color:#d66e63}.entry{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.entry input{min-width:min(100%,270px)}.primary{background:#126451;color:#fff;border:1px solid #126451;border-radius:10px;padding:11px 16px;font-weight:800}.primary:disabled{opacity:.5;cursor:default}.secondary{border:1px solid #aacbb9;background:#fff;color:#175d4f;border-radius:10px;padding:11px 15px;font-weight:760}.feedback{min-height:48px;margin:12px 0 0;line-height:1.5}.feedback.good{color:#166443}.feedback.bad{color:#a63e31}.nextrow{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.toolbar button{padding:5px 10px;border:1px solid #d3e0d8;border-radius:8px;background:white}.source{margin-top:18px;color:#61736d;font-size:.83rem;line-height:1.55}.source a{color:#195f51}.hidden{display:none!important}@media(max-width:700px){.shell{padding:18px 11px 40px}.panel{padding:13px}.choicegrid{grid-template-columns:1fr}.tree{margin:0}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crann Ginealaigh — Irish family words</title>
+    <style>
+        :root {
+            font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+            color: #1b3140;
+            background: #f5f7f4
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        .shell {
+            max-width: 1510px;
+            margin: auto;
+            padding: 24px 20px 60px
+        }
+
+        header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin: 0;
+            letter-spacing: -.04em
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 1.35rem
+        }
+
+        .eyebrow {
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            color: #346e62;
+            font-weight: 800;
+            margin: 0 0 6px
+        }
+
+        .intro {
+            max-width: 780px;
+            line-height: 1.55;
+            margin: 9px 0 19px;
+            color: #526573
+        }
+
+        .badge {
+            background: #e0ede5;
+            color: #235448;
+            border-radius: 999px;
+            padding: 8px 13px;
+            font-weight: 700
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 17px 0
+        }
+
+        .tabs button,
+        .pill {
+            border: 1px solid #ccdcd5;
+            background: white;
+            color: #275b51;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-weight: 750
+        }
+
+        .tabs button[aria-selected=true],
+        .pill.active {
+            background: #126451;
+            color: white;
+            border-color: #126451
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid #dce5df;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 8px 27px #1836290a
+        }
+
+        .studybar,
+        .quizbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
+
+        .small {
+            color: #667783;
+            font-size: .9rem;
+            line-height: 1.45
+        }
+
+        .modearea {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        select,
+        input {
+            border: 1px solid #bdcfc7;
+            border-radius: 10px;
+            background: #fff;
+            color: #193c34;
+            padding: 10px 12px
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        .person:focus-visible {
+            outline: 3px solid #efb95c;
+            outline-offset: 3px
+        }
+
+        .tree-scroll {
+            overflow-x: auto;
+            padding: 14px 2px 4px
+        }
+
+        .tree {
+            width: 1200px;
+            height: 795px;
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(#f7faf8, #f2f7f3);
+            border: 1px solid #e4ede8;
+            border-radius: 18px
+        }
+
+        .tree svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none
+        }
+
+        .generation {
+            position: absolute;
+            left: 18px;
+            color: #779187;
+            text-transform: uppercase;
+            font-size: .69rem;
+            letter-spacing: .09em;
+            font-weight: 800
+        }
+
+        .person {
+            position: absolute;
+            transform: translateX(-50%);
+            width: 164px;
+            min-height: 84px;
+            z-index: 1;
+            border: 1px solid #cadbd2;
+            background: #fff;
+            border-radius: 14px;
+            padding: 9px 10px;
+            text-align: left;
+            box-shadow: 0 3px 10px #16452d0d;
+            transition: transform .16s, box-shadow .16s, border-color .16s
+        }
+
+        .person .who {
+            display: block;
+            color: #536c63;
+            font-size: .73rem;
+            line-height: 1.25;
+            min-height: 28px
+        }
+
+        .person .irish {
+            display: block;
+            font-weight: 800;
+            color: #175a4d;
+            font-size: 1.06rem;
+            margin-top: 4px
+        }
+
+        .person.you {
+            background: #d8efe3;
+            border: 2px solid #17846a
+        }
+
+        .person.you .irish {
+            color: #094333
+        }
+
+        .person.target {
+            border: 3px solid #e69b2b;
+            box-shadow: 0 0 0 5px #f9dcad
+        }
+
+        .person.valid {
+            border-color: #299776;
+            background: #edfaf3
+        }
+
+        .person.invalid {
+            border-color: #cc594d;
+            background: #fff0eb
+        }
+
+        .person.answerable:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 9px 18px #163c2928
+        }
+
+        .person .blank {
+            color: #777;
+            font-weight: 700;
+            letter-spacing: .08em
+        }
+
+        .person .hint {
+            font-size: .74rem;
+            color: #597469;
+            display: block;
+            margin-top: 2px
+        }
+
+        .tree-foot {
+            margin: 5px 0 0;
+            color: #607369;
+            font-size: .84rem
+        }
+
+        .quiz {
+            margin-top: 18px
+        }
+
+        .progress {
+            font-size: .92rem;
+            font-weight: 750;
+            color: #42685b
+        }
+
+        .question {
+            font-size: clamp(1.15rem, 2.7vw, 1.5rem);
+            font-weight: 800;
+            line-height: 1.4;
+            margin: 15px 0
+        }
+
+        .choicegrid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+            max-width: 660px
+        }
+
+        .choicegrid button {
+            border: 1px solid #bbd1c3;
+            background: #f8fbf9;
+            border-radius: 11px;
+            padding: 14px;
+            text-align: left;
+            font-weight: 720;
+            min-height: 54px
+        }
+
+        .choicegrid button:hover:not(:disabled) {
+            background: #e5f3ea
+        }
+
+        .choicegrid button:disabled {
+            cursor: default
+        }
+
+        .choicegrid .right {
+            background: #d5f2dc;
+            border-color: #3e9c5e
+        }
+
+        .choicegrid .wrong {
+            background: #fde1dc;
+            border-color: #d66e63
+        }
+
+        .entry {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        .entry input {
+            min-width: min(100%, 270px)
+        }
+
+        .primary {
+            background: #126451;
+            color: #fff;
+            border: 1px solid #126451;
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-weight: 800
+        }
+
+        .primary:disabled {
+            opacity: .5;
+            cursor: default
+        }
+
+        .secondary {
+            border: 1px solid #aacbb9;
+            background: #fff;
+            color: #175d4f;
+            border-radius: 10px;
+            padding: 11px 15px;
+            font-weight: 760
+        }
+
+        .feedback {
+            min-height: 48px;
+            margin: 12px 0 0;
+            line-height: 1.5
+        }
+
+        .feedback.good {
+            color: #166443
+        }
+
+        .feedback.bad {
+            color: #a63e31
+        }
+
+        .nextrow {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 8px 0
+        }
+
+        .toolbar button {
+            padding: 5px 10px;
+            border: 1px solid #d3e0d8;
+            border-radius: 8px;
+            background: white
+        }
+
+        .source {
+            margin-top: 18px;
+            color: #61736d;
+            font-size: .83rem;
+            line-height: 1.55
+        }
+
+        .source a {
+            color: #195f51
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        @media(max-width:700px) {
+            .shell {
+                padding: 18px 11px 40px
+            }
+
+            .panel {
+                padding: 13px
+            }
+
+            .choicegrid {
+                grid-template-columns: 1fr
+            }
+
+            .tree {
+                margin: 0
+            }
+        }
+    </style>
 </head>
-<body><main class="shell">
-<header><div><p class="eyebrow">Learn Irish · Family</p><h1>Crann Ginealaigh</h1><p class="intro">Explore a family tree, then practise the Irish words for relatives. Every relationship is measured from <strong>YOU</strong>. These words are <em>nouns</em> for relatives, rather than grammatical pronouns.</p></div><span class="badge">15 family words</span></header>
-<nav class="tabs" aria-label="Practice mode"><button data-tab="study" aria-selected="true">Explore tree</button><button data-tab="place" aria-selected="false">Place on tree</button><button data-tab="translate" aria-selected="false">Translate words</button></nav>
-<section class="panel" aria-label="Family tree"><div class="studybar"><div><h2 id="treeTitle">Your family tree</h2><span class="small" id="treeSub">Select any card to see its Irish word and relationship.</span></div><button class="secondary" id="showAll">Show all words</button></div><div class="tree-scroll"><div class="tree" id="tree"><svg id="links" viewBox="0 0 1200 795" aria-hidden="true"></svg></div></div><p class="tree-foot">On a narrow screen, scroll sideways to explore the tree. Lines indicate parent and child relationships; the dotted line indicates spouses.</p></section>
-<section class="panel quiz hidden" id="quiz" aria-label="Quiz"><div class="quizbar"><div><h2 id="quizTitle">Practice</h2><span class="progress" id="progress"></span></div><div class="modearea" id="settings"></div></div><p class="question" id="question"></p><div id="answerArea"></div><p class="feedback" id="feedback" role="status" aria-live="polite"></p><div class="nextrow"><button class="primary hidden" id="next">Next question →</button><button class="secondary" id="restart">New round</button></div></section>
-<p class="source">Vocabulary uses standard dictionary headwords. Some relatives also have other valid Irish names; the typing quiz accepts listed alternatives. <a href="https://www.focloir.ie/en/dictionary/ei/family" target="_blank" rel="noopener noreferrer">Foras na Gaeilge dictionary</a> · <a href="https://www.focloir.ie/en/dictionary/ei/aunt" target="_blank" rel="noopener noreferrer">aunt</a> · <a href="https://www.focloir.ie/en/dictionary/ei/uncle" target="_blank" rel="noopener noreferrer">uncle</a> · <a href="https://www.focloir.ie/en/dictionary/ei/niece" target="_blank" rel="noopener noreferrer">niece</a> · <a href="https://www.focloir.ie/en/dictionary/ei/nephew" target="_blank" rel="noopener noreferrer">nephew</a> · <a href="https://www.focloir.ie/en/dictionary/ei/cousin" target="_blank" rel="noopener noreferrer">cousin</a>.</p>
-</main><script>
-'use strict';
-const words=[
-{id:'grandmother',en:'grandmother',ga:'seanmháthair',alts:['máthair mhór','máthair chríonna'],clue:'mother’s mother',x:32,y:45},
-{id:'grandfather',en:'grandfather',ga:'seanathair',alts:['daideo','athair mór','athair críonna'],clue:'mother’s father',x:47,y:45},
-{id:'aunt',en:'aunt',ga:'aintín',alts:['aint'],clue:'mother’s sister',x:13,y:182},
-{id:'mother',en:'mother',ga:'máthair',alts:[],clue:'your mother',x:37,y:182},
-{id:'father',en:'father',ga:'athair',alts:[],clue:'your father',x:53,y:182},
-{id:'uncle',en:'uncle',ga:'uncail',alts:[],clue:'mother’s brother',x:80,y:182},
-{id:'cousin',en:'cousin',ga:'col ceathrair',alts:['col ceathar'],clue:'aunt’s child / first cousin',x:11,y:331},
-{id:'brother',en:'brother',ga:'deartháir',alts:[],clue:'your brother',x:27,y:331},
-{id:'you',en:'you',ga:'tú',alts:[],clue:'the reference point',x:43,y:331},
-{id:'spouse',en:'spouse',ga:'céile',alts:[],clue:'your spouse',x:58,y:331},
-{id:'sister',en:'sister',ga:'deirfiúr',alts:[],clue:'your sister',x:76,y:331},
-{id:'niece',en:'niece',ga:'neacht',alts:['iníon dearthár'],clue:'brother’s daughter',x:27,y:488},
-{id:'son',en:'son',ga:'mac',alts:[],clue:'your son',x:42,y:488},
-{id:'daughter',en:'daughter',ga:'iníon',alts:[],clue:'your daughter',x:58,y:488},
-{id:'nephew',en:'nephew',ga:'nia',alts:['mac deirféar'],clue:'sister’s son',x:76,y:488},
-{id:'granddaughter',en:'granddaughter',ga:'gariníon',alts:[],clue:'son’s daughter',x:42,y:650}
-];
-const byId=Object.fromEntries(words.map(w=>[w.id,w]));const quizWords=words.filter(w=>w.id!=='you');
-const tree=document.getElementById('tree'),links=document.getElementById('links');
-const edges=[['grandmother','aunt'],['grandfather','aunt'],['grandmother','mother'],['grandfather','mother'],['grandmother','uncle'],['grandfather','uncle'],['mother','brother'],['father','brother'],['mother','you'],['father','you'],['mother','sister'],['father','sister'],['aunt','cousin'],['brother','niece'],['you','son'],['spouse','son'],['you','daughter'],['spouse','daughter'],['sister','nephew'],['son','granddaughter']];
-for(const [p,c] of edges){const a=byId[p],b=byId[c],x=a.x*12,X=b.x*12;const y=a.y+84,Y=b.y;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M ${x} ${y} C ${x} ${(y+Y)/2}, ${X} ${(y+Y)/2}, ${X} ${Y}`);path.setAttribute('fill','none');path.setAttribute('stroke','#a8c6b8');path.setAttribute('stroke-width','2');links.appendChild(path)}
-const marriage=document.createElementNS('http://www.w3.org/2000/svg','path');marriage.setAttribute('d','M 588 373 H 614');marriage.setAttribute('stroke','#d7a25c');marriage.setAttribute('stroke-width','3');marriage.setAttribute('stroke-dasharray','5 5');links.appendChild(marriage);
-for(const [y,label] of [[15,'Grandparents'],[151,'Parents & their siblings'],[301,'You & your generation'],[458,'Children & siblings’ children'],[620,'Grandchild']]){let s=document.createElement('span');s.className='generation';s.style.top=y+'px';s.textContent=label;tree.appendChild(s)}
-let tab='study',placement='move',direction='en-ga',response='choose',queue=[],index=0,correct=0,answered=false,seen=new Set(),current=null;
-const $=id=>document.getElementById(id);const shuffle=a=>{let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
-function norm(s){return s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/\s+/g,' ')}
-function renderTree(){tree.querySelectorAll('.person').forEach(n=>n.remove());for(const w of words){const b=document.createElement('button');b.type='button';b.className='person'+(w.id==='you'?' you':'');b.style.left=w.x+'%';b.style.top=w.y+'px';b.dataset.id=w.id;const name=document.createElement('span');name.className='who';name.textContent=w.id==='you'?'YOU · tú':w.clue;const ga=document.createElement('span');ga.className='irish';const hint=document.createElement('span');hint.className='hint';if(tab==='study'){ga.textContent=seen.has(w.id)||w.id==='you'?w.ga:'Tap to reveal';hint.textContent=seen.has(w.id)?w.en:' '}
-else if(tab==='place'&&w.id!=='you'){ga.textContent=answered&&current?.id===w.id?w.ga:'· · ·';ga.classList.add('blank');if(current?.id===w.id&&answered)b.classList.add('valid');if(placement==='move'&&!answered)b.classList.add('answerable')}
-else{ga.textContent=w.ga;hint.textContent=w.en}b.append(name,ga,hint);if(tab==='study')b.onclick=()=>{seen.add(w.id);renderTree()};if(tab==='place'&&w.id!=='you'&&placement==='move'){b.onclick=()=>submit(w.id===current.id,w.ga);b.ondragover=e=>{e.preventDefault();b.classList.add('target')};b.ondragleave=()=>b.classList.remove('target');b.ondrop=e=>{e.preventDefault();b.classList.remove('target');if(e.dataTransfer.getData('text/plain')===current.id)submit(w.id===current.id,w.ga)}}tree.appendChild(b)}}
-function setTab(t){tab=t;for(const b of document.querySelectorAll('[data-tab]'))b.setAttribute('aria-selected',b.dataset.tab===t?'true':'false');$('quiz').classList.toggle('hidden',t==='study');$('treeTitle').textContent=t==='place'?'Place the Irish word on the tree':'Your family tree';$('treeSub').textContent=t==='place'?'Use the English relationship clues to find the correct position.':'Select any card to see its Irish word and relationship.';$('showAll').classList.toggle('hidden',t!=='study');if(t!=='study')start();else renderTree()}
-document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));$('showAll').onclick=()=>{seen=new Set(words.map(w=>w.id));renderTree()};
-function settings(){const node=$('settings');node.replaceChildren();function addSelect(label,options,value,onchange){let wrap=document.createElement('label');wrap.className='small';wrap.textContent=label+' ';const sel=document.createElement('select');for(const [v,text] of options){let o=document.createElement('option');o.value=v;o.textContent=text;sel.appendChild(o)}sel.value=value;sel.onchange=()=>onchange(sel.value);wrap.appendChild(sel);node.appendChild(wrap)}
-if(tab==='place')addSelect('Answer with',[['move','Move / tap word'],['type','Type the word']],placement,v=>{placement=v;start()});else{addSelect('Direction',[['en-ga','English → Irish'],['ga-en','Irish → English']],direction,v=>{direction=v;start()});addSelect('Answer with',[['choose','Choose'],['type','Type']],response,v=>{response=v;start()})}}
-function start(){queue=shuffle(quizWords);index=0;correct=0;answered=false;settings();showQuestion()}
-function showQuestion(){answered=false;current=queue[index];$('feedback').textContent='';$('feedback').className='feedback';$('next').classList.add('hidden');$('quizTitle').textContent=tab==='place'?'Place on the family tree':'Translate family words';$('progress').textContent=`Question ${index+1} of ${queue.length} · ${correct} correct`;$('answerArea').replaceChildren();renderTree();if(tab==='place'){$('question').textContent=placement==='move'?`Where does “${current.ga}” go?`:`Type the Irish for ${current.en} (${current.clue}).`;if(placement==='move'){let token=document.createElement('button');token.className='pill active';token.textContent=current.ga;token.draggable=true;token.setAttribute('aria-label',`Drag ${current.ga} to a position on the tree, or tap a position`);token.ondragstart=e=>e.dataTransfer.setData('text/plain',current.id);$('answerArea').append(token);let h=document.createElement('span');h.className='small';h.textContent=' Drag the word or tap the matching tree card.';$('answerArea').append(h)}else makeInput('Irish word',true)}else{const prompt=direction==='en-ga'?current.en:current.ga;$('question').textContent=`What is “${prompt}” in ${direction==='en-ga'?'Irish':'English'}?`;if(response==='type')makeInput(direction==='en-ga'?'Irish word':'English word',direction==='en-ga');else makeChoices()}}
-function makeChoices(){const options=shuffle([current,...shuffle(quizWords.filter(w=>w.id!==current.id)).slice(0,3)]);let box=document.createElement('div');box.className='choicegrid';for(const w of options){let b=document.createElement('button');b.textContent=direction==='en-ga'?w.ga:w.en;b.onclick=()=>{if(answered)return;submit(w.id===current.id,w.id);for(const c of box.children){c.disabled=true;if(c.textContent===(direction==='en-ga'?current.ga:current.en))c.classList.add('right');else if(c===b)c.classList.add('wrong')}};box.appendChild(b)}$('answerArea').append(box)}
-function makeInput(placeholder,irish){let form=document.createElement('form');form.className='entry';let input=document.createElement('input');input.placeholder=placeholder;input.autocomplete='off';input.spellcheck=false;input.setAttribute('aria-label',placeholder);let check=document.createElement('button');check.className='primary';check.textContent='Check answer';form.append(input,check);form.onsubmit=e=>{e.preventDefault();if(answered||!input.value.trim())return;const answers=tab==='place'||direction==='en-ga'?[current.ga,...current.alts]:[current.en];submit(answers.some(a=>norm(a)===norm(input.value)),input.value);input.disabled=true;check.disabled=true};$('answerArea').append(form);if(irish){const accents=document.createElement('div');accents.className='toolbar';for(const chr of ['á','é','í','ó','ú']){let b=document.createElement('button');b.type='button';b.textContent=chr;b.setAttribute('aria-label',`Insert ${chr}`);b.onclick=()=>{let n=input.selectionStart??input.value.length;input.setRangeText(chr,n,input.selectionEnd??n,'end');input.focus()};accents.append(b)}$('answerArea').append(accents)}input.focus()}
-function submit(ok,given){if(answered)return;answered=true;if(ok)correct++;const f=$('feedback');f.className='feedback '+(ok?'good':'bad');let expected=tab==='place'||direction==='en-ga'?current.ga:current.en;f.textContent=ok?`Correct! ${current.en} = ${current.ga}.`:`Not quite. ${current.en} = ${current.ga}. ${current.clue}.`;if(!ok&&tab==='place'&&placement==='move')f.textContent+=` You selected ${given}.`;renderTree();$('progress').textContent=`Question ${index+1} of ${queue.length} · ${correct} correct`;$('next').textContent=index+1===queue.length?'See results →':'Next question →';$('next').classList.remove('hidden');$('next').focus()}
-$('next').onclick=()=>{if(index+1<queue.length){index++;showQuestion()}else{const pct=Math.round(100*correct/queue.length);$('question').textContent=`Round complete: ${correct}/${queue.length} (${pct}%).`;$('answerArea').replaceChildren();$('feedback').textContent='Choose New round to practise again.';$('feedback').className='feedback';$('next').classList.add('hidden');$('progress').textContent='Finished';renderTree()}};$('restart').onclick=start;
-renderTree();
-</script></body></html>
+
+<body>
+    <main class="shell">
+        <header>
+            <div>
+                <p class="eyebrow">Learn Irish · Family</p>
+                <h1>Crann Ginealaigh</h1>
+                <p class="intro">Explore a family tree, then practise the Irish words for relatives. Every relationship
+                    is measured from <strong>YOU</strong>. These words are <em>nouns</em> for relatives, rather than
+                    grammatical pronouns.</p>
+            </div><span class="badge">15 family words</span>
+        </header>
+        <nav class="tabs" aria-label="Practice mode"><button data-tab="study" aria-selected="true">Explore
+                tree</button><button data-tab="place" aria-selected="false">Place on tree</button><button
+                data-tab="translate" aria-selected="false">Translate words</button></nav>
+        <section class="panel" aria-label="Family tree">
+            <div class="studybar">
+                <div>
+                    <h2 id="treeTitle">Your family tree</h2><span class="small" id="treeSub">Select any card to see its
+                        Irish word and relationship.</span>
+                </div><button class="secondary" id="showAll">Show all words</button>
+            </div>
+            <div class="tree-scroll">
+                <div class="tree" id="tree"><svg id="links" viewBox="0 0 1200 795" aria-hidden="true"></svg></div>
+            </div>
+            <p class="tree-foot">On a narrow screen, scroll sideways to explore the tree. Lines indicate parent and
+                child relationships; the dotted line indicates spouses.</p>
+        </section>
+        <section class="panel quiz hidden" id="quiz" aria-label="Quiz">
+            <div class="quizbar">
+                <div>
+                    <h2 id="quizTitle">Practice</h2><span class="progress" id="progress"></span>
+                </div>
+                <div class="modearea" id="settings"></div>
+            </div>
+            <p class="question" id="question"></p>
+            <div id="answerArea"></div>
+            <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+            <div class="nextrow"><button class="primary hidden" id="next">Next question →</button><button
+                    class="secondary" id="restart">New round</button></div>
+        </section>
+        <p class="source">Vocabulary uses standard dictionary headwords. Some relatives also have other valid Irish
+            names; the typing quiz accepts listed alternatives. <a href="https://www.focloir.ie/en/dictionary/ei/family"
+                target="_blank" rel="noopener noreferrer">Foras na Gaeilge dictionary</a> · <a
+                href="https://www.focloir.ie/en/dictionary/ei/aunt" target="_blank" rel="noopener noreferrer">aunt</a> ·
+            <a href="https://www.focloir.ie/en/dictionary/ei/uncle" target="_blank" rel="noopener noreferrer">uncle</a>
+            · <a href="https://www.focloir.ie/en/dictionary/ei/niece" target="_blank"
+                rel="noopener noreferrer">niece</a> · <a href="https://www.focloir.ie/en/dictionary/ei/nephew"
+                target="_blank" rel="noopener noreferrer">nephew</a> · <a
+                href="https://www.focloir.ie/en/dictionary/ei/cousin" target="_blank"
+                rel="noopener noreferrer">cousin</a>.</p>
+    </main>
+    <script>
+        'use strict';
+        const words = [
+            { id: 'grandmother', en: 'grandmother', ga: 'seanmháthair', alts: ['máthair mhór', 'máthair chríonna'], clue: 'mother’s mother', x: 32, y: 45 },
+            { id: 'grandfather', en: 'grandfather', ga: 'seanathair', alts: ['daideo', 'athair mór', 'athair críonna'], clue: 'mother’s father', x: 47, y: 45 },
+            { id: 'aunt', en: 'aunt', ga: 'aintín', alts: ['aint'], clue: 'mother’s sister', x: 13, y: 182 },
+            { id: 'mother', en: 'mother', ga: 'máthair', alts: [], clue: 'your mother', x: 37, y: 182 },
+            { id: 'father', en: 'father', ga: 'athair', alts: [], clue: 'your father', x: 53, y: 182 },
+            { id: 'uncle', en: 'uncle', ga: 'uncail', alts: [], clue: 'mother’s brother', x: 80, y: 182 },
+            { id: 'cousin', en: 'cousin', ga: 'col ceathrair', alts: ['col ceathar'], clue: 'aunt’s child / first cousin', x: 11, y: 331 },
+            { id: 'brother', en: 'brother', ga: 'deartháir', alts: [], clue: 'your brother', x: 27, y: 331 },
+            { id: 'you', en: 'you', ga: 'tú', alts: [], clue: 'the reference point', x: 43, y: 331 },
+            { id: 'spouse', en: 'spouse', ga: 'céile', alts: [], clue: 'your spouse', x: 58, y: 331 },
+            { id: 'sister', en: 'sister', ga: 'deirfiúr', alts: [], clue: 'your sister', x: 76, y: 331 },
+            { id: 'niece', en: 'niece', ga: 'neacht', alts: ['iníon dearthár'], clue: 'brother’s daughter', x: 27, y: 488 },
+            { id: 'son', en: 'son', ga: 'mac', alts: [], clue: 'your son', x: 42, y: 488 },
+            { id: 'daughter', en: 'daughter', ga: 'iníon', alts: [], clue: 'your daughter', x: 58, y: 488 },
+            { id: 'nephew', en: 'nephew', ga: 'nia', alts: ['mac deirféar'], clue: 'sister’s son', x: 76, y: 488 },
+            { id: 'granddaughter', en: 'granddaughter', ga: 'gariníon', alts: [], clue: 'son’s daughter', x: 42, y: 650 }
+        ];
+        const byId = Object.fromEntries(words.map(w => [w.id, w])); const quizWords = words.filter(w => w.id !== 'you');
+        const tree = document.getElementById('tree'), links = document.getElementById('links');
+        const edges = [['grandmother', 'aunt'], ['grandfather', 'aunt'], ['grandmother', 'mother'], ['grandfather', 'mother'], ['grandmother', 'uncle'], ['grandfather', 'uncle'], ['mother', 'brother'], ['father', 'brother'], ['mother', 'you'], ['father', 'you'], ['mother', 'sister'], ['father', 'sister'], ['aunt', 'cousin'], ['brother', 'niece'], ['you', 'son'], ['spouse', 'son'], ['you', 'daughter'], ['spouse', 'daughter'], ['sister', 'nephew'], ['son', 'granddaughter']];
+        for (const [p, c] of edges) { const a = byId[p], b = byId[c], x = a.x * 12, X = b.x * 12; const y = a.y + 84, Y = b.y; const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', `M ${x} ${y} C ${x} ${(y + Y) / 2}, ${X} ${(y + Y) / 2}, ${X} ${Y}`); path.setAttribute('fill', 'none'); path.setAttribute('stroke', '#a8c6b8'); path.setAttribute('stroke-width', '2'); links.appendChild(path) }
+        const marriage = document.createElementNS('http://www.w3.org/2000/svg', 'path'); marriage.setAttribute('d', 'M 588 373 H 614'); marriage.setAttribute('stroke', '#d7a25c'); marriage.setAttribute('stroke-width', '3'); marriage.setAttribute('stroke-dasharray', '5 5'); links.appendChild(marriage);
+        for (const [y, label] of [[15, 'Grandparents'], [151, 'Parents & their siblings'], [301, 'You & your generation'], [458, 'Children & siblings’ children'], [620, 'Grandchild']]) { let s = document.createElement('span'); s.className = 'generation'; s.style.top = y + 'px'; s.textContent = label; tree.appendChild(s) }
+        let tab = 'study', placement = 'move', direction = 'en-ga', response = 'choose', queue = [], index = 0, correct = 0, answered = false, seen = new Set(), current = null;
+        const $ = id => document.getElementById(id); const shuffle = a => { let b = [...a]; for (let i = b.length - 1; i > 0; i--) { let j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]] } return b };
+        function norm(s) { return s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/\s+/g, ' ') }
+        function renderTree() {
+            tree.querySelectorAll('.person').forEach(n => n.remove()); for (const w of words) {
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'person' + (w.id === 'you' ? ' you' : ''); b.style.left = w.x + '%'; b.style.top = w.y + 'px'; b.dataset.id = w.id; const name = document.createElement('span'); name.className = 'who'; name.textContent = w.id === 'you' ? 'YOU · tú' : w.clue; const ga = document.createElement('span'); ga.className = 'irish'; const hint = document.createElement('span'); hint.className = 'hint'; if (tab === 'study') { ga.textContent = seen.has(w.id) || w.id === 'you' ? w.ga : 'Tap to reveal'; hint.textContent = seen.has(w.id) ? w.en : ' ' }
+                else if (tab === 'place' && w.id !== 'you') { ga.textContent = answered && current?.id === w.id ? w.ga : '· · ·'; ga.classList.add('blank'); if (current?.id === w.id && answered) b.classList.add('valid'); if (placement === 'move' && !answered) b.classList.add('answerable') }
+                else { ga.textContent = w.ga; hint.textContent = w.en } b.append(name, ga, hint); if (tab === 'study') b.onclick = () => { seen.add(w.id); renderTree() }; if (tab === 'place' && w.id !== 'you' && placement === 'move') { b.onclick = () => submit(w.id === current.id, w.ga); b.ondragover = e => { e.preventDefault(); b.classList.add('target') }; b.ondragleave = () => b.classList.remove('target'); b.ondrop = e => { e.preventDefault(); b.classList.remove('target'); if (e.dataTransfer.getData('text/plain') === current.id) submit(w.id === current.id, w.ga) } } tree.appendChild(b)
+            }
+        }
+        function setTab(t) { tab = t; for (const b of document.querySelectorAll('[data-tab]')) b.setAttribute('aria-selected', b.dataset.tab === t ? 'true' : 'false'); $('quiz').classList.toggle('hidden', t === 'study'); $('treeTitle').textContent = t === 'place' ? 'Place the Irish word on the tree' : 'Your family tree'; $('treeSub').textContent = t === 'place' ? 'Use the English relationship clues to find the correct position.' : 'Select any card to see its Irish word and relationship.'; $('showAll').classList.toggle('hidden', t !== 'study'); if (t !== 'study') start(); else renderTree() }
+        document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => setTab(b.dataset.tab)); $('showAll').onclick = () => { seen = new Set(words.map(w => w.id)); renderTree() };
+        function settings() {
+            const node = $('settings'); node.replaceChildren(); function addSelect(label, options, value, onchange) { let wrap = document.createElement('label'); wrap.className = 'small'; wrap.textContent = label + ' '; const sel = document.createElement('select'); for (const [v, text] of options) { let o = document.createElement('option'); o.value = v; o.textContent = text; sel.appendChild(o) } sel.value = value; sel.onchange = () => onchange(sel.value); wrap.appendChild(sel); node.appendChild(wrap) }
+            if (tab === 'place') addSelect('Answer with', [['move', 'Move / tap word'], ['type', 'Type the word']], placement, v => { placement = v; start() }); else { addSelect('Direction', [['en-ga', 'English → Irish'], ['ga-en', 'Irish → English']], direction, v => { direction = v; start() }); addSelect('Answer with', [['choose', 'Choose'], ['type', 'Type']], response, v => { response = v; start() }) }
+        }
+        function start() { queue = shuffle(quizWords); index = 0; correct = 0; answered = false; settings(); showQuestion() }
+        function showQuestion() { answered = false; current = queue[index]; $('feedback').textContent = ''; $('feedback').className = 'feedback'; $('next').classList.add('hidden'); $('quizTitle').textContent = tab === 'place' ? 'Place on the family tree' : 'Translate family words'; $('progress').textContent = `Question ${index + 1} of ${queue.length} · ${correct} correct`; $('answerArea').replaceChildren(); renderTree(); if (tab === 'place') { $('question').textContent = placement === 'move' ? `Where does “${current.ga}” go?` : `Type the Irish for ${current.en} (${current.clue}).`; if (placement === 'move') { let token = document.createElement('button'); token.className = 'pill active'; token.textContent = current.ga; token.draggable = true; token.setAttribute('aria-label', `Drag ${current.ga} to a position on the tree, or tap a position`); token.ondragstart = e => e.dataTransfer.setData('text/plain', current.id); $('answerArea').append(token); let h = document.createElement('span'); h.className = 'small'; h.textContent = ' Drag the word or tap the matching tree card.'; $('answerArea').append(h) } else makeInput('Irish word', true) } else { const prompt = direction === 'en-ga' ? current.en : current.ga; $('question').textContent = `What is “${prompt}” in ${direction === 'en-ga' ? 'Irish' : 'English'}?`; if (response === 'type') makeInput(direction === 'en-ga' ? 'Irish word' : 'English word', direction === 'en-ga'); else makeChoices() } }
+        function makeChoices() { const options = shuffle([current, ...shuffle(quizWords.filter(w => w.id !== current.id)).slice(0, 3)]); let box = document.createElement('div'); box.className = 'choicegrid'; for (const w of options) { let b = document.createElement('button'); b.textContent = direction === 'en-ga' ? w.ga : w.en; b.onclick = () => { if (answered) return; submit(w.id === current.id, w.id); for (const c of box.children) { c.disabled = true; if (c.textContent === (direction === 'en-ga' ? current.ga : current.en)) c.classList.add('right'); else if (c === b) c.classList.add('wrong') } }; box.appendChild(b) } $('answerArea').append(box) }
+        function makeInput(placeholder, irish) { let form = document.createElement('form'); form.className = 'entry'; let input = document.createElement('input'); input.placeholder = placeholder; input.autocomplete = 'off'; input.spellcheck = false; input.setAttribute('aria-label', placeholder); let check = document.createElement('button'); check.className = 'primary'; check.textContent = 'Check answer'; form.append(input, check); form.onsubmit = e => { e.preventDefault(); if (answered || !input.value.trim()) return; const answers = tab === 'place' || direction === 'en-ga' ? [current.ga, ...current.alts] : [current.en]; submit(answers.some(a => norm(a) === norm(input.value)), input.value); input.disabled = true; check.disabled = true }; $('answerArea').append(form); if (irish) { const accents = document.createElement('div'); accents.className = 'toolbar'; for (const chr of ['á', 'é', 'í', 'ó', 'ú']) { let b = document.createElement('button'); b.type = 'button'; b.textContent = chr; b.setAttribute('aria-label', `Insert ${chr}`); b.onclick = () => { let n = input.selectionStart ?? input.value.length; input.setRangeText(chr, n, input.selectionEnd ?? n, 'end'); input.focus() }; accents.append(b) } $('answerArea').append(accents) } input.focus() }
+        function submit(ok, given) { if (answered) return; answered = true; if (ok) correct++; const f = $('feedback'); f.className = 'feedback ' + (ok ? 'good' : 'bad'); let expected = tab === 'place' || direction === 'en-ga' ? current.ga : current.en; f.textContent = ok ? `Correct! ${current.en} = ${current.ga}.` : `Not quite. ${current.en} = ${current.ga}. ${current.clue}.`; if (!ok && tab === 'place' && placement === 'move') f.textContent += ` You selected ${given}.`; renderTree(); $('progress').textContent = `Question ${index + 1} of ${queue.length} · ${correct} correct`; $('next').textContent = index + 1 === queue.length ? 'See results →' : 'Next question →'; $('next').classList.remove('hidden'); $('next').focus() }
+        $('next').onclick = () => { if (index + 1 < queue.length) { index++; showQuestion() } else { const pct = Math.round(100 * correct / queue.length); $('question').textContent = `Round complete: ${correct}/${queue.length} (${pct}%).`; $('answerArea').replaceChildren(); $('feedback').textContent = 'Choose New round to practise again.'; $('feedback').className = 'feedback'; $('next').classList.add('hidden'); $('progress').textContent = 'Finished'; renderTree() } }; $('restart').onclick = start;
+        renderTree();
+    </script>
+</body>
+
+</html>
