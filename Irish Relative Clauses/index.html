@@ -1,55 +1,474 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Irish Relative Clauses · A / Ar</title>
-<style>
-:root{color-scheme:light;--ink:#18333b;--muted:#587078;--bg:#f3f5ee;--card:#fff;--green:#14765d;--pale:#e2f2e9;--red:#a4383b;--line:#d8e2df;--gold:#d49d39}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% 0%,#e4eee3,transparent 42%),var(--bg);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}main{max-width:950px;margin:auto;padding:24px 18px 70px}header{display:flex;justify-content:space-between;gap:20px;align-items:start}.brand{font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;font-weight:800;color:var(--green)}h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;margin:.4rem 0}.sub{color:var(--muted);max-width:700px;margin:0 0 22px}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #cf8f22;outline-offset:3px}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 10px 35px #2449360b;margin:18px 0}.controls{display:flex;gap:14px;flex-wrap:wrap;align-items:end}.controls label{display:grid;gap:5px;font-weight:650;font-size:.9rem}.controls select{padding:9px 12px;border:1px solid #bdcfca;border-radius:9px;background:#fff;color:var(--ink)}.stat{border-radius:12px;padding:7px 12px;background:#edf3ef;color:var(--muted);font-size:.9rem}.stat strong{color:var(--ink)}.stats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}.progress{height:8px;background:#e7edeb;border-radius:50px;margin:20px 0 0;overflow:hidden}.progress>div{height:100%;background:var(--green);transition:width .3s}.eyebrow{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);font-weight:800}.meaning{font-size:1.2rem;margin:8px 0;color:#274750}.sentence{font-size:clamp(1.45rem,3vw,2rem);font-weight:700;margin:23px 0;line-height:1.5}.blank{display:inline-block;background:#f5edcf;color:#77531d;padding:0 10px;border-radius:8px;border-bottom:3px solid var(--gold);min-width:110px;text-align:center}.prompt{color:var(--muted);margin-bottom:12px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.choice{background:#fff;border:2px solid var(--line);border-radius:12px;padding:13px 14px;text-align:left;font-weight:650;color:var(--ink);min-height:57px}.choice:not(:disabled):hover{border-color:var(--green);background:#f5faf7}.choice.selected{border-color:var(--green);background:var(--pale)}.choice.wrong{border-color:var(--red);background:#fcecec}.choice:disabled{cursor:default}.typed{display:flex;gap:10px}.typed input{min-width:0;flex:1;border:2px solid var(--line);border-radius:10px;padding:12px}.primary{border:0;border-radius:11px;background:var(--green);color:white;padding:12px 18px;font-weight:800}.primary:disabled{opacity:.5;cursor:default}.secondary{border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);padding:10px 15px;font-weight:650}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.feedback{border-radius:13px;padding:16px;margin-top:18px;border:1px solid #bbdacd;background:#f1f9f4}.feedback.bad{background:#fff4f1;border-color:#e7c2bc}.feedback h3{margin:0 0 5px}.feedback p{margin:7px 0}.group{background:#fff;border-radius:8px;padding:8px 11px;margin-top:11px;overflow-wrap:anywhere}.reference{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rule{background:#f6f9f6;border-radius:11px;padding:13px}.rule strong{display:block;margin-bottom:3px}.rule small{color:var(--muted)}details{margin-top:20px}summary{cursor:pointer;font-weight:750}footer{font-size:.83rem;color:var(--muted)}a{color:#0e6553}@media(max-width:650px){.choices,.reference{grid-template-columns:1fr}.panel{padding:17px}.typed{flex-direction:column}header{display:block}}
-</style></head><body><main><header><div><div class="brand">Gaeilge · grammar practice</div><h1>Who, whom, where?</h1><p class="sub">Practise direct and indirect relative clauses. Choose the whole missing phrase so the particle, mutation and verb form all have to agree.</p></div></header>
-<section class="panel"><div class="controls"><label>Topic<select id="topic"><option value="all">All topics</option><option value="direct">Direct relative</option><option value="indirect">Indirect relative</option><option value="past">Past & irregular verbs</option><option value="negative">Negative relatives</option><option value="preposition">Prepositions & possessives</option></select></label><label>Answer mode<select id="mode"><option value="choice">Multiple choice</option><option value="type">Type the missing phrase</option></select></label><label>Round length<select id="length"><option value="10">10 questions</option><option value="20">20 questions</option><option value="all">All in topic</option></select></label><button class="secondary" id="restart" type="button">New round</button></div><div class="stats"><span class="stat">Question <strong id="count">1/10</strong></span><span class="stat">Score <strong id="score">0/0</strong></span><span class="stat">Best round <strong id="best">—</strong></span></div><div class="progress"><div id="bar"></div></div></section>
-<section class="panel" id="quiz" aria-live="polite"><div class="eyebrow" id="tag"></div><p class="meaning" id="meaning"></p><div class="sentence" id="sentence"></div><p class="prompt" id="prompt"></p><div id="answer"></div><div id="feedback" class="feedback" role="status" hidden></div><div class="actions"><button class="primary" id="next" type="button" hidden>Next question →</button><button class="secondary" id="skip" type="button">Skip</button></div></section>
-<section class="panel"><details><summary>Quick reference: how do I decide?</summary><div class="reference" style="margin-top:14px"><div class="rule"><strong>Direct · a + lenition</strong>Head noun is the subject or direct object of the relative verb. <em>an bhean a phóg Gearóid</em> can mean either “the woman who kissed Gearóid” or “the woman whom Gearóid kissed.”</div><div class="rule"><strong>Indirect · a + eclipsis</strong>The head noun is linked through a preposition or possessive (or a repeated pronoun for clarity). <em>an bhean a bhfuil cónaí orm léi</em>. Dependent verb forms apply.</div><div class="rule"><strong>Indirect past · ar + lenition</strong>Most regular verbs and five irregular verbs take <em>ar</em>: <em>an bhean ar phóg Gearóid í</em>. Six irregular verbs instead take <em>a</em> plus their dependent form: <em>a bhfaca</em>, <em>a raibh</em>.</div><div class="rule"><strong>Negative · nach / nár</strong><em>nach</em> eclipses; past <em>nár</em> generally lenites. Six past irregular verbs keep <em>nach</em>: <em>nach bhfaca</em>, <em>nach raibh</em>.</div></div><p><strong>Important:</strong> English “whom” alone does not force an indirect relative in Irish. A direct object can use a direct relative. Indirect wording may repeat a pronoun to remove ambiguity. <em>A chur</em> means “to put” and is not itself a relative particle.</p></details></section>
-<footer>Based on <a href="https://data.oireachtas.ie/ie/oireachtas/caighdeanOifigiul/2017/2017-08-03_an-caighdean-oifigiuil-2017_en.pdf" target="_blank" rel="noopener noreferrer">An Caighdeán Oifigiúil, chapter 11</a>. Standard written Irish; dialect usage may vary. No account, internet connection, or external scripts needed.</footer></main>
-<script>
-'use strict';
-// The blank contains a complete particle + verb phrase, or a fused preposition + particle + verb.
-const Q=[
-{t:['direct'],en:'The woman who kisses Gearóid.',pre:'Sin í an bhean ',post:' Gearóid.',a:'a phógann',o:['a bpógann','ar phóg','a bpógfaidh'],why:'The woman does the kissing: she is the subject. Direct a lenites pógann.',g:'[Sin í an bhean] [a phógann Gearóid]'},
-{t:['direct'],en:'The poem that the man composed.',pre:'Sin é an dán ',post:' an fear.',a:'a chum',o:['ar chum','a gcum','a chumann'],why:'The poem is the direct object of chum. Irish still permits the direct relative here; a lenites cum → chum.',g:'[Sin é an dán] [a chum an fear]'},
-{t:['direct'],en:'The house that the family will buy.',pre:'Sin é an teach ',post:' an teaghlach.',a:'a cheannóidh',o:['a gceannóidh','ar cheannaigh','a cheannaíonn'],why:'The house is the direct object. Direct a lenites the future verb: ceannóidh → cheannóidh.',g:'[Sin é an teach] [a cheannóidh an teaghlach]'},
-{t:['direct'],en:'The woman who goes to the matches.',pre:'Sin í an bhean ',post:' go dtí na cluichí.',a:'a théann',o:['a dtéann','ar tháinig','a ndeachaigh'],why:'She is the subject. Direct a selects the independent form téann and lenites it to théann.',g:'[Sin í an bhean] [a théann go dtí na cluichí]'},
-{t:['direct'],en:'The woman who was on television.',pre:'Sin í an bhean ',post:' ar an teilifís.',a:'a bhí',o:['a raibh','ar bhí','ar raibh'],why:'She is the subject. Direct a uses independent past bí: bhí. Indirect past bí is a raibh.',g:'[Sin í an bhean] [a bhí ar an teilifís]'},
-{t:['direct'],en:'The woman who is at home.',pre:'Sin í an bhean ',post:' sa bhaile.',a:'atá',o:['a bhfuil','ar tá','a tá'],why:'The direct relative a merges with present tá to form atá.',g:'[Sin í an bhean] [atá sa bhaile]'},
-{t:['direct'],en:'The coat that I got.',pre:'Sin é an cóta ',post:' mé.',a:'a fuair',o:['a bhfuair','ar fuair','a fhaigheann'],why:'The coat is the direct object of the relative verb. Direct a uses independent past fuair; the indirect past is a bhfuair.',g:'[Sin é an cóta] [a fuair mé]'},
-{t:['direct'],en:'The woman who saw the man.',pre:'Sin í an bhean ',post:' an fear.',a:'a chonaic',o:['a bhfaca','ar chonaic','a fheiceann'],why:'She is the subject. Direct past feic takes independent chonaic, giving a chonaic.',g:'[Sin í an bhean] [a chonaic an fear]'},
-{t:['indirect','preposition'],en:'The man from whom I buy clothes.',pre:'Sin é an fear ',post:' éadaí uaidh.',a:'a gceannaím',o:['a cheannaím','ar cheannaigh','a gceannaíonn'],why:'Uaidh (“from him”) refers back to the man: the link is through a preposition. Indirect present a eclipses ceannaím → gceannaím.',g:'[Sin é an fear] [a gceannaím éadaí uaidh]'},
-{t:['indirect','preposition'],en:'The book to which the programme refers.',pre:'Sin é an leabhar ',post:' tagairt dó sa chlár.',a:'a ndéantar',o:['a dhéantar','ar dhearnadh','a rinneadh'],why:'Dó (“to it”) links back to the book. Indirect a takes dependent déan and eclipses it: ndéantar.',g:'[Sin é an leabhar] [a ndéantar tagairt dó sa chlár]'},
-{t:['indirect','preposition'],en:'The house in which I live.',pre:'Sin é an teach ',post:' cónaí orm ann.',a:'a bhfuil',o:['atá','ar bhí','a bhí'],why:'Ann (“in it”) refers back to the house. The indirect present of bí is a bhfuil, not atá.',g:'[Sin é an teach] [a bhfuil cónaí orm ann]'},
-{t:['indirect','preposition'],en:'The girl to whom I will give the book.',pre:'Sin í an cailín ',post:' mé an leabhar di.',a:'a dtabharfaidh',o:['a thabharfaidh','ar thug','a dtabharann'],why:'Di (“to her”) links back to the girl. Indirect a takes the dependent future tabharfaidh and eclipses t → dt.',g:'[Sin í an cailín] [a dtabharfaidh mé an leabhar di]'},
-{t:['indirect','preposition'],en:'The woman whose daughter goes to the matches.',pre:'Sin í an bhean ',post:' a hiníon go dtí na cluichí.',a:'a dtéann',o:['a théann','ar tháinig','a ndeachaigh'],why:'A hiníon (“her daughter”) points back to the woman: this is a possessive link. Indirect a eclipses téann → dtéann.',g:'[Sin í an bhean] [a dtéann a hiníon go dtí na cluichí]'},
-{t:['indirect','preposition'],en:'The man whose son will go to the stadium.',pre:'Sin é an fear ',post:' a mhac go dtí an staid.',a:'a rachaidh',o:['a rachfaidh','ar rachaidh','a dtéann'],why:'A mhac (“his son”) is the possessive link. Future indirect a uses dependent rachaidh; r does not display eclipsis in writing.',g:'[Sin é an fear] [a rachaidh a mhac go dtí an staid]'},
-{t:['indirect','preposition'],en:'The house in which the woman lives.',pre:'Sin é an teach ',post:' an bhean.',a:'ina gcónaíonn',o:['inar chónaigh','a chónaíonn','ina chónaíonn'],why:'Here i (“in”) is brought forward and fuses with indirect a → ina. The verb cónaíonn is eclipsed → gcónaíonn.',g:'[Sin é an teach] [ina gcónaíonn an bhean]'},
-{t:['indirect','preposition','past'],en:'The house in which the woman lived.',pre:'Sin é an teach ',post:' an bhean.',a:'inar chónaigh',o:['ina gcónaigh','a chónaigh','inar gcónaigh'],why:'Fronted i + past indirect ar → inar. Past ar lenites cónaigh → chónaigh.',g:'[Sin é an teach] [inar chónaigh an bhean]'},
-{t:['indirect','preposition'],en:'The man from whom I buy clothes (fronted preposition).',pre:'Sin é an fear ',post:' éadaí.',a:'óna gceannaím',o:['ónar cheannaigh','a cheannaím','óna cheannaím'],why:'Fronted ó + indirect a → óna. The verb is eclipsed: gceannaím. The alternative with uaidh at the end also works, but is not the structure tested here.',g:'[Sin é an fear] [óna gceannaím éadaí]'},
-{t:['indirect','past'],en:'The woman whom Gearóid kissed (explicit “her”).',pre:'Sin í an bhean ',post:' Gearóid í.',a:'ar phóg',o:['a phóg','a bpóg','ar bpóg'],why:'Í repeats the woman as the object and removes the possible subject/object ambiguity. Past indirect ar lenites póg → phóg.',g:'[Sin í an bhean] [ar phóg Gearóid í]'},
-{t:['indirect','past','preposition'],en:'The woman from whom I bought the clothes.',pre:'Sin í an bhean ',post:' mé na héadaí uaithi.',a:'ar cheannaigh',o:['a gceannaigh','a cheannaigh','ar gceannaigh'],why:'Uaithi (“from her”) points back to the woman. Past indirect regular verbs take ar + lenition.',g:'[Sin í an bhean] [ar cheannaigh mé na héadaí uaithi]'},
-{t:['indirect','past','preposition'],en:'The film that I heard about.',pre:'Sin é an scannán ',post:' mé faoi.',a:'ar chuala',o:['a chuala','a gcloiseann','ar gchuala'],why:'Faoi (“about it”) links back to the film. Indirect past clois has dependent chuala after ar.',g:'[Sin é an scannán] [ar chuala mé faoi]'},
-{t:['indirect','past','preposition'],en:'The teacher from whom I received a letter.',pre:'Sin é an múinteoir ',post:' mé litir uaidh.',a:'a bhfuair',o:['a fuair','ar fhuair','ar bhfuair'],why:'Although this is past indirect, faigh is one of six irregular verbs using a + the dependent form: a bhfuair.',g:'[Sin é an múinteoir] [a bhfuair mé litir uaidh]'},
-{t:['indirect','past','preposition'],en:'The place to which I went long ago.',pre:'Sin í an áit ',post:' mé fadó.',a:'a ndeachaigh',o:['a chuaigh','ar chuaigh','ar ndeachaigh'],why:'The destination is an indirect link. Past téigh is one of six irregular verbs that use a + dependent ndeachaigh.',g:'[Sin í an áit] [a ndeachaigh mé fadó]'},
-{t:['indirect','past','preposition'],en:'The woman whose daughter was on television.',pre:'Sin í an bhean ',post:' a hiníon ar an teilifís.',a:'a raibh',o:['a bhí','ar bhí','ar raibh'],why:'A hiníon (“her daughter”) makes this indirect. Past bí is an irregular exception: a raibh.',g:'[Sin í an bhean] [a raibh a hiníon ar an teilifís]'},
-{t:['indirect','past'],en:'The woman whom the man saw (explicit “her”).',pre:'Sin í an bhean ',post:' an fear í.',a:'a bhfaca',o:['a chonaic','ar fhaca','ar chonaic'],why:'Í repeats the woman as the object. Past indirect feic is an irregular exception: a bhfaca, using dependent faca with eclipsis.',g:'[Sin í an bhean] [a bhfaca an fear í]'},
-{t:['negative'],en:'The person who does not accept advice.',pre:'Is duine é ',post:' comhairle.',a:'nach nglacann',o:['nár ghlac','a ghlacann','nach glacann'],why:'A negative present relative takes nach + eclipsis, whether the link is direct or indirect.',g:'[Is duine é] [nach nglacann comhairle]'},
-{t:['negative','past'],en:'The person who did not accept advice.',pre:'Ba dhuine é ',post:' comhairle.',a:'nár ghlac',o:['nach nglacann','nach nglac','nár nglac'],why:'Regular negative past relatives take nár + lenition: glac → ghlac.',g:'[Ba dhuine é] [nár ghlac comhairle]'},
-{t:['negative','past','preposition'],en:'The teacher from whom I did not receive a letter.',pre:'Sin é an múinteoir ',post:' mé litir uaidh.',a:'nach bhfuair',o:['nár fhuair','nach fuair','nár bhfuair'],why:'Negative past faigh belongs to the exceptional group: nach + dependent bhfuair, even though the clause is past.',g:'[Sin é an múinteoir] [nach bhfuair mé litir uaidh]'},
-{t:['negative','past'],en:'The woman whom the doctor did not see (explicit “her”).',pre:'Sin í an bhean ',post:' an dochtúir í.',a:'nach bhfaca',o:['nár fhaca','nach chonaic','nár chonaic'],why:'Negative past feic is another exception: nach + dependent bhfaca. The repeated í makes the object explicit.',g:'[Sin í an bhean] [nach bhfaca an dochtúir í]'},
-{t:['negative','past'],en:'The station that did not broadcast the programme.',pre:'Sin é an stáisiún ',post:' an clár.',a:'nár chraol',o:['nach gcraol','nár gcraol','a chraol'],why:'The station is the subject; the clause is direct. Regular negative past uses nár + lenition.',g:'[Sin é an stáisiún] [nár chraol an clár]'},
-{t:['negative','preposition'],en:'The man from whom I would not buy goods.',pre:'Sin é an fear ',post:' aon earraí uaidh.',a:'nach gceannóinn',o:['nár cheannaigh','nach cheannaínn','a gceannóinn'],why:'Uaidh makes the link indirect. Negative conditional uses nach + eclipsis: gceannóinn.',g:'[Sin é an fear] [nach gceannóinn aon earraí uaidh]'}
-];
-const pool=Q;
-const $=id=>document.getElementById(id); let round=[],at=0,score=0,attempts=0,revealed=false;
-function shuffle(arr){return [...arr].sort(()=>Math.random()-.5)}
-function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function norm(s){return s.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('ga')}
-function setup(){const topic=$('topic').value,chosen=pool.filter(q=>topic==='all'||q.t.includes(topic));const n=$('length').value;round=shuffle(chosen).slice(0,n==='all'?chosen.length:Number(n));at=0;score=0;attempts=0;show()}
-function show(){revealed=false;const q=round[at];$('feedback').hidden=true;$('next').hidden=true;$('skip').hidden=false;$('best').textContent=localStorage.getItem('relative_best')||'—';$('score').textContent=`${score}/${attempts}`;$('count').textContent=q?`${at+1}/${round.length}`:`${round.length}/${round.length}`;$('bar').style.width=(round.length?100*at/round.length:0)+'%';if(!q){$('tag').textContent='Round complete';$('meaning').textContent=`You scored ${score} out of ${attempts} answered questions.`;$('sentence').textContent='Maith thú!';$('prompt').textContent='Choose New round to practise again.';$('answer').replaceChildren();$('skip').hidden=true;$('bar').style.width='100%';let pct=attempts?Math.round(100*score/attempts):0;let best=Number(localStorage.getItem('relative_best_pct')||-1);if(attempts&&pct>best){localStorage.setItem('relative_best_pct',pct);localStorage.setItem('relative_best',`${pct}%`);$('best').textContent=`${pct}%`}return}
-$('tag').textContent=q.t.map(x=>({direct:'Direct',indirect:'Indirect',past:'Past',negative:'Negative',preposition:'Preposition / possessive'}[x])).join(' · ');$('meaning').textContent=q.en;$('sentence').innerHTML=escapeHTML(q.pre)+'<span class="blank" aria-label="missing phrase">…</span>'+escapeHTML(q.post);$('prompt').textContent=$('mode').value==='choice'?'Choose the complete missing phrase.':'Type the complete missing phrase (include the particle).';const area=$('answer');area.replaceChildren();if($('mode').value==='choice'){const wrap=document.createElement('div');wrap.className='choices';for(const candidate of shuffle([q.a,...q.o])){let b=document.createElement('button');b.type='button';b.className='choice';b.textContent=candidate;b.onclick=()=>grade(candidate,b);wrap.append(b)}area.append(wrap)}else{const wrap=document.createElement('form');wrap.className='typed';const input=document.createElement('input');input.autocomplete='off';input.spellcheck=false;input.setAttribute('aria-label','Missing Irish phrase');const b=document.createElement('button');b.type='submit';b.className='primary';b.textContent='Check answer';wrap.append(input,b);wrap.onsubmit=e=>{e.preventDefault();if(input.value.trim())grade(input.value,input)};area.append(wrap);input.focus()}}
-function grade(value,control){if(revealed)return;revealed=true;const q=round[at],ok=norm(value)===norm(q.a);attempts++;if(ok)score++;$('score').textContent=`${score}/${attempts}`;$('sentence').innerHTML=escapeHTML(q.pre)+'<span class="blank">'+escapeHTML(q.a)+'</span>'+escapeHTML(q.post);const f=$('feedback');f.hidden=false;f.className='feedback'+(ok?'':' bad');f.innerHTML='<h3>'+(ok?'Correct ✓':'Not quite · '+escapeHTML(q.a))+'</h3><p>'+escapeHTML(q.why)+'</p><div class="group"><strong>Structure:</strong> '+escapeHTML(q.g)+'</div>';for(const b of $('answer').querySelectorAll('button')){b.disabled=true;if(b.textContent===q.a)b.classList.add('selected');if(b===control&&!ok)b.classList.add('wrong')}const inp=$('answer').querySelector('input');if(inp)inp.disabled=true;$('next').hidden=false;$('next').textContent=at===round.length-1?'See results →':'Next question →';$('skip').hidden=true;$('next').focus()}
-$('next').onclick=()=>{at++;show()};$('skip').onclick=()=>{at++;show()};$('restart').onclick=setup;for(const id of ['topic','mode','length'])$(id).onchange=setup;document.addEventListener('keydown',e=>{if(e.key==='Enter'&&revealed&&document.activeElement?.tagName!=='SELECT'){e.preventDefault();at++;show()}});setup();
-</script></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Irish Relative Clauses · A / Ar</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #18333b;
+            --muted: #587078;
+            --bg: #f3f5ee;
+            --card: #fff;
+            --green: #14765d;
+            --pale: #e2f2e9;
+            --red: #a4383b;
+            --line: #d8e2df;
+            --gold: #d49d39
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 12% 0%, #e4eee3, transparent 42%), var(--bg);
+            font: 16px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+            color: var(--ink)
+        }
+
+        main {
+            max-width: 950px;
+            margin: auto;
+            padding: 24px 18px 70px
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: start
+        }
+
+        .brand {
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: .18em;
+            font-weight: 800;
+            color: var(--green)
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.1;
+            margin: .4rem 0
+        }
+
+        .sub {
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 0 22px
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid #cf8f22;
+            outline-offset: 3px
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 35px #2449360b;
+            margin: 18px 0
+        }
+
+        .controls {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: end
+        }
+
+        .controls label {
+            display: grid;
+            gap: 5px;
+            font-weight: 650;
+            font-size: .9rem
+        }
+
+        .controls select {
+            padding: 9px 12px;
+            border: 1px solid #bdcfca;
+            border-radius: 9px;
+            background: #fff;
+            color: var(--ink)
+        }
+
+        .stat {
+            border-radius: 12px;
+            padding: 7px 12px;
+            background: #edf3ef;
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        .stat strong {
+            color: var(--ink)
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 14px 0 0
+        }
+
+        .progress {
+            height: 8px;
+            background: #e7edeb;
+            border-radius: 50px;
+            margin: 20px 0 0;
+            overflow: hidden
+        }
+
+        .progress>div {
+            height: 100%;
+            background: var(--green);
+            transition: width .3s
+        }
+
+        .eyebrow {
+            font-size: .82rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--green);
+            font-weight: 800
+        }
+
+        .meaning {
+            font-size: 1.2rem;
+            margin: 8px 0;
+            color: #274750
+        }
+
+        .sentence {
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            font-weight: 700;
+            margin: 23px 0;
+            line-height: 1.5
+        }
+
+        .blank {
+            display: inline-block;
+            background: #f5edcf;
+            color: #77531d;
+            padding: 0 10px;
+            border-radius: 8px;
+            border-bottom: 3px solid var(--gold);
+            min-width: 110px;
+            text-align: center
+        }
+
+        .prompt {
+            color: var(--muted);
+            margin-bottom: 12px
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px
+        }
+
+        .choice {
+            background: #fff;
+            border: 2px solid var(--line);
+            border-radius: 12px;
+            padding: 13px 14px;
+            text-align: left;
+            font-weight: 650;
+            color: var(--ink);
+            min-height: 57px
+        }
+
+        .choice:not(:disabled):hover {
+            border-color: var(--green);
+            background: #f5faf7
+        }
+
+        .choice.selected {
+            border-color: var(--green);
+            background: var(--pale)
+        }
+
+        .choice.wrong {
+            border-color: var(--red);
+            background: #fcecec
+        }
+
+        .choice:disabled {
+            cursor: default
+        }
+
+        .typed {
+            display: flex;
+            gap: 10px
+        }
+
+        .typed input {
+            min-width: 0;
+            flex: 1;
+            border: 2px solid var(--line);
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .primary {
+            border: 0;
+            border-radius: 11px;
+            background: var(--green);
+            color: white;
+            padding: 12px 18px;
+            font-weight: 800
+        }
+
+        .primary:disabled {
+            opacity: .5;
+            cursor: default
+        }
+
+        .secondary {
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            background: #fff;
+            color: var(--ink);
+            padding: 10px 15px;
+            font-weight: 650
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px
+        }
+
+        .feedback {
+            border-radius: 13px;
+            padding: 16px;
+            margin-top: 18px;
+            border: 1px solid #bbdacd;
+            background: #f1f9f4
+        }
+
+        .feedback.bad {
+            background: #fff4f1;
+            border-color: #e7c2bc
+        }
+
+        .feedback h3 {
+            margin: 0 0 5px
+        }
+
+        .feedback p {
+            margin: 7px 0
+        }
+
+        .group {
+            background: #fff;
+            border-radius: 8px;
+            padding: 8px 11px;
+            margin-top: 11px;
+            overflow-wrap: anywhere
+        }
+
+        .reference {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .rule {
+            background: #f6f9f6;
+            border-radius: 11px;
+            padding: 13px
+        }
+
+        .rule strong {
+            display: block;
+            margin-bottom: 3px
+        }
+
+        .rule small {
+            color: var(--muted)
+        }
+
+        details {
+            margin-top: 20px
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 750
+        }
+
+        footer {
+            font-size: .83rem;
+            color: var(--muted)
+        }
+
+        a {
+            color: #0e6553
+        }
+
+        @media(max-width:650px) {
+
+            .choices,
+            .reference {
+                grid-template-columns: 1fr
+            }
+
+            .panel {
+                padding: 17px
+            }
+
+            .typed {
+                flex-direction: column
+            }
+
+            header {
+                display: block
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <div>
+                <div class="brand">Gaeilge · grammar practice</div>
+                <h1>Who, whom, where?</h1>
+                <p class="sub">Practise direct and indirect relative clauses. Choose the whole missing phrase so the
+                    particle, mutation and verb form all have to agree.</p>
+            </div>
+        </header>
+        <section class="panel">
+            <div class="controls"><label>Topic<select id="topic">
+                        <option value="all">All topics</option>
+                        <option value="direct">Direct relative</option>
+                        <option value="indirect">Indirect relative</option>
+                        <option value="past">Past & irregular verbs</option>
+                        <option value="negative">Negative relatives</option>
+                        <option value="preposition">Prepositions & possessives</option>
+                    </select></label><label>Answer mode<select id="mode">
+                        <option value="choice">Multiple choice</option>
+                        <option value="type">Type the missing phrase</option>
+                    </select></label><label>Round length<select id="length">
+                        <option value="10">10 questions</option>
+                        <option value="20">20 questions</option>
+                        <option value="all">All in topic</option>
+                    </select></label><button class="secondary" id="restart" type="button">New round</button></div>
+            <div class="stats"><span class="stat">Question <strong id="count">1/10</strong></span><span
+                    class="stat">Score <strong id="score">0/0</strong></span><span class="stat">Best round <strong
+                        id="best">—</strong></span></div>
+            <div class="progress">
+                <div id="bar"></div>
+            </div>
+        </section>
+        <section class="panel" id="quiz" aria-live="polite">
+            <div class="eyebrow" id="tag"></div>
+            <p class="meaning" id="meaning"></p>
+            <div class="sentence" id="sentence"></div>
+            <p class="prompt" id="prompt"></p>
+            <div id="answer"></div>
+            <div id="feedback" class="feedback" role="status" hidden></div>
+            <div class="actions"><button class="primary" id="next" type="button" hidden>Next question →</button><button
+                    class="secondary" id="skip" type="button">Skip</button></div>
+        </section>
+        <section class="panel">
+            <details>
+                <summary>Quick reference: how do I decide?</summary>
+                <div class="reference" style="margin-top:14px">
+                    <div class="rule"><strong>Direct · a + lenition</strong>Head noun is the subject or direct object of
+                        the relative verb. <em>an bhean a phóg Gearóid</em> can mean either “the woman who kissed
+                        Gearóid” or “the woman whom Gearóid kissed.”</div>
+                    <div class="rule"><strong>Indirect · a + eclipsis</strong>The head noun is linked through a
+                        preposition or possessive (or a repeated pronoun for clarity). <em>an bhean a bhfuil cónaí orm
+                            léi</em>. Dependent verb forms apply.</div>
+                    <div class="rule"><strong>Indirect past · ar + lenition</strong>Most regular verbs and five
+                        irregular verbs take <em>ar</em>: <em>an bhean ar phóg Gearóid í</em>. Six irregular verbs
+                        instead take <em>a</em> plus their dependent form: <em>a bhfaca</em>, <em>a raibh</em>.</div>
+                    <div class="rule"><strong>Negative · nach / nár</strong><em>nach</em> eclipses; past <em>nár</em>
+                        generally lenites. Six past irregular verbs keep <em>nach</em>: <em>nach bhfaca</em>, <em>nach
+                            raibh</em>.</div>
+                </div>
+                <p><strong>Important:</strong> English “whom” alone does not force an indirect relative in Irish. A
+                    direct object can use a direct relative. Indirect wording may repeat a pronoun to remove ambiguity.
+                    <em>A chur</em> means “to put” and is not itself a relative particle.</p>
+            </details>
+        </section>
+        <footer>Based on <a
+                href="https://data.oireachtas.ie/ie/oireachtas/caighdeanOifigiul/2017/2017-08-03_an-caighdean-oifigiuil-2017_en.pdf"
+                target="_blank" rel="noopener noreferrer">An Caighdeán Oifigiúil, chapter 11</a>. Standard written
+            Irish; dialect usage may vary. No account, internet connection, or external scripts needed.</footer>
+    </main>
+    <script>
+        'use strict';
+        // The blank contains a complete particle + verb phrase, or a fused preposition + particle + verb.
+        const Q = [
+            { t: ['direct'], en: 'The woman who kisses Gearóid.', pre: 'Sin í an bhean ', post: ' Gearóid.', a: 'a phógann', o: ['a bpógann', 'ar phóg', 'a bpógfaidh'], why: 'The woman does the kissing: she is the subject. Direct a lenites pógann.', g: '[Sin í an bhean] [a phógann Gearóid]' },
+            { t: ['direct'], en: 'The poem that the man composed.', pre: 'Sin é an dán ', post: ' an fear.', a: 'a chum', o: ['ar chum', 'a gcum', 'a chumann'], why: 'The poem is the direct object of chum. Irish still permits the direct relative here; a lenites cum → chum.', g: '[Sin é an dán] [a chum an fear]' },
+            { t: ['direct'], en: 'The house that the family will buy.', pre: 'Sin é an teach ', post: ' an teaghlach.', a: 'a cheannóidh', o: ['a gceannóidh', 'ar cheannaigh', 'a cheannaíonn'], why: 'The house is the direct object. Direct a lenites the future verb: ceannóidh → cheannóidh.', g: '[Sin é an teach] [a cheannóidh an teaghlach]' },
+            { t: ['direct'], en: 'The woman who goes to the matches.', pre: 'Sin í an bhean ', post: ' go dtí na cluichí.', a: 'a théann', o: ['a dtéann', 'ar tháinig', 'a ndeachaigh'], why: 'She is the subject. Direct a selects the independent form téann and lenites it to théann.', g: '[Sin í an bhean] [a théann go dtí na cluichí]' },
+            { t: ['direct'], en: 'The woman who was on television.', pre: 'Sin í an bhean ', post: ' ar an teilifís.', a: 'a bhí', o: ['a raibh', 'ar bhí', 'ar raibh'], why: 'She is the subject. Direct a uses independent past bí: bhí. Indirect past bí is a raibh.', g: '[Sin í an bhean] [a bhí ar an teilifís]' },
+            { t: ['direct'], en: 'The woman who is at home.', pre: 'Sin í an bhean ', post: ' sa bhaile.', a: 'atá', o: ['a bhfuil', 'ar tá', 'a tá'], why: 'The direct relative a merges with present tá to form atá.', g: '[Sin í an bhean] [atá sa bhaile]' },
+            { t: ['direct'], en: 'The coat that I got.', pre: 'Sin é an cóta ', post: ' mé.', a: 'a fuair', o: ['a bhfuair', 'ar fuair', 'a fhaigheann'], why: 'The coat is the direct object of the relative verb. Direct a uses independent past fuair; the indirect past is a bhfuair.', g: '[Sin é an cóta] [a fuair mé]' },
+            { t: ['direct'], en: 'The woman who saw the man.', pre: 'Sin í an bhean ', post: ' an fear.', a: 'a chonaic', o: ['a bhfaca', 'ar chonaic', 'a fheiceann'], why: 'She is the subject. Direct past feic takes independent chonaic, giving a chonaic.', g: '[Sin í an bhean] [a chonaic an fear]' },
+            { t: ['indirect', 'preposition'], en: 'The man from whom I buy clothes.', pre: 'Sin é an fear ', post: ' éadaí uaidh.', a: 'a gceannaím', o: ['a cheannaím', 'ar cheannaigh', 'a gceannaíonn'], why: 'Uaidh (“from him”) refers back to the man: the link is through a preposition. Indirect present a eclipses ceannaím → gceannaím.', g: '[Sin é an fear] [a gceannaím éadaí uaidh]' },
+            { t: ['indirect', 'preposition'], en: 'The book to which the programme refers.', pre: 'Sin é an leabhar ', post: ' tagairt dó sa chlár.', a: 'a ndéantar', o: ['a dhéantar', 'ar dhearnadh', 'a rinneadh'], why: 'Dó (“to it”) links back to the book. Indirect a takes dependent déan and eclipses it: ndéantar.', g: '[Sin é an leabhar] [a ndéantar tagairt dó sa chlár]' },
+            { t: ['indirect', 'preposition'], en: 'The house in which I live.', pre: 'Sin é an teach ', post: ' cónaí orm ann.', a: 'a bhfuil', o: ['atá', 'ar bhí', 'a bhí'], why: 'Ann (“in it”) refers back to the house. The indirect present of bí is a bhfuil, not atá.', g: '[Sin é an teach] [a bhfuil cónaí orm ann]' },
+            { t: ['indirect', 'preposition'], en: 'The girl to whom I will give the book.', pre: 'Sin í an cailín ', post: ' mé an leabhar di.', a: 'a dtabharfaidh', o: ['a thabharfaidh', 'ar thug', 'a dtabharann'], why: 'Di (“to her”) links back to the girl. Indirect a takes the dependent future tabharfaidh and eclipses t → dt.', g: '[Sin í an cailín] [a dtabharfaidh mé an leabhar di]' },
+            { t: ['indirect', 'preposition'], en: 'The woman whose daughter goes to the matches.', pre: 'Sin í an bhean ', post: ' a hiníon go dtí na cluichí.', a: 'a dtéann', o: ['a théann', 'ar tháinig', 'a ndeachaigh'], why: 'A hiníon (“her daughter”) points back to the woman: this is a possessive link. Indirect a eclipses téann → dtéann.', g: '[Sin í an bhean] [a dtéann a hiníon go dtí na cluichí]' },
+            { t: ['indirect', 'preposition'], en: 'The man whose son will go to the stadium.', pre: 'Sin é an fear ', post: ' a mhac go dtí an staid.', a: 'a rachaidh', o: ['a rachfaidh', 'ar rachaidh', 'a dtéann'], why: 'A mhac (“his son”) is the possessive link. Future indirect a uses dependent rachaidh; r does not display eclipsis in writing.', g: '[Sin é an fear] [a rachaidh a mhac go dtí an staid]' },
+            { t: ['indirect', 'preposition'], en: 'The house in which the woman lives.', pre: 'Sin é an teach ', post: ' an bhean.', a: 'ina gcónaíonn', o: ['inar chónaigh', 'a chónaíonn', 'ina chónaíonn'], why: 'Here i (“in”) is brought forward and fuses with indirect a → ina. The verb cónaíonn is eclipsed → gcónaíonn.', g: '[Sin é an teach] [ina gcónaíonn an bhean]' },
+            { t: ['indirect', 'preposition', 'past'], en: 'The house in which the woman lived.', pre: 'Sin é an teach ', post: ' an bhean.', a: 'inar chónaigh', o: ['ina gcónaigh', 'a chónaigh', 'inar gcónaigh'], why: 'Fronted i + past indirect ar → inar. Past ar lenites cónaigh → chónaigh.', g: '[Sin é an teach] [inar chónaigh an bhean]' },
+            { t: ['indirect', 'preposition'], en: 'The man from whom I buy clothes (fronted preposition).', pre: 'Sin é an fear ', post: ' éadaí.', a: 'óna gceannaím', o: ['ónar cheannaigh', 'a cheannaím', 'óna cheannaím'], why: 'Fronted ó + indirect a → óna. The verb is eclipsed: gceannaím. The alternative with uaidh at the end also works, but is not the structure tested here.', g: '[Sin é an fear] [óna gceannaím éadaí]' },
+            { t: ['indirect', 'past'], en: 'The woman whom Gearóid kissed (explicit “her”).', pre: 'Sin í an bhean ', post: ' Gearóid í.', a: 'ar phóg', o: ['a phóg', 'a bpóg', 'ar bpóg'], why: 'Í repeats the woman as the object and removes the possible subject/object ambiguity. Past indirect ar lenites póg → phóg.', g: '[Sin í an bhean] [ar phóg Gearóid í]' },
+            { t: ['indirect', 'past', 'preposition'], en: 'The woman from whom I bought the clothes.', pre: 'Sin í an bhean ', post: ' mé na héadaí uaithi.', a: 'ar cheannaigh', o: ['a gceannaigh', 'a cheannaigh', 'ar gceannaigh'], why: 'Uaithi (“from her”) points back to the woman. Past indirect regular verbs take ar + lenition.', g: '[Sin í an bhean] [ar cheannaigh mé na héadaí uaithi]' },
+            { t: ['indirect', 'past', 'preposition'], en: 'The film that I heard about.', pre: 'Sin é an scannán ', post: ' mé faoi.', a: 'ar chuala', o: ['a chuala', 'a gcloiseann', 'ar gchuala'], why: 'Faoi (“about it”) links back to the film. Indirect past clois has dependent chuala after ar.', g: '[Sin é an scannán] [ar chuala mé faoi]' },
+            { t: ['indirect', 'past', 'preposition'], en: 'The teacher from whom I received a letter.', pre: 'Sin é an múinteoir ', post: ' mé litir uaidh.', a: 'a bhfuair', o: ['a fuair', 'ar fhuair', 'ar bhfuair'], why: 'Although this is past indirect, faigh is one of six irregular verbs using a + the dependent form: a bhfuair.', g: '[Sin é an múinteoir] [a bhfuair mé litir uaidh]' },
+            { t: ['indirect', 'past', 'preposition'], en: 'The place to which I went long ago.', pre: 'Sin í an áit ', post: ' mé fadó.', a: 'a ndeachaigh', o: ['a chuaigh', 'ar chuaigh', 'ar ndeachaigh'], why: 'The destination is an indirect link. Past téigh is one of six irregular verbs that use a + dependent ndeachaigh.', g: '[Sin í an áit] [a ndeachaigh mé fadó]' },
+            { t: ['indirect', 'past', 'preposition'], en: 'The woman whose daughter was on television.', pre: 'Sin í an bhean ', post: ' a hiníon ar an teilifís.', a: 'a raibh', o: ['a bhí', 'ar bhí', 'ar raibh'], why: 'A hiníon (“her daughter”) makes this indirect. Past bí is an irregular exception: a raibh.', g: '[Sin í an bhean] [a raibh a hiníon ar an teilifís]' },
+            { t: ['indirect', 'past'], en: 'The woman whom the man saw (explicit “her”).', pre: 'Sin í an bhean ', post: ' an fear í.', a: 'a bhfaca', o: ['a chonaic', 'ar fhaca', 'ar chonaic'], why: 'Í repeats the woman as the object. Past indirect feic is an irregular exception: a bhfaca, using dependent faca with eclipsis.', g: '[Sin í an bhean] [a bhfaca an fear í]' },
+            { t: ['negative'], en: 'The person who does not accept advice.', pre: 'Is duine é ', post: ' comhairle.', a: 'nach nglacann', o: ['nár ghlac', 'a ghlacann', 'nach glacann'], why: 'A negative present relative takes nach + eclipsis, whether the link is direct or indirect.', g: '[Is duine é] [nach nglacann comhairle]' },
+            { t: ['negative', 'past'], en: 'The person who did not accept advice.', pre: 'Ba dhuine é ', post: ' comhairle.', a: 'nár ghlac', o: ['nach nglacann', 'nach nglac', 'nár nglac'], why: 'Regular negative past relatives take nár + lenition: glac → ghlac.', g: '[Ba dhuine é] [nár ghlac comhairle]' },
+            { t: ['negative', 'past', 'preposition'], en: 'The teacher from whom I did not receive a letter.', pre: 'Sin é an múinteoir ', post: ' mé litir uaidh.', a: 'nach bhfuair', o: ['nár fhuair', 'nach fuair', 'nár bhfuair'], why: 'Negative past faigh belongs to the exceptional group: nach + dependent bhfuair, even though the clause is past.', g: '[Sin é an múinteoir] [nach bhfuair mé litir uaidh]' },
+            { t: ['negative', 'past'], en: 'The woman whom the doctor did not see (explicit “her”).', pre: 'Sin í an bhean ', post: ' an dochtúir í.', a: 'nach bhfaca', o: ['nár fhaca', 'nach chonaic', 'nár chonaic'], why: 'Negative past feic is another exception: nach + dependent bhfaca. The repeated í makes the object explicit.', g: '[Sin í an bhean] [nach bhfaca an dochtúir í]' },
+            { t: ['negative', 'past'], en: 'The station that did not broadcast the programme.', pre: 'Sin é an stáisiún ', post: ' an clár.', a: 'nár chraol', o: ['nach gcraol', 'nár gcraol', 'a chraol'], why: 'The station is the subject; the clause is direct. Regular negative past uses nár + lenition.', g: '[Sin é an stáisiún] [nár chraol an clár]' },
+            { t: ['negative', 'preposition'], en: 'The man from whom I would not buy goods.', pre: 'Sin é an fear ', post: ' aon earraí uaidh.', a: 'nach gceannóinn', o: ['nár cheannaigh', 'nach cheannaínn', 'a gceannóinn'], why: 'Uaidh makes the link indirect. Negative conditional uses nach + eclipsis: gceannóinn.', g: '[Sin é an fear] [nach gceannóinn aon earraí uaidh]' }
+        ];
+        const pool = Q;
+        const $ = id => document.getElementById(id); let round = [], at = 0, score = 0, attempts = 0, revealed = false;
+        function shuffle(arr) { return [...arr].sort(() => Math.random() - .5) }
+        function escapeHTML(v) { return String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
+        function norm(s) { return s.normalize('NFC').trim().replace(/\s+/g, ' ').toLocaleLowerCase('ga') }
+        function setup() { const topic = $('topic').value, chosen = pool.filter(q => topic === 'all' || q.t.includes(topic)); const n = $('length').value; round = shuffle(chosen).slice(0, n === 'all' ? chosen.length : Number(n)); at = 0; score = 0; attempts = 0; show() }
+        function show() {
+            revealed = false; const q = round[at]; $('feedback').hidden = true; $('next').hidden = true; $('skip').hidden = false; $('best').textContent = localStorage.getItem('relative_best') || '—'; $('score').textContent = `${score}/${attempts}`; $('count').textContent = q ? `${at + 1}/${round.length}` : `${round.length}/${round.length}`; $('bar').style.width = (round.length ? 100 * at / round.length : 0) + '%'; if (!q) { $('tag').textContent = 'Round complete'; $('meaning').textContent = `You scored ${score} out of ${attempts} answered questions.`; $('sentence').textContent = 'Maith thú!'; $('prompt').textContent = 'Choose New round to practise again.'; $('answer').replaceChildren(); $('skip').hidden = true; $('bar').style.width = '100%'; let pct = attempts ? Math.round(100 * score / attempts) : 0; let best = Number(localStorage.getItem('relative_best_pct') || -1); if (attempts && pct > best) { localStorage.setItem('relative_best_pct', pct); localStorage.setItem('relative_best', `${pct}%`); $('best').textContent = `${pct}%` } return }
+            $('tag').textContent = q.t.map(x => ({ direct: 'Direct', indirect: 'Indirect', past: 'Past', negative: 'Negative', preposition: 'Preposition / possessive' }[x])).join(' · '); $('meaning').textContent = q.en; $('sentence').innerHTML = escapeHTML(q.pre) + '<span class="blank" aria-label="missing phrase">…</span>' + escapeHTML(q.post); $('prompt').textContent = $('mode').value === 'choice' ? 'Choose the complete missing phrase.' : 'Type the complete missing phrase (include the particle).'; const area = $('answer'); area.replaceChildren(); if ($('mode').value === 'choice') { const wrap = document.createElement('div'); wrap.className = 'choices'; for (const candidate of shuffle([q.a, ...q.o])) { let b = document.createElement('button'); b.type = 'button'; b.className = 'choice'; b.textContent = candidate; b.onclick = () => grade(candidate, b); wrap.append(b) } area.append(wrap) } else { const wrap = document.createElement('form'); wrap.className = 'typed'; const input = document.createElement('input'); input.autocomplete = 'off'; input.spellcheck = false; input.setAttribute('aria-label', 'Missing Irish phrase'); const b = document.createElement('button'); b.type = 'submit'; b.className = 'primary'; b.textContent = 'Check answer'; wrap.append(input, b); wrap.onsubmit = e => { e.preventDefault(); if (input.value.trim()) grade(input.value, input) }; area.append(wrap); input.focus() }
+        }
+        function grade(value, control) { if (revealed) return; revealed = true; const q = round[at], ok = norm(value) === norm(q.a); attempts++; if (ok) score++; $('score').textContent = `${score}/${attempts}`; $('sentence').innerHTML = escapeHTML(q.pre) + '<span class="blank">' + escapeHTML(q.a) + '</span>' + escapeHTML(q.post); const f = $('feedback'); f.hidden = false; f.className = 'feedback' + (ok ? '' : ' bad'); f.innerHTML = '<h3>' + (ok ? 'Correct ✓' : 'Not quite · ' + escapeHTML(q.a)) + '</h3><p>' + escapeHTML(q.why) + '</p><div class="group"><strong>Structure:</strong> ' + escapeHTML(q.g) + '</div>'; for (const b of $('answer').querySelectorAll('button')) { b.disabled = true; if (b.textContent === q.a) b.classList.add('selected'); if (b === control && !ok) b.classList.add('wrong') } const inp = $('answer').querySelector('input'); if (inp) inp.disabled = true; $('next').hidden = false; $('next').textContent = at === round.length - 1 ? 'See results →' : 'Next question →'; $('skip').hidden = true; $('next').focus() }
+        $('next').onclick = () => { at++; show() }; $('skip').onclick = () => { at++; show() }; $('restart').onclick = setup; for (const id of ['topic', 'mode', 'length']) $(id).onchange = setup; document.addEventListener('keydown', e => { if (e.key === 'Enter' && revealed && document.activeElement?.tagName !== 'SELECT') { e.preventDefault(); at++; show() } }); setup();
+    </script>
+</body>
+
+</html>

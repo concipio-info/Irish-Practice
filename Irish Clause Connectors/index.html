@@ -1,31 +1,507 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Irish Clause Connectors</title><style>
-:root{--ink:#173d36;--green:#176c55;--paper:#f5f3eb;--line:#d5ddd5;--muted:#586b63}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}header{background:var(--ink);color:white;padding:35px max(22px,calc((100vw - 1120px)/2)) 26px}header p{color:#d0e0d5;max-width:760px;margin:8px 0}h1{font:clamp(30px,5vw,46px)/1.2 Georgia,serif;margin:6px 0}.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase}main{max-width:1160px;margin:auto;padding:24px 20px}nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}button,select,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;padding:10px 17px;background:white;color:var(--ink)}button:hover{border-color:var(--green);background:#eaf1eb}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d19c33;outline-offset:3px}button:disabled{opacity:.55;cursor:default}.primary,nav button[aria-selected=true]{background:var(--green);color:white;border-color:var(--green)}.layout{display:grid;grid-template-columns:270px 1fr;gap:24px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:25px;box-shadow:0 4px 15px #173d3605}aside label{display:block;font-size:14px;font-weight:650;margin:15px 0 5px}select,input[type=text],input[type=search]{width:100%;border:1px solid #aebfb3;padding:11px;border-radius:8px;background:white;color:var(--ink)}.muted{color:var(--muted);font-size:14px}.tag{display:inline-block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--green);font-weight:700}.sentence{font:clamp(23px,3vw,31px)/1.65 Georgia,serif;margin:25px 0}.blank{display:inline-block;min-width:90px;color:var(--green);border-bottom:3px solid #dba83a;text-align:center;padding:0 8px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}.choices button{text-align:left}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.feedback{border-left:4px solid var(--green);background:#edf5ef;padding:16px;margin-top:20px}.feedback.bad{border-color:#a56323;background:#fcf3e4}.feedback h3{margin:0 0 8px}.progress{height:5px;background:#e2e8e1;border-radius:5px;margin:13px 0}.progress span{display:block;height:5px;background:var(--green);border-radius:5px}h2{font:28px Georgia,serif;margin:0 0 15px}h3{font-size:19px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.hidden,[hidden]{display:none!important}.tokens{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}.assembly{min-height:65px;padding:10px;border:1px dashed #aebfb3;border-radius:10px}.reference{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}.example{border-top:1px solid var(--line);padding:12px 0}.example p{margin:3px 0}summary{cursor:pointer;font-weight:650}.fadas{display:flex;gap:5px;margin-top:10px}.fadas button{padding:4px 13px}.metrics{font-size:14px;margin-top:22px}.notice{padding:13px 16px;background:#eeeade;border-radius:9px;margin:16px 0}a{color:var(--green)}footer{font-size:13px;color:var(--muted);margin:30px 0}.toggle{display:flex;gap:8px;align-items:center}aside .toggle{font-weight:400}.scope{max-width:850px}#feedback p{margin:8px 0}@media(max-width:780px){.layout{grid-template-columns:1fr}.reference{grid-template-columns:1fr}aside.card{padding:18px}.choices{grid-template-columns:1fr}header{padding:25px 20px}.sentence{font-size:25px}}@media print{header,nav,aside,#practice,#about,footer,#search{display:none!important}#reference{display:block!important}.reference{display:block}.card{break-inside:avoid;box-shadow:none}}
-</style></head><body><header><div class="eyebrow">Gaeilge • offline practice</div><h1>Connect your sentences.</h1><p lang="ga">Ceangail na habairtí — ach, mar, nuair, má agus tuilleadh.</p><p>Build the connections between ideas. Practise meaning, clause structure and the verb forms that bring them together.</p></header><main><nav aria-label="App sections"><button data-tab="practice" aria-selected="true">Practise</button><button data-tab="reference" aria-selected="false">Reference & examples</button><button data-tab="about" aria-selected="false">How to use</button></nav>
-<section id="practice"><div class="layout"><aside class="card"><h2>Your practice</h2><label for="family">Connector family</label><select id="family"><option value="all">All families</option></select><label for="mode">Exercise</label><select id="mode"><option value="choose">Choose the missing phrase</option><option value="type">Type the missing phrase</option><option value="build">Build the whole sentence</option></select><label for="length">Session length</label><select id="length"><option>10</option><option>20</option><option value="all">All matching examples</option></select><label class="toggle"><input type="checkbox" id="strict" checked>Require fadas when typing</label><label class="toggle"><input type="checkbox" id="hint" checked>Show connector family</label><button class="primary" id="start">Start new session</button><div class="metrics" id="stats"></div><p class="muted">Progress is saved in this browser when local storage is available.</p><button id="review">Review mistakes</button></aside><div class="card" id="quiz"></div></div></section>
-<section id="reference" hidden><h2>A map of the connections</h2><p>22 families • 82 examples. Open a family to see its sentences. Brackets identify the clause units; bold marks the phrase practised.</p><input type="search" id="search" aria-label="Search reference" placeholder="Search Irish, English or a grammar rule…"><div class="reference" id="referenceCards"></div></section>
-<section id="about" class="card scope" hidden><h2>Small connections. Different grammar.</h2><p>This standalone app works by opening this HTML file in a browser. It needs no server, installation, internet connection or account. All lessons and exercises are inside this file.</p><h3>Three ways to practise</h3><ol><li><b>Choose:</b> select the missing connector or connector-and-verb phrase.</li><li><b>Type:</b> supply the same phrase. Case, punctuation and extra spaces are ignored. Fadas matter by default; the accent buttons help.</li><li><b>Build:</b> click words in order to reproduce the supplied model sentence. Click a selected word to return it to the bank.</li></ol><p>Use the English meaning and the supplied Irish sentence together. A gap may include the verb so that you practise mutations as well as the connector. Different Irish translations can be valid; typing and building check the displayed lesson’s model, not every possible translation. Connector-family hints make the target explicit.</p><h3>What is covered?</h3><p>Coordination, contrast, consequence, reason, time, open and hypothetical conditions, negative conditions, concession, purpose, precaution and indirect questions. Examples include present, habitual present, past, future and conditional verbs, positive and negative clauses, copular constructions and some verbal-noun clauses.</p><p>This is a broad practice collection, not an exhaustive grammar of every dialect, tense combination or literary construction. The exercises use mainly standard written Irish. Pronunciation hints are approximate English-friendly guides for connector phrases, with a Munster leaning; they cannot represent all dialect sounds. “Kh” represents the sound in Scottish <i>loch</i>. They are not recordings.</p><div class="notice"><b>Key distinctions:</b> má vs dá; when <i>nuair a</i> vs conditional <i>má</i>; reason “since” vs time “since”; conditional “if” vs indirect-question “whether”; independent <i>mar tá</i> vs dependent <i>toisc go bhfuil</i>.</div><h3>References</h3><p>Rules were checked against Foras na Gaeilge’s Teanglann dictionary. These optional links need internet; the app does not. The practice sentences and summaries are original teaching material.</p><ul><li><a href="https://www.teanglann.ie/en/fgb/má" target="_blank" rel="noopener noreferrer">Má</a></li><li><a href="https://www.teanglann.ie/en/fgb/mura" target="_blank" rel="noopener noreferrer">Mura / murar and copular forms</a></li><li><a href="https://www.teanglann.ie/en/fgb/sula" target="_blank" rel="noopener noreferrer">Sula / sular</a></li><li><a href="https://www.teanglann.ie" target="_blank" rel="noopener noreferrer">Teanglann grammar and pronunciation</a></li></ul><h3>Progress & privacy</h3><p>Only scores and missed example IDs are saved locally. Nothing is sent anywhere. Moving or renaming this file, changing browser, or clearing browser data may reset your progress. Blocked storage does not prevent practice.</p><button id="reset">Reset saved progress</button><details style="margin-top:22px"><summary>MIT licence</summary><p>Copyright © 2026 Irish Clause Connectors contributors</p><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><p>External reference sites retain their own rights. No dictionary database, third-party code, images or audio is bundled.</p></details></section><footer>Irish Clause Connectors · v1.0 · Works offline · <span id="count"></span></footer></main>
-<script>
-const CONTENT={"groups": [{"name": "agus / nó", "meaning": "and / or", "rule": "These coordinate clauses. They do not themselves require a dependent verb form.", "sound": "AH-gus / noh"}, {"name": "ach", "meaning": "but", "rule": "Ach contrasts clauses without changing the following verb into a dependent form.", "sound": "akh (ch as in loch)"}, {"name": "áfach / mar sin / dá bhrí sin", "meaning": "however / so / therefore", "rule": "These link ideas without selecting dependent verb forms. Áfach often follows the verb or appears later in its clause.", "sound": "AW-fukh / mar shin / daw vree shin"}, {"name": "mar / óir", "meaning": "because / for", "rule": "Causal mar and óir can introduce an independent clause: mar tá, óir tá. Do not automatically change tá to bhfuil.", "sound": "mar / ohr"}, {"name": "toisc go / de bhrí go", "meaning": "because / since (reason)", "rule": "These take a dependent clause: go + eclipsis; gur + lenition for most past verbs. Some irregular past forms retain go, e.g. go raibh. Negative nach / nár replace go / gur.", "sound": "tishk guh / duh vree guh"}, {"name": "nuair a", "meaning": "when (a time or occasion)", "rule": "Nuair a normally uses the direct-relative verb pattern: lenition where possible. Tá → atá, bhí → a bhí, beidh → a bheidh. A future event can use the future tense.", "sound": "NOO-ir uh"}, {"name": "má / más / má ba", "meaning": "if (open condition)", "rule": "Má generally lenites, but tá stays tá. In a future open condition, Irish commonly uses the present after má. Copular forms include más (present) and má ba (past).", "sound": "maw / mawss / maw buh"}, {"name": "dá / dá mba / dá mb’", "meaning": "if (hypothetical)", "rule": "Dá takes eclipsis, commonly with the conditional. The result clause commonly also uses the conditional. Copular forms include dá mba and dá mb’.", "sound": "daw / daw muh / daw muh"}, {"name": "mura / murar", "meaning": "unless / if not", "rule": "Mura introduces a negative condition and takes eclipsis. Murar is used with most past verbs, followed by lenition; irregular raibh retains mura. Mura mbeadh is hypothetical.", "sound": "MUR-uh / MUR-ur"}, {"name": "fiú má / fiú dá", "meaning": "even if", "rule": "Fiú adds “even”. Má keeps an open condition; dá introduces a hypothetical one.", "sound": "fyoo maw / fyoo daw"}, {"name": "cé go / cé gur / cé nach / cé nár", "meaning": "although / even though", "rule": "Concessive dependent clauses: go + eclipsis, gur with most past verbs; negative nach / nár. Irregular past raibh uses go / nach.", "sound": "kay guh / kay gur / kay nakh / kay nawr"}, {"name": "sula / sular", "meaning": "before", "rule": "Sula takes eclipsis. Sular + lenition is used with most past verbs; some irregular past forms retain sula. Future indicative and subjunctive constructions both occur.", "sound": "SUL-uh / SUL-ur"}, {"name": "tar éis + verbal noun / sula + clause", "meaning": "after / before (different structures)", "rule": "A verbal-noun clause offers another way to connect events. Where an object precedes the verbal noun, a can lenite it: an obair a chríochnú.", "sound": "tar AYSH / SUL-uh"}, {"name": "go dtí go / go dtí gur", "meaning": "until", "rule": "Go dtí go introduces a dependent clause. Most past verbs use go dtí gur; irregular raibh retains go.", "sound": "guh djee guh / guh djee gur"}, {"name": "chomh luath agus a", "meaning": "as soon as", "rule": "This time phrase normally takes a direct-relative clause: a + lenition where possible.", "sound": "khum LOO-uh ug-us uh"}, {"name": "fad is a / agus", "meaning": "while", "rule": "Fad is a introduces a time clause. Agus can also connect a main clause with a simultaneous non-finite phrase, such as agus mé ag obair.", "sound": "fad iss uh / AH-gus"}, {"name": "ó / ó tharla go", "meaning": "since (time / reason)", "rule": "Distinguish time since from causal since. Ó with a past event can mark a starting time; ó tharla go introduces a reason and a dependent clause.", "sound": "oh / oh HAR-luh guh"}, {"name": "ionas go / ionas nach", "meaning": "so that / so that not", "rule": "Purpose clauses use a dependent verb. Go takes eclipsis; nach makes the purpose negative. Ná is not substituted for nach here.", "sound": "UN-us guh / UN-us nakh"}, {"name": "chun / gan + verbal noun", "meaning": "in order to / without", "rule": "Chun can introduce purpose with a verbal noun. Gan introduces a negative non-finite phrase. These need no finite tense marking.", "sound": "khun / gun"}, {"name": "ar eagla go", "meaning": "in case / for fear that", "rule": "A precaution or feared possibility, followed by a dependent clause. Conditional forms are common.", "sound": "er AG-luh guh"}, {"name": "ach amháin má / ar choinníoll go", "meaning": "except if / provided that", "rule": "Ach amháin má follows the má pattern; ar choinníoll go takes a dependent clause.", "sound": "akh uh-WAWN maw / er KHIN-yul guh"}, {"name": "an / ar (indirect question)", "meaning": "whether / if (asking, not a condition)", "rule": "After “I do not know” or “ask”, English if can mean whether. Use an / ar and dependent question forms, not má / dá. Irregular past raibh uses an.", "sound": "un / ur"}], "data": [{"id": 0, "g": 0, "p": "Tá mé sa bhaile ", "a": "agus", "s": " tá Síle ar scoil.", "en": "I am at home and Síle is at school.", "note": ""}, {"id": 1, "g": 0, "p": "Léigh mé an leabhar ", "a": "agus", "s": " scríobh mé litir.", "en": "I read the book and wrote a letter.", "note": ""}, {"id": 2, "g": 0, "p": "Tiocfaidh tú linn ", "a": "nó", "s": " fanfaidh tú anseo.", "en": "You will come with us or you will stay here.", "note": ""}, {"id": 3, "g": 1, "p": "Tá sé fuar ", "a": "ach", "s": " tá an ghrian ag taitneamh.", "en": "It is cold but the sun is shining.", "note": ""}, {"id": 4, "g": 1, "p": "Chuaigh mé ann ", "a": "ach", "s": " ní fhaca mé é.", "en": "I went there but I did not see him.", "note": ""}, {"id": 5, "g": 1, "p": "Ba mhaith liom teacht ", "a": "ach", "s": " tá mé gnóthach.", "en": "I would like to come but I am busy.", "note": ""}, {"id": 6, "g": 1, "p": "Beidh mé ann ", "a": "ach", "s": " beidh mé déanach.", "en": "I will be there but I will be late.", "note": ""}, {"id": 7, "g": 2, "p": "Bhí mé tuirseach; ", "a": "mar sin", "s": ", chuaigh mé a chodladh.", "en": "I was tired; so, I went to sleep.", "note": ""}, {"id": 8, "g": 2, "p": "Tá an siopa dúnta; ", "a": "dá bhrí sin", "s": ", caithfimid dul abhaile.", "en": "The shop is closed; therefore, we must go home.", "note": ""}, {"id": 9, "g": 2, "p": "Tá sé daor; tá sé go maith, ", "a": "áfach", "s": ".", "en": "It is expensive; it is good, however.", "note": ""}, {"id": 10, "g": 3, "p": "Fanfaidh mé anseo ", "a": "mar tá", "s": " mé tuirseach.", "en": "I will stay here because I am tired.", "note": ""}, {"id": 11, "g": 3, "p": "Níor tháinig sí ", "a": "mar bhí", "s": " sí tinn.", "en": "She did not come because she was ill.", "note": ""}, {"id": 12, "g": 3, "p": "Dún an doras, ", "a": "óir tá", "s": " sé fuar.", "en": "Close the door, for it is cold.", "note": ""}, {"id": 13, "g": 3, "p": "Ní rachaimid amach ", "a": "mar níl", "s": " an aimsir go maith.", "en": "We will not go out because the weather is not good.", "note": ""}, {"id": 14, "g": 4, "p": "Tá mé sásta ", "a": "toisc go bhfuil", "s": " tú anseo.", "en": "I am happy because you are here.", "note": ""}, {"id": 15, "g": 4, "p": "Tá sí tuirseach ", "a": "toisc gur oibrigh", "s": " sí go dian.", "en": "She is tired because she worked hard.", "note": ""}, {"id": 16, "g": 4, "p": "D’fhan sé sa bhaile ", "a": "toisc nach raibh", "s": " sé go maith.", "en": "He stayed at home because he was not well.", "note": ""}, {"id": 17, "g": 4, "p": "Tá ocras orm ", "a": "toisc nár ith", "s": " mé mo lón.", "en": "I am hungry because I did not eat my lunch.", "note": ""}, {"id": 18, "g": 4, "p": "Fanfaidh mé ", "a": "de bhrí go mbeidh", "s": " tú anseo.", "en": "I will stay because you will be here.", "note": ""}, {"id": 19, "g": 4, "p": "Tá áthas orm ", "a": "toisc gur", "s": " múinteoir í.", "en": "I am glad because she is a teacher.", "note": "Gur is the present dependent copula here, not a past-tense marker."}, {"id": 20, "g": 5, "p": "", "a": "Nuair a bhíonn", "s": " am agam, léim leabhar.", "en": "When I have time, I read a book.", "note": ""}, {"id": 21, "g": 5, "p": "", "a": "Nuair a tháinig", "s": " sí, bhí mé sásta.", "en": "When she came, I was happy.", "note": ""}, {"id": 22, "g": 5, "p": "", "a": "Nuair a bheidh", "s": " tú réidh, imeoimid.", "en": "When you are ready, we will leave.", "note": ""}, {"id": 23, "g": 5, "p": "Bím sásta ", "a": "nuair atá", "s": " tú anseo.", "en": "I am happy when you are here.", "note": ""}, {"id": 24, "g": 5, "p": "Bhí mé sa bhaile ", "a": "nuair a ghlaoigh", "s": " tú.", "en": "I was at home when you called.", "note": ""}, {"id": 25, "g": 5, "p": "", "a": "Nuair nach mbíonn", "s": " am agam, ní léim.", "en": "When I do not have time, I do not read.", "note": "Negative relative nach takes eclipsis."}, {"id": 26, "g": 5, "p": "Bhí iontas orm ", "a": "nuair nár tháinig", "s": " sí.", "en": "I was surprised when she did not come.", "note": "Nár is used with this regular past verb."}, {"id": 27, "g": 6, "p": "", "a": "Má tá", "s": " tú réidh, imeoimid.", "en": "If you are ready, we will leave.", "note": ""}, {"id": 28, "g": 6, "p": "", "a": "Má thagann", "s": " sí, beidh áthas orm.", "en": "If she comes, I will be pleased.", "note": ""}, {"id": 29, "g": 6, "p": "", "a": "Má bhíonn", "s": " am agam, cabhróidh mé leat.", "en": "If I have time, I will help you.", "note": ""}, {"id": 30, "g": 6, "p": "", "a": "Má chonaic", "s": " tú é, inis dom.", "en": "If you saw it, tell me.", "note": ""}, {"id": 31, "g": 6, "p": "", "a": "Más", "s": " maith leat é, ceannaigh é.", "en": "If you like it, buy it.", "note": ""}, {"id": 32, "g": 6, "p": "", "a": "Más", "s": " múinteoir í, tuigfidh sí é.", "en": "If she is a teacher, she will understand it.", "note": ""}, {"id": 33, "g": 6, "p": "", "a": "Má ba", "s": " mhaith leat é, cén fáth nár cheannaigh tú é?", "en": "If you liked it, why did you not buy it?", "note": ""}, {"id": 34, "g": 7, "p": "", "a": "Dá mbeadh", "s": " am agam, rachainn leat.", "en": "If I had time, I would go with you.", "note": ""}, {"id": 35, "g": 7, "p": "", "a": "Dá dtiocfadh", "s": " sí, bheinn sásta.", "en": "If she came, I would be happy.", "note": ""}, {"id": 36, "g": 7, "p": "", "a": "Dá bhfeicfinn", "s": " é, déarfainn leis.", "en": "If I saw him, I would tell him.", "note": ""}, {"id": 37, "g": 7, "p": "", "a": "Dá mba", "s": " mhúinteoir mé, thuigfinn é.", "en": "If I were a teacher, I would understand it.", "note": ""}, {"id": 38, "g": 7, "p": "", "a": "Dá mb’", "s": "fhéidir é, rachainn ann.", "en": "If it were possible, I would go there.", "note": "Mb’ precedes fhéidir in this copular construction."}, {"id": 39, "g": 8, "p": "", "a": "Mura bhfuil", "s": " tú réidh, fanfaidh mé.", "en": "If you are not ready, I will wait.", "note": ""}, {"id": 40, "g": 8, "p": "", "a": "Mura dtuigeann", "s": " tú é, cuir ceist.", "en": "If you do not understand it, ask a question.", "note": ""}, {"id": 41, "g": 8, "p": "", "a": "Murar cheannaigh", "s": " tú bainne, ceannaigh anois é.", "en": "If you did not buy milk, buy it now.", "note": ""}, {"id": 42, "g": 8, "p": "", "a": "Mura raibh", "s": " tú ann, ní fhaca tú é.", "en": "If you were not there, you did not see it.", "note": ""}, {"id": 43, "g": 8, "p": "", "a": "Mura mbeadh", "s": " báisteach ann, rachainn amach.", "en": "If it were not raining, I would go out.", "note": ""}, {"id": 44, "g": 8, "p": "", "a": "Mura", "s": " miste leat, fan anseo.", "en": "If you do not mind, wait here.", "note": "Mura includes the negative copula in this expression."}, {"id": 45, "g": 8, "p": "", "a": "Murab", "s": " é sin do chóta, fág anseo é.", "en": "If that is not your coat, leave it here.", "note": "Murab is used before é in this copular clause."}, {"id": 46, "g": 9, "p": "", "a": "Fiú má bhíonn", "s": " sé fuar, rachaimid amach.", "en": "Even if it is cold, we will go out.", "note": ""}, {"id": 47, "g": 9, "p": "", "a": "Fiú dá mbeadh", "s": " sé saor, ní cheannóinn é.", "en": "Even if it were cheap, I would not buy it.", "note": ""}, {"id": 48, "g": 10, "p": "", "a": "Cé go bhfuil", "s": " sé fuar, rachaimid amach.", "en": "Although it is cold, we will go out.", "note": ""}, {"id": 49, "g": 10, "p": "", "a": "Cé gur oibrigh", "s": " sé go dian, níor chríochnaigh sé é.", "en": "Although he worked hard, he did not finish it.", "note": ""}, {"id": 50, "g": 10, "p": "", "a": "Cé go raibh", "s": " mé tuirseach, chuaigh mé ann.", "en": "Although I was tired, I went there.", "note": ""}, {"id": 51, "g": 10, "p": "", "a": "Cé nach bhfuil", "s": " sí anseo, is féidir linn tosú.", "en": "Although she is not here, we can start.", "note": ""}, {"id": 52, "g": 10, "p": "", "a": "Cé nár cheannaigh", "s": " mé é, thaitin sé liom.", "en": "Although I did not buy it, I liked it.", "note": ""}, {"id": 53, "g": 10, "p": "", "a": "Cé gur", "s": " dochtúir é, níl an freagra aige.", "en": "Although he is a doctor, he does not have the answer.", "note": "Gur is a present copular form here."}, {"id": 54, "g": 11, "p": "Léigh mé é ", "a": "sular chuir", "s": " mé an litir sa phost.", "en": "I read it before I posted the letter.", "note": ""}, {"id": 55, "g": 11, "p": "Bhí mé ann ", "a": "sula raibh", "s": " sé dorcha.", "en": "I was there before it was dark.", "note": ""}, {"id": 56, "g": 11, "p": "Críochnóidh mé é ", "a": "sula mbeidh", "s": " tú anseo.", "en": "I will finish it before you are here.", "note": ""}, {"id": 57, "g": 11, "p": "Nigh do lámha ", "a": "sula n-íosfaidh", "s": " tú.", "en": "Wash your hands before you eat.", "note": ""}, {"id": 58, "g": 12, "p": "", "a": "Tar éis", "s": " dom an obair a chríochnú, chuaigh mé abhaile.", "en": "After I finished the work, I went home.", "note": ""}, {"id": 59, "g": 12, "p": "", "a": "Sula", "s": " ndeachaigh mé abhaile, dhún mé an doras.", "en": "Before I went home, I closed the door.", "note": "This example contrasts a finite clause: sula ndeachaigh, an irregular past form."}, {"id": 60, "g": 12, "p": "", "a": "Tar éis", "s": " di teacht abhaile, rinne sí tae.", "en": "After she came home, she made tea.", "note": ""}, {"id": 61, "g": 13, "p": "Fan anseo ", "a": "go dtí go mbeidh", "s": " mé réidh.", "en": "Wait here until I am ready.", "note": ""}, {"id": 62, "g": 13, "p": "D’fhan mé ", "a": "go dtí gur chríochnaigh", "s": " sí.", "en": "I waited until she finished.", "note": ""}, {"id": 63, "g": 13, "p": "D’fhan sé ", "a": "go dtí go raibh", "s": " sé dorcha.", "en": "He waited until it was dark.", "note": ""}, {"id": 64, "g": 14, "p": "", "a": "Chomh luath agus a bheidh", "s": " mé réidh, glaofaidh mé ort.", "en": "As soon as I am ready, I will call you.", "note": ""}, {"id": 65, "g": 14, "p": "", "a": "Chomh luath agus a tháinig", "s": " sí, d’imigh sé.", "en": "As soon as she arrived, he left.", "note": ""}, {"id": 66, "g": 15, "p": "Léigh mé leabhar ", "a": "fad is a bhí", "s": " sí ag cócaireacht.", "en": "I read a book while she was cooking.", "note": ""}, {"id": 67, "g": 15, "p": "Ná labhair liom ", "a": "agus mé", "s": " ag obair.", "en": "Do not talk to me while I am working.", "note": "Agus + subject + ag + verbal noun: no finite verb in this second clause."}, {"id": 68, "g": 16, "p": "Tá mé anseo ", "a": "ó tháinig", "s": " tú.", "en": "I have been here since you came.", "note": ""}, {"id": 69, "g": 16, "p": "", "a": "Ó tharla go bhfuil", "s": " tú anseo, cabhraigh liom.", "en": "Since you are here, help me.", "note": ""}, {"id": 70, "g": 17, "p": "Labhair go mall ", "a": "ionas go dtuigfidh", "s": " mé thú.", "en": "Speak slowly so that I will understand you.", "note": ""}, {"id": 71, "g": 17, "p": "Scríobh síos é ", "a": "ionas nach ndéanfaidh", "s": " tú dearmad air.", "en": "Write it down so that you will not forget it.", "note": ""}, {"id": 72, "g": 17, "p": "D’oscail mé an doras ", "a": "ionas go mbeadh", "s": " solas againn.", "en": "I opened the door so that we would have light.", "note": ""}, {"id": 73, "g": 18, "p": "Chuaigh mé ann ", "a": "chun", "s": " Gaeilge a fhoghlaim.", "en": "I went there to learn Irish.", "note": ""}, {"id": 74, "g": 18, "p": "D’imigh sé ", "a": "gan", "s": " slán a fhágáil.", "en": "He left without saying goodbye.", "note": ""}, {"id": 75, "g": 19, "p": "Tóg cóta leat ", "a": "ar eagla go mbeidh", "s": " sé fuar.", "en": "Take a coat in case it is cold.", "note": ""}, {"id": 76, "g": 19, "p": "D’fhan mé ciúin ", "a": "ar eagla go ndéanfainn", "s": " botún.", "en": "I stayed quiet for fear that I would make a mistake.", "note": ""}, {"id": 77, "g": 20, "p": "Rachaidh mé ann ", "a": "ach amháin má bhíonn", "s": " mé tinn.", "en": "I will go there except if I am ill.", "note": ""}, {"id": 78, "g": 20, "p": "Cabhróidh mé leat ", "a": "ar choinníoll go mbeidh", "s": " tú anseo in am.", "en": "I will help you provided that you are here on time.", "note": ""}, {"id": 79, "g": 21, "p": "Níl a fhios agam ", "a": "an bhfuil", "s": " sí anseo.", "en": "I do not know whether she is here.", "note": ""}, {"id": 80, "g": 21, "p": "Fiafraigh de ", "a": "ar cheannaigh", "s": " sé é.", "en": "Ask him whether he bought it.", "note": ""}, {"id": 81, "g": 21, "p": "Níl a fhios agam ", "a": "an raibh", "s": " siad ann.", "en": "I do not know whether they were there.", "note": ""}]};
-const {groups,data}=CONTENT,$=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const full=q=>q.p+q.a+q.s;
-function bracket(q){return q.p?`[${esc(q.p.trim())}] [<b>${esc(q.a)}</b>${esc(q.s)}]`:`[<b>${esc(q.a)}</b>${esc(q.s).replace(',', '], [')}${q.s.includes(',')?']':']'}`}
-let saved={attempts:0,correct:0,missed:[]};try{const s=JSON.parse(localStorage.getItem('irish-connectors-v1'));if(s&&Number.isFinite(s.attempts)&&Number.isFinite(s.correct)&&Array.isArray(s.missed))saved={...s,missed:s.missed.filter(x=>data[x])}}catch(e){}
-let deck=[],pos=0,correct=0,done=false,sessionMode='choose',tokens=[],selected=[];
-function persist(){try{localStorage.setItem('irish-connectors-v1',JSON.stringify(saved))}catch(e){}stats()}
-function stats(){$('#stats').textContent=`Saved total: ${saved.correct} / ${saved.attempts} correct · ${saved.missed.length} to review`;$('#review').disabled=!saved.missed.length}
-groups.forEach((g,i)=>$('#family').insertAdjacentHTML('beforeend',`<option value="${i}">${esc(g.name)} — ${esc(g.meaning)}</option>`));
-function start(review=false){let pool=data.filter(q=>($('#family').value==='all'||q.g===+$('#family').value)&&(!review||saved.missed.includes(q.id)));if(!pool.length){$('#quiz').innerHTML='<h2>No mistakes in this family.</h2><p>Choose another family or start a new session.</p>';return}deck=shuffle(pool).slice(0,$('#length').value==='all'?pool.length:+$('#length').value);pos=0;correct=0;sessionMode=$('#mode').value;show()}
-function show(){done=false;selected=[];const q=deck[pos],g=groups[q.g];$('#quiz').innerHTML=`<div class="row"><span class="tag">${sessionMode==='build'?'Sentence builder':'Complete the connection'}</span><span class="muted">${pos+1} / ${deck.length}</span></div><div class="progress"><span style="width:${pos/deck.length*100}%"></span></div><div id="familyHint" class="muted" ${$('#hint').checked?'':'hidden'}>${esc(g.name)} · ${esc(g.meaning)}</div><p>${esc(q.en)}</p>${sessionMode!=='build'?`<div class="sentence" lang="ga">${esc(q.p)}<span class="blank">…</span>${esc(q.s)}</div>`:'<p class="muted">Arrange the words to match the model. The connector family above tells you which construction to use.</p>'}<div id="answerArea"></div><div class="actions"><button id="reveal">Show answer</button><button id="next" class="primary" hidden>Next question →</button></div><div id="feedback" aria-live="polite"></div>`;
-if(sessionMode==='choose'){let alternatives=shuffle([...new Set(data.filter(x=>x.g!==q.g && !([3,4].includes(q.g)&&[3,4].includes(x.g)) && !([12,11].includes(q.g)&&[12,11].includes(x.g)) && x.a.toLowerCase()!==q.a.toLowerCase()).map(x=>x.a))]).slice(0,3);$('#answerArea').innerHTML='<div class="choices">'+shuffle([q.a,...alternatives]).map(a=>`<button lang="ga">${esc(a)}</button>`).join('')+'</div>';document.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>grade(b.textContent));}
-else if(sessionMode==='type'){$('#answerArea').innerHTML='<label for="answer" class="muted">Missing Irish phrase</label><input id="answer" type="text" lang="ga" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="fadas">'+[...'áéíóú'].map(c=>`<button type="button">${c}</button>`).join('')+'</div><button id="check" class="primary" style="margin-top:16px">Check answer</button>';$('#check').onclick=()=>grade($('#answer').value);$('#answer').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(done)next();else grade($('#answer').value)}};document.querySelectorAll('.fadas button').forEach(b=>b.onclick=()=>{const a=$('#answer');a.setRangeText(b.textContent,a.selectionStart,a.selectionEnd,'end');a.focus()});$('#answer').focus()}
-else{tokens=full(q).trim().split(/\s+/);$('#answerArea').innerHTML='<div class="tokens assembly" id="selected" aria-label="Your sentence"></div><div class="tokens" id="bank"></div><button id="check" class="primary">Check sentence</button><button id="clear" style="margin-left:8px">Clear</button>';window.bankOrder=shuffle(tokens.map((_,i)=>i));renderTokens();$('#check').onclick=()=>grade(selected.map(i=>tokens[i]).join(' '));$('#clear').onclick=()=>{selected=[];renderTokens()}}
-$('#reveal').onclick=()=>grade('',true);$('#next').onclick=next;}
-function renderTokens(){$('#selected').innerHTML=selected.map(i=>`<button data-i="${i}" lang="ga">${esc(tokens[i])}</button>`).join('');$('#bank').innerHTML=window.bankOrder.filter(i=>!selected.includes(i)).map(i=>`<button data-i="${i}" lang="ga">${esc(tokens[i])}</button>`).join('');document.querySelectorAll('#bank button').forEach(b=>b.onclick=()=>{if(!done){selected.push(+b.dataset.i);renderTokens()}});document.querySelectorAll('#selected button').forEach(b=>b.onclick=()=>{if(!done){selected=selected.filter(i=>i!==+b.dataset.i);renderTokens()}})}
-function norm(s){s=s.normalize('NFC').toLowerCase().replace(/[’‘']/g,'').replace(/[.,;:!?“”"()[\]—–-]/g,' ').replace(/\s+/g,' ').trim();return $('#strict').checked?s:s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function grade(answer,reveal=false){if(done)return;if(!reveal&&!answer.trim())return;done=true;let q=deck[pos],g=groups[q.g],expected=sessionMode==='build'?full(q):q.a,ok=!reveal&&norm(answer)===norm(expected);saved.attempts++;if(ok){correct++;saved.correct++;saved.missed=saved.missed.filter(i=>i!==q.id)}else if(!saved.missed.includes(q.id))saved.missed.push(q.id);persist();$('#feedback').className='feedback'+(ok?'':' bad');$('#feedback').innerHTML=`<h3>${ok?'Correct — maith thú!':reveal?'Model answer':'Compare with the model'}</h3>${!ok&&!reveal?`<p>Your answer: <b>${esc(answer)}</b></p>`:''}<p lang="ga" style="font-size:21px">${bracket(q)}</p><p>${esc(q.en)}</p><p>${esc(g.rule)}</p>${q.note?`<p><b>This example:</b> ${esc(q.note)}</p>`:''}<p class="muted">Connector pronunciation (approximate): ${esc(g.sound)}</p>${!ok&&!reveal?'<p class="muted">This exercise checks the supplied model; another construction may be valid in a different context.</p>':''}`;document.querySelectorAll('#answerArea button').forEach(b=>b.disabled=true);if($('#answer'))$('#answer').readOnly=true;$('#reveal').hidden=true;$('#next').hidden=false;$('#next').textContent=pos===deck.length-1?'See results →':'Next question →';$('#next').focus()}
-function next(){if(!done)return;pos++;if(pos<deck.length)show();else{$('#quiz').innerHTML=`<span class="tag">Session complete</span><h2 style="margin-top:15px">${correct} / ${deck.length} correct</h2><p>${correct===deck.length?'All correct. Try another family or a different exercise.':'Review missed examples to practise these connections again.'}</p><div class="actions"><button class="primary" id="again">Practise again</button><button id="missedAgain">Review mistakes</button></div>`;$('#again').onclick=()=>start();$('#missedAgain').onclick=()=>start(true);$('#missedAgain').disabled=!saved.missed.length}}
-function reference(){const term=$('#search').value.toLowerCase();$('#referenceCards').innerHTML=groups.map((g,i)=>{const examples=data.filter(q=>q.g===i);if(!JSON.stringify([g,examples]).toLowerCase().includes(term))return '';return `<article class="card"><span class="tag">${esc(g.meaning)}</span><h3 lang="ga">${esc(g.name)}</h3><p>${esc(g.rule)}</p><p class="muted">Approximate: ${esc(g.sound)}</p><details ${term?'open':''}><summary>${examples.length} examples</summary>${examples.map(q=>`<div class="example"><p lang="ga">${bracket(q)}</p><p class="muted">${esc(q.en)}</p>${q.note?`<p class="muted">${esc(q.note)}</p>`:''}</div>`).join('')}</details></article>`}).join('')||'<p>No matching examples.</p>'}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));['practice','reference','about'].forEach(id=>$('#'+id).hidden=id!==b.dataset.tab)});
-$('#start').onclick=()=>start();$('#review').onclick=()=>start(true);$('#hint').onchange=()=>{if($('#familyHint'))$('#familyHint').hidden=!$('#hint').checked};$('#search').oninput=reference;$('#reset').onclick=()=>{if(confirm('Reset all saved scores and mistakes?')){saved={attempts:0,correct:0,missed:[]};persist()}};$('#count').textContent=`${data.length} examples`;stats();reference();start();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Irish Clause Connectors</title>
+    <style>
+        :root {
+            --ink: #173d36;
+            --green: #176c55;
+            --paper: #f5f3eb;
+            --line: #d5ddd5;
+            --muted: #586b63
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font: 17px/1.6 system-ui, sans-serif
+        }
+
+        header {
+            background: var(--ink);
+            color: white;
+            padding: 35px max(22px, calc((100vw - 1120px)/2)) 26px
+        }
+
+        header p {
+            color: #d0e0d5;
+            max-width: 760px;
+            margin: 8px 0
+        }
+
+        h1 {
+            font: clamp(30px, 5vw, 46px)/1.2 Georgia, serif;
+            margin: 6px 0
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase
+        }
+
+        main {
+            max-width: 1160px;
+            margin: auto;
+            padding: 24px 20px
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap
+        }
+
+        button,
+        select,
+        input {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 10px 17px;
+            background: white;
+            color: var(--ink)
+        }
+
+        button:hover {
+            border-color: var(--green);
+            background: #eaf1eb
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #d19c33;
+            outline-offset: 3px
+        }
+
+        button:disabled {
+            opacity: .55;
+            cursor: default
+        }
+
+        .primary,
+        nav button[aria-selected=true] {
+            background: var(--green);
+            color: white;
+            border-color: var(--green)
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 24px
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px #173d3605
+        }
+
+        aside label {
+            display: block;
+            font-size: 14px;
+            font-weight: 650;
+            margin: 15px 0 5px
+        }
+
+        select,
+        input[type=text],
+        input[type=search] {
+            width: 100%;
+            border: 1px solid #aebfb3;
+            padding: 11px;
+            border-radius: 8px;
+            background: white;
+            color: var(--ink)
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--green);
+            font-weight: 700
+        }
+
+        .sentence {
+            font: clamp(23px, 3vw, 31px)/1.65 Georgia, serif;
+            margin: 25px 0
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 90px;
+            color: var(--green);
+            border-bottom: 3px solid #dba83a;
+            text-align: center;
+            padding: 0 8px
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0
+        }
+
+        .choices button {
+            text-align: left
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px
+        }
+
+        .feedback {
+            border-left: 4px solid var(--green);
+            background: #edf5ef;
+            padding: 16px;
+            margin-top: 20px
+        }
+
+        .feedback.bad {
+            border-color: #a56323;
+            background: #fcf3e4
+        }
+
+        .feedback h3 {
+            margin: 0 0 8px
+        }
+
+        .progress {
+            height: 5px;
+            background: #e2e8e1;
+            border-radius: 5px;
+            margin: 13px 0
+        }
+
+        .progress span {
+            display: block;
+            height: 5px;
+            background: var(--green);
+            border-radius: 5px
+        }
+
+        h2 {
+            font: 28px Georgia, serif;
+            margin: 0 0 15px
+        }
+
+        h3 {
+            font-size: 19px
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .hidden,
+        [hidden] {
+            display: none !important
+        }
+
+        .tokens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 16px 0
+        }
+
+        .assembly {
+            min-height: 65px;
+            padding: 10px;
+            border: 1px dashed #aebfb3;
+            border-radius: 10px
+        }
+
+        .reference {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 20px
+        }
+
+        .example {
+            border-top: 1px solid var(--line);
+            padding: 12px 0
+        }
+
+        .example p {
+            margin: 3px 0
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 650
+        }
+
+        .fadas {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px
+        }
+
+        .fadas button {
+            padding: 4px 13px
+        }
+
+        .metrics {
+            font-size: 14px;
+            margin-top: 22px
+        }
+
+        .notice {
+            padding: 13px 16px;
+            background: #eeeade;
+            border-radius: 9px;
+            margin: 16px 0
+        }
+
+        a {
+            color: var(--green)
+        }
+
+        footer {
+            font-size: 13px;
+            color: var(--muted);
+            margin: 30px 0
+        }
+
+        .toggle {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        aside .toggle {
+            font-weight: 400
+        }
+
+        .scope {
+            max-width: 850px
+        }
+
+        #feedback p {
+            margin: 8px 0
+        }
+
+        @media(max-width:780px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .reference {
+                grid-template-columns: 1fr
+            }
+
+            aside.card {
+                padding: 18px
+            }
+
+            .choices {
+                grid-template-columns: 1fr
+            }
+
+            header {
+                padding: 25px 20px
+            }
+
+            .sentence {
+                font-size: 25px
+            }
+        }
+
+        @media print {
+
+            header,
+            nav,
+            aside,
+            #practice,
+            #about,
+            footer,
+            #search {
+                display: none !important
+            }
+
+            #reference {
+                display: block !important
+            }
+
+            .reference {
+                display: block
+            }
+
+            .card {
+                break-inside: avoid;
+                box-shadow: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="eyebrow">Gaeilge • offline practice</div>
+        <h1>Connect your sentences.</h1>
+        <p lang="ga">Ceangail na habairtí — ach, mar, nuair, má agus tuilleadh.</p>
+        <p>Build the connections between ideas. Practise meaning, clause structure and the verb forms that bring them
+            together.</p>
+    </header>
+    <main>
+        <nav aria-label="App sections"><button data-tab="practice" aria-selected="true">Practise</button><button
+                data-tab="reference" aria-selected="false">Reference & examples</button><button data-tab="about"
+                aria-selected="false">How to use</button></nav>
+        <section id="practice">
+            <div class="layout">
+                <aside class="card">
+                    <h2>Your practice</h2><label for="family">Connector family</label><select id="family">
+                        <option value="all">All families</option>
+                    </select><label for="mode">Exercise</label><select id="mode">
+                        <option value="choose">Choose the missing phrase</option>
+                        <option value="type">Type the missing phrase</option>
+                        <option value="build">Build the whole sentence</option>
+                    </select><label for="length">Session length</label><select id="length">
+                        <option>10</option>
+                        <option>20</option>
+                        <option value="all">All matching examples</option>
+                    </select><label class="toggle"><input type="checkbox" id="strict" checked>Require fadas when
+                        typing</label><label class="toggle"><input type="checkbox" id="hint" checked>Show connector
+                        family</label><button class="primary" id="start">Start new session</button>
+                    <div class="metrics" id="stats"></div>
+                    <p class="muted">Progress is saved in this browser when local storage is available.</p><button
+                        id="review">Review mistakes</button>
+                </aside>
+                <div class="card" id="quiz"></div>
+            </div>
+        </section>
+        <section id="reference" hidden>
+            <h2>A map of the connections</h2>
+            <p>22 families • 82 examples. Open a family to see its sentences. Brackets identify the clause units; bold
+                marks the phrase practised.</p><input type="search" id="search" aria-label="Search reference"
+                placeholder="Search Irish, English or a grammar rule…">
+            <div class="reference" id="referenceCards"></div>
+        </section>
+        <section id="about" class="card scope" hidden>
+            <h2>Small connections. Different grammar.</h2>
+            <p>This standalone app works by opening this HTML file in a browser. It needs no server, installation,
+                internet connection or account. All lessons and exercises are inside this file.</p>
+            <h3>Three ways to practise</h3>
+            <ol>
+                <li><b>Choose:</b> select the missing connector or connector-and-verb phrase.</li>
+                <li><b>Type:</b> supply the same phrase. Case, punctuation and extra spaces are ignored. Fadas matter by
+                    default; the accent buttons help.</li>
+                <li><b>Build:</b> click words in order to reproduce the supplied model sentence. Click a selected word
+                    to return it to the bank.</li>
+            </ol>
+            <p>Use the English meaning and the supplied Irish sentence together. A gap may include the verb so that you
+                practise mutations as well as the connector. Different Irish translations can be valid; typing and
+                building check the displayed lesson’s model, not every possible translation. Connector-family hints make
+                the target explicit.</p>
+            <h3>What is covered?</h3>
+            <p>Coordination, contrast, consequence, reason, time, open and hypothetical conditions, negative conditions,
+                concession, purpose, precaution and indirect questions. Examples include present, habitual present,
+                past, future and conditional verbs, positive and negative clauses, copular constructions and some
+                verbal-noun clauses.</p>
+            <p>This is a broad practice collection, not an exhaustive grammar of every dialect, tense combination or
+                literary construction. The exercises use mainly standard written Irish. Pronunciation hints are
+                approximate English-friendly guides for connector phrases, with a Munster leaning; they cannot represent
+                all dialect sounds. “Kh” represents the sound in Scottish <i>loch</i>. They are not recordings.</p>
+            <div class="notice"><b>Key distinctions:</b> má vs dá; when <i>nuair a</i> vs conditional <i>má</i>; reason
+                “since” vs time “since”; conditional “if” vs indirect-question “whether”; independent <i>mar tá</i> vs
+                dependent <i>toisc go bhfuil</i>.</div>
+            <h3>References</h3>
+            <p>Rules were checked against Foras na Gaeilge’s Teanglann dictionary. These optional links need internet;
+                the app does not. The practice sentences and summaries are original teaching material.</p>
+            <ul>
+                <li><a href="https://www.teanglann.ie/en/fgb/má" target="_blank" rel="noopener noreferrer">Má</a></li>
+                <li><a href="https://www.teanglann.ie/en/fgb/mura" target="_blank" rel="noopener noreferrer">Mura /
+                        murar and copular forms</a></li>
+                <li><a href="https://www.teanglann.ie/en/fgb/sula" target="_blank" rel="noopener noreferrer">Sula /
+                        sular</a></li>
+                <li><a href="https://www.teanglann.ie" target="_blank" rel="noopener noreferrer">Teanglann grammar and
+                        pronunciation</a></li>
+            </ul>
+            <h3>Progress & privacy</h3>
+            <p>Only scores and missed example IDs are saved locally. Nothing is sent anywhere. Moving or renaming this
+                file, changing browser, or clearing browser data may reset your progress. Blocked storage does not
+                prevent practice.</p><button id="reset">Reset saved progress</button>
+            <details style="margin-top:22px">
+                <summary>MIT licence</summary>
+                <p>Copyright © 2026 Irish Clause Connectors contributors</p>
+                <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+                    associated documentation files (the “Software”), to deal in the Software without restriction,
+                    including without limitation the rights to use, copy, modify, merge, publish, distribute,
+                    sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+                    furnished to do so, subject to the following conditions:</p>
+                <p>The above copyright notice and this permission notice shall be included in all copies or substantial
+                    portions of the Software.</p>
+                <p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+                    LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+                    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+                    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                <p>External reference sites retain their own rights. No dictionary database, third-party code, images or
+                    audio is bundled.</p>
+            </details>
+        </section>
+        <footer>Irish Clause Connectors · v1.0 · Works offline · <span id="count"></span></footer>
+    </main>
+    <script>
+        const CONTENT = { "groups": [{ "name": "agus / nó", "meaning": "and / or", "rule": "These coordinate clauses. They do not themselves require a dependent verb form.", "sound": "AH-gus / noh" }, { "name": "ach", "meaning": "but", "rule": "Ach contrasts clauses without changing the following verb into a dependent form.", "sound": "akh (ch as in loch)" }, { "name": "áfach / mar sin / dá bhrí sin", "meaning": "however / so / therefore", "rule": "These link ideas without selecting dependent verb forms. Áfach often follows the verb or appears later in its clause.", "sound": "AW-fukh / mar shin / daw vree shin" }, { "name": "mar / óir", "meaning": "because / for", "rule": "Causal mar and óir can introduce an independent clause: mar tá, óir tá. Do not automatically change tá to bhfuil.", "sound": "mar / ohr" }, { "name": "toisc go / de bhrí go", "meaning": "because / since (reason)", "rule": "These take a dependent clause: go + eclipsis; gur + lenition for most past verbs. Some irregular past forms retain go, e.g. go raibh. Negative nach / nár replace go / gur.", "sound": "tishk guh / duh vree guh" }, { "name": "nuair a", "meaning": "when (a time or occasion)", "rule": "Nuair a normally uses the direct-relative verb pattern: lenition where possible. Tá → atá, bhí → a bhí, beidh → a bheidh. A future event can use the future tense.", "sound": "NOO-ir uh" }, { "name": "má / más / má ba", "meaning": "if (open condition)", "rule": "Má generally lenites, but tá stays tá. In a future open condition, Irish commonly uses the present after má. Copular forms include más (present) and má ba (past).", "sound": "maw / mawss / maw buh" }, { "name": "dá / dá mba / dá mb’", "meaning": "if (hypothetical)", "rule": "Dá takes eclipsis, commonly with the conditional. The result clause commonly also uses the conditional. Copular forms include dá mba and dá mb’.", "sound": "daw / daw muh / daw muh" }, { "name": "mura / murar", "meaning": "unless / if not", "rule": "Mura introduces a negative condition and takes eclipsis. Murar is used with most past verbs, followed by lenition; irregular raibh retains mura. Mura mbeadh is hypothetical.", "sound": "MUR-uh / MUR-ur" }, { "name": "fiú má / fiú dá", "meaning": "even if", "rule": "Fiú adds “even”. Má keeps an open condition; dá introduces a hypothetical one.", "sound": "fyoo maw / fyoo daw" }, { "name": "cé go / cé gur / cé nach / cé nár", "meaning": "although / even though", "rule": "Concessive dependent clauses: go + eclipsis, gur with most past verbs; negative nach / nár. Irregular past raibh uses go / nach.", "sound": "kay guh / kay gur / kay nakh / kay nawr" }, { "name": "sula / sular", "meaning": "before", "rule": "Sula takes eclipsis. Sular + lenition is used with most past verbs; some irregular past forms retain sula. Future indicative and subjunctive constructions both occur.", "sound": "SUL-uh / SUL-ur" }, { "name": "tar éis + verbal noun / sula + clause", "meaning": "after / before (different structures)", "rule": "A verbal-noun clause offers another way to connect events. Where an object precedes the verbal noun, a can lenite it: an obair a chríochnú.", "sound": "tar AYSH / SUL-uh" }, { "name": "go dtí go / go dtí gur", "meaning": "until", "rule": "Go dtí go introduces a dependent clause. Most past verbs use go dtí gur; irregular raibh retains go.", "sound": "guh djee guh / guh djee gur" }, { "name": "chomh luath agus a", "meaning": "as soon as", "rule": "This time phrase normally takes a direct-relative clause: a + lenition where possible.", "sound": "khum LOO-uh ug-us uh" }, { "name": "fad is a / agus", "meaning": "while", "rule": "Fad is a introduces a time clause. Agus can also connect a main clause with a simultaneous non-finite phrase, such as agus mé ag obair.", "sound": "fad iss uh / AH-gus" }, { "name": "ó / ó tharla go", "meaning": "since (time / reason)", "rule": "Distinguish time since from causal since. Ó with a past event can mark a starting time; ó tharla go introduces a reason and a dependent clause.", "sound": "oh / oh HAR-luh guh" }, { "name": "ionas go / ionas nach", "meaning": "so that / so that not", "rule": "Purpose clauses use a dependent verb. Go takes eclipsis; nach makes the purpose negative. Ná is not substituted for nach here.", "sound": "UN-us guh / UN-us nakh" }, { "name": "chun / gan + verbal noun", "meaning": "in order to / without", "rule": "Chun can introduce purpose with a verbal noun. Gan introduces a negative non-finite phrase. These need no finite tense marking.", "sound": "khun / gun" }, { "name": "ar eagla go", "meaning": "in case / for fear that", "rule": "A precaution or feared possibility, followed by a dependent clause. Conditional forms are common.", "sound": "er AG-luh guh" }, { "name": "ach amháin má / ar choinníoll go", "meaning": "except if / provided that", "rule": "Ach amháin má follows the má pattern; ar choinníoll go takes a dependent clause.", "sound": "akh uh-WAWN maw / er KHIN-yul guh" }, { "name": "an / ar (indirect question)", "meaning": "whether / if (asking, not a condition)", "rule": "After “I do not know” or “ask”, English if can mean whether. Use an / ar and dependent question forms, not má / dá. Irregular past raibh uses an.", "sound": "un / ur" }], "data": [{ "id": 0, "g": 0, "p": "Tá mé sa bhaile ", "a": "agus", "s": " tá Síle ar scoil.", "en": "I am at home and Síle is at school.", "note": "" }, { "id": 1, "g": 0, "p": "Léigh mé an leabhar ", "a": "agus", "s": " scríobh mé litir.", "en": "I read the book and wrote a letter.", "note": "" }, { "id": 2, "g": 0, "p": "Tiocfaidh tú linn ", "a": "nó", "s": " fanfaidh tú anseo.", "en": "You will come with us or you will stay here.", "note": "" }, { "id": 3, "g": 1, "p": "Tá sé fuar ", "a": "ach", "s": " tá an ghrian ag taitneamh.", "en": "It is cold but the sun is shining.", "note": "" }, { "id": 4, "g": 1, "p": "Chuaigh mé ann ", "a": "ach", "s": " ní fhaca mé é.", "en": "I went there but I did not see him.", "note": "" }, { "id": 5, "g": 1, "p": "Ba mhaith liom teacht ", "a": "ach", "s": " tá mé gnóthach.", "en": "I would like to come but I am busy.", "note": "" }, { "id": 6, "g": 1, "p": "Beidh mé ann ", "a": "ach", "s": " beidh mé déanach.", "en": "I will be there but I will be late.", "note": "" }, { "id": 7, "g": 2, "p": "Bhí mé tuirseach; ", "a": "mar sin", "s": ", chuaigh mé a chodladh.", "en": "I was tired; so, I went to sleep.", "note": "" }, { "id": 8, "g": 2, "p": "Tá an siopa dúnta; ", "a": "dá bhrí sin", "s": ", caithfimid dul abhaile.", "en": "The shop is closed; therefore, we must go home.", "note": "" }, { "id": 9, "g": 2, "p": "Tá sé daor; tá sé go maith, ", "a": "áfach", "s": ".", "en": "It is expensive; it is good, however.", "note": "" }, { "id": 10, "g": 3, "p": "Fanfaidh mé anseo ", "a": "mar tá", "s": " mé tuirseach.", "en": "I will stay here because I am tired.", "note": "" }, { "id": 11, "g": 3, "p": "Níor tháinig sí ", "a": "mar bhí", "s": " sí tinn.", "en": "She did not come because she was ill.", "note": "" }, { "id": 12, "g": 3, "p": "Dún an doras, ", "a": "óir tá", "s": " sé fuar.", "en": "Close the door, for it is cold.", "note": "" }, { "id": 13, "g": 3, "p": "Ní rachaimid amach ", "a": "mar níl", "s": " an aimsir go maith.", "en": "We will not go out because the weather is not good.", "note": "" }, { "id": 14, "g": 4, "p": "Tá mé sásta ", "a": "toisc go bhfuil", "s": " tú anseo.", "en": "I am happy because you are here.", "note": "" }, { "id": 15, "g": 4, "p": "Tá sí tuirseach ", "a": "toisc gur oibrigh", "s": " sí go dian.", "en": "She is tired because she worked hard.", "note": "" }, { "id": 16, "g": 4, "p": "D’fhan sé sa bhaile ", "a": "toisc nach raibh", "s": " sé go maith.", "en": "He stayed at home because he was not well.", "note": "" }, { "id": 17, "g": 4, "p": "Tá ocras orm ", "a": "toisc nár ith", "s": " mé mo lón.", "en": "I am hungry because I did not eat my lunch.", "note": "" }, { "id": 18, "g": 4, "p": "Fanfaidh mé ", "a": "de bhrí go mbeidh", "s": " tú anseo.", "en": "I will stay because you will be here.", "note": "" }, { "id": 19, "g": 4, "p": "Tá áthas orm ", "a": "toisc gur", "s": " múinteoir í.", "en": "I am glad because she is a teacher.", "note": "Gur is the present dependent copula here, not a past-tense marker." }, { "id": 20, "g": 5, "p": "", "a": "Nuair a bhíonn", "s": " am agam, léim leabhar.", "en": "When I have time, I read a book.", "note": "" }, { "id": 21, "g": 5, "p": "", "a": "Nuair a tháinig", "s": " sí, bhí mé sásta.", "en": "When she came, I was happy.", "note": "" }, { "id": 22, "g": 5, "p": "", "a": "Nuair a bheidh", "s": " tú réidh, imeoimid.", "en": "When you are ready, we will leave.", "note": "" }, { "id": 23, "g": 5, "p": "Bím sásta ", "a": "nuair atá", "s": " tú anseo.", "en": "I am happy when you are here.", "note": "" }, { "id": 24, "g": 5, "p": "Bhí mé sa bhaile ", "a": "nuair a ghlaoigh", "s": " tú.", "en": "I was at home when you called.", "note": "" }, { "id": 25, "g": 5, "p": "", "a": "Nuair nach mbíonn", "s": " am agam, ní léim.", "en": "When I do not have time, I do not read.", "note": "Negative relative nach takes eclipsis." }, { "id": 26, "g": 5, "p": "Bhí iontas orm ", "a": "nuair nár tháinig", "s": " sí.", "en": "I was surprised when she did not come.", "note": "Nár is used with this regular past verb." }, { "id": 27, "g": 6, "p": "", "a": "Má tá", "s": " tú réidh, imeoimid.", "en": "If you are ready, we will leave.", "note": "" }, { "id": 28, "g": 6, "p": "", "a": "Má thagann", "s": " sí, beidh áthas orm.", "en": "If she comes, I will be pleased.", "note": "" }, { "id": 29, "g": 6, "p": "", "a": "Má bhíonn", "s": " am agam, cabhróidh mé leat.", "en": "If I have time, I will help you.", "note": "" }, { "id": 30, "g": 6, "p": "", "a": "Má chonaic", "s": " tú é, inis dom.", "en": "If you saw it, tell me.", "note": "" }, { "id": 31, "g": 6, "p": "", "a": "Más", "s": " maith leat é, ceannaigh é.", "en": "If you like it, buy it.", "note": "" }, { "id": 32, "g": 6, "p": "", "a": "Más", "s": " múinteoir í, tuigfidh sí é.", "en": "If she is a teacher, she will understand it.", "note": "" }, { "id": 33, "g": 6, "p": "", "a": "Má ba", "s": " mhaith leat é, cén fáth nár cheannaigh tú é?", "en": "If you liked it, why did you not buy it?", "note": "" }, { "id": 34, "g": 7, "p": "", "a": "Dá mbeadh", "s": " am agam, rachainn leat.", "en": "If I had time, I would go with you.", "note": "" }, { "id": 35, "g": 7, "p": "", "a": "Dá dtiocfadh", "s": " sí, bheinn sásta.", "en": "If she came, I would be happy.", "note": "" }, { "id": 36, "g": 7, "p": "", "a": "Dá bhfeicfinn", "s": " é, déarfainn leis.", "en": "If I saw him, I would tell him.", "note": "" }, { "id": 37, "g": 7, "p": "", "a": "Dá mba", "s": " mhúinteoir mé, thuigfinn é.", "en": "If I were a teacher, I would understand it.", "note": "" }, { "id": 38, "g": 7, "p": "", "a": "Dá mb’", "s": "fhéidir é, rachainn ann.", "en": "If it were possible, I would go there.", "note": "Mb’ precedes fhéidir in this copular construction." }, { "id": 39, "g": 8, "p": "", "a": "Mura bhfuil", "s": " tú réidh, fanfaidh mé.", "en": "If you are not ready, I will wait.", "note": "" }, { "id": 40, "g": 8, "p": "", "a": "Mura dtuigeann", "s": " tú é, cuir ceist.", "en": "If you do not understand it, ask a question.", "note": "" }, { "id": 41, "g": 8, "p": "", "a": "Murar cheannaigh", "s": " tú bainne, ceannaigh anois é.", "en": "If you did not buy milk, buy it now.", "note": "" }, { "id": 42, "g": 8, "p": "", "a": "Mura raibh", "s": " tú ann, ní fhaca tú é.", "en": "If you were not there, you did not see it.", "note": "" }, { "id": 43, "g": 8, "p": "", "a": "Mura mbeadh", "s": " báisteach ann, rachainn amach.", "en": "If it were not raining, I would go out.", "note": "" }, { "id": 44, "g": 8, "p": "", "a": "Mura", "s": " miste leat, fan anseo.", "en": "If you do not mind, wait here.", "note": "Mura includes the negative copula in this expression." }, { "id": 45, "g": 8, "p": "", "a": "Murab", "s": " é sin do chóta, fág anseo é.", "en": "If that is not your coat, leave it here.", "note": "Murab is used before é in this copular clause." }, { "id": 46, "g": 9, "p": "", "a": "Fiú má bhíonn", "s": " sé fuar, rachaimid amach.", "en": "Even if it is cold, we will go out.", "note": "" }, { "id": 47, "g": 9, "p": "", "a": "Fiú dá mbeadh", "s": " sé saor, ní cheannóinn é.", "en": "Even if it were cheap, I would not buy it.", "note": "" }, { "id": 48, "g": 10, "p": "", "a": "Cé go bhfuil", "s": " sé fuar, rachaimid amach.", "en": "Although it is cold, we will go out.", "note": "" }, { "id": 49, "g": 10, "p": "", "a": "Cé gur oibrigh", "s": " sé go dian, níor chríochnaigh sé é.", "en": "Although he worked hard, he did not finish it.", "note": "" }, { "id": 50, "g": 10, "p": "", "a": "Cé go raibh", "s": " mé tuirseach, chuaigh mé ann.", "en": "Although I was tired, I went there.", "note": "" }, { "id": 51, "g": 10, "p": "", "a": "Cé nach bhfuil", "s": " sí anseo, is féidir linn tosú.", "en": "Although she is not here, we can start.", "note": "" }, { "id": 52, "g": 10, "p": "", "a": "Cé nár cheannaigh", "s": " mé é, thaitin sé liom.", "en": "Although I did not buy it, I liked it.", "note": "" }, { "id": 53, "g": 10, "p": "", "a": "Cé gur", "s": " dochtúir é, níl an freagra aige.", "en": "Although he is a doctor, he does not have the answer.", "note": "Gur is a present copular form here." }, { "id": 54, "g": 11, "p": "Léigh mé é ", "a": "sular chuir", "s": " mé an litir sa phost.", "en": "I read it before I posted the letter.", "note": "" }, { "id": 55, "g": 11, "p": "Bhí mé ann ", "a": "sula raibh", "s": " sé dorcha.", "en": "I was there before it was dark.", "note": "" }, { "id": 56, "g": 11, "p": "Críochnóidh mé é ", "a": "sula mbeidh", "s": " tú anseo.", "en": "I will finish it before you are here.", "note": "" }, { "id": 57, "g": 11, "p": "Nigh do lámha ", "a": "sula n-íosfaidh", "s": " tú.", "en": "Wash your hands before you eat.", "note": "" }, { "id": 58, "g": 12, "p": "", "a": "Tar éis", "s": " dom an obair a chríochnú, chuaigh mé abhaile.", "en": "After I finished the work, I went home.", "note": "" }, { "id": 59, "g": 12, "p": "", "a": "Sula", "s": " ndeachaigh mé abhaile, dhún mé an doras.", "en": "Before I went home, I closed the door.", "note": "This example contrasts a finite clause: sula ndeachaigh, an irregular past form." }, { "id": 60, "g": 12, "p": "", "a": "Tar éis", "s": " di teacht abhaile, rinne sí tae.", "en": "After she came home, she made tea.", "note": "" }, { "id": 61, "g": 13, "p": "Fan anseo ", "a": "go dtí go mbeidh", "s": " mé réidh.", "en": "Wait here until I am ready.", "note": "" }, { "id": 62, "g": 13, "p": "D’fhan mé ", "a": "go dtí gur chríochnaigh", "s": " sí.", "en": "I waited until she finished.", "note": "" }, { "id": 63, "g": 13, "p": "D’fhan sé ", "a": "go dtí go raibh", "s": " sé dorcha.", "en": "He waited until it was dark.", "note": "" }, { "id": 64, "g": 14, "p": "", "a": "Chomh luath agus a bheidh", "s": " mé réidh, glaofaidh mé ort.", "en": "As soon as I am ready, I will call you.", "note": "" }, { "id": 65, "g": 14, "p": "", "a": "Chomh luath agus a tháinig", "s": " sí, d’imigh sé.", "en": "As soon as she arrived, he left.", "note": "" }, { "id": 66, "g": 15, "p": "Léigh mé leabhar ", "a": "fad is a bhí", "s": " sí ag cócaireacht.", "en": "I read a book while she was cooking.", "note": "" }, { "id": 67, "g": 15, "p": "Ná labhair liom ", "a": "agus mé", "s": " ag obair.", "en": "Do not talk to me while I am working.", "note": "Agus + subject + ag + verbal noun: no finite verb in this second clause." }, { "id": 68, "g": 16, "p": "Tá mé anseo ", "a": "ó tháinig", "s": " tú.", "en": "I have been here since you came.", "note": "" }, { "id": 69, "g": 16, "p": "", "a": "Ó tharla go bhfuil", "s": " tú anseo, cabhraigh liom.", "en": "Since you are here, help me.", "note": "" }, { "id": 70, "g": 17, "p": "Labhair go mall ", "a": "ionas go dtuigfidh", "s": " mé thú.", "en": "Speak slowly so that I will understand you.", "note": "" }, { "id": 71, "g": 17, "p": "Scríobh síos é ", "a": "ionas nach ndéanfaidh", "s": " tú dearmad air.", "en": "Write it down so that you will not forget it.", "note": "" }, { "id": 72, "g": 17, "p": "D’oscail mé an doras ", "a": "ionas go mbeadh", "s": " solas againn.", "en": "I opened the door so that we would have light.", "note": "" }, { "id": 73, "g": 18, "p": "Chuaigh mé ann ", "a": "chun", "s": " Gaeilge a fhoghlaim.", "en": "I went there to learn Irish.", "note": "" }, { "id": 74, "g": 18, "p": "D’imigh sé ", "a": "gan", "s": " slán a fhágáil.", "en": "He left without saying goodbye.", "note": "" }, { "id": 75, "g": 19, "p": "Tóg cóta leat ", "a": "ar eagla go mbeidh", "s": " sé fuar.", "en": "Take a coat in case it is cold.", "note": "" }, { "id": 76, "g": 19, "p": "D’fhan mé ciúin ", "a": "ar eagla go ndéanfainn", "s": " botún.", "en": "I stayed quiet for fear that I would make a mistake.", "note": "" }, { "id": 77, "g": 20, "p": "Rachaidh mé ann ", "a": "ach amháin má bhíonn", "s": " mé tinn.", "en": "I will go there except if I am ill.", "note": "" }, { "id": 78, "g": 20, "p": "Cabhróidh mé leat ", "a": "ar choinníoll go mbeidh", "s": " tú anseo in am.", "en": "I will help you provided that you are here on time.", "note": "" }, { "id": 79, "g": 21, "p": "Níl a fhios agam ", "a": "an bhfuil", "s": " sí anseo.", "en": "I do not know whether she is here.", "note": "" }, { "id": 80, "g": 21, "p": "Fiafraigh de ", "a": "ar cheannaigh", "s": " sé é.", "en": "Ask him whether he bought it.", "note": "" }, { "id": 81, "g": 21, "p": "Níl a fhios agam ", "a": "an raibh", "s": " siad ann.", "en": "I do not know whether they were there.", "note": "" }] };
+        const { groups, data } = CONTENT, $ = s => document.querySelector(s), esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]] } return a };
+        const full = q => q.p + q.a + q.s;
+        function bracket(q) { return q.p ? `[${esc(q.p.trim())}] [<b>${esc(q.a)}</b>${esc(q.s)}]` : `[<b>${esc(q.a)}</b>${esc(q.s).replace(',', '], [')}${q.s.includes(',') ? ']' : ']'}` }
+        let saved = { attempts: 0, correct: 0, missed: [] }; try { const s = JSON.parse(localStorage.getItem('irish-connectors-v1')); if (s && Number.isFinite(s.attempts) && Number.isFinite(s.correct) && Array.isArray(s.missed)) saved = { ...s, missed: s.missed.filter(x => data[x]) } } catch (e) { }
+        let deck = [], pos = 0, correct = 0, done = false, sessionMode = 'choose', tokens = [], selected = [];
+        function persist() { try { localStorage.setItem('irish-connectors-v1', JSON.stringify(saved)) } catch (e) { } stats() }
+        function stats() { $('#stats').textContent = `Saved total: ${saved.correct} / ${saved.attempts} correct · ${saved.missed.length} to review`; $('#review').disabled = !saved.missed.length }
+        groups.forEach((g, i) => $('#family').insertAdjacentHTML('beforeend', `<option value="${i}">${esc(g.name)} — ${esc(g.meaning)}</option>`));
+        function start(review = false) { let pool = data.filter(q => ($('#family').value === 'all' || q.g === +$('#family').value) && (!review || saved.missed.includes(q.id))); if (!pool.length) { $('#quiz').innerHTML = '<h2>No mistakes in this family.</h2><p>Choose another family or start a new session.</p>'; return } deck = shuffle(pool).slice(0, $('#length').value === 'all' ? pool.length : +$('#length').value); pos = 0; correct = 0; sessionMode = $('#mode').value; show() }
+        function show() {
+            done = false; selected = []; const q = deck[pos], g = groups[q.g]; $('#quiz').innerHTML = `<div class="row"><span class="tag">${sessionMode === 'build' ? 'Sentence builder' : 'Complete the connection'}</span><span class="muted">${pos + 1} / ${deck.length}</span></div><div class="progress"><span style="width:${pos / deck.length * 100}%"></span></div><div id="familyHint" class="muted" ${$('#hint').checked ? '' : 'hidden'}>${esc(g.name)} · ${esc(g.meaning)}</div><p>${esc(q.en)}</p>${sessionMode !== 'build' ? `<div class="sentence" lang="ga">${esc(q.p)}<span class="blank">…</span>${esc(q.s)}</div>` : '<p class="muted">Arrange the words to match the model. The connector family above tells you which construction to use.</p>'}<div id="answerArea"></div><div class="actions"><button id="reveal">Show answer</button><button id="next" class="primary" hidden>Next question →</button></div><div id="feedback" aria-live="polite"></div>`;
+            if (sessionMode === 'choose') { let alternatives = shuffle([...new Set(data.filter(x => x.g !== q.g && !([3, 4].includes(q.g) && [3, 4].includes(x.g)) && !([12, 11].includes(q.g) && [12, 11].includes(x.g)) && x.a.toLowerCase() !== q.a.toLowerCase()).map(x => x.a))]).slice(0, 3); $('#answerArea').innerHTML = '<div class="choices">' + shuffle([q.a, ...alternatives]).map(a => `<button lang="ga">${esc(a)}</button>`).join('') + '</div>'; document.querySelectorAll('.choices button').forEach(b => b.onclick = () => grade(b.textContent)); }
+            else if (sessionMode === 'type') { $('#answerArea').innerHTML = '<label for="answer" class="muted">Missing Irish phrase</label><input id="answer" type="text" lang="ga" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="fadas">' + [...'áéíóú'].map(c => `<button type="button">${c}</button>`).join('') + '</div><button id="check" class="primary" style="margin-top:16px">Check answer</button>'; $('#check').onclick = () => grade($('#answer').value); $('#answer').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); if (done) next(); else grade($('#answer').value) } }; document.querySelectorAll('.fadas button').forEach(b => b.onclick = () => { const a = $('#answer'); a.setRangeText(b.textContent, a.selectionStart, a.selectionEnd, 'end'); a.focus() }); $('#answer').focus() }
+            else { tokens = full(q).trim().split(/\s+/); $('#answerArea').innerHTML = '<div class="tokens assembly" id="selected" aria-label="Your sentence"></div><div class="tokens" id="bank"></div><button id="check" class="primary">Check sentence</button><button id="clear" style="margin-left:8px">Clear</button>'; window.bankOrder = shuffle(tokens.map((_, i) => i)); renderTokens(); $('#check').onclick = () => grade(selected.map(i => tokens[i]).join(' ')); $('#clear').onclick = () => { selected = []; renderTokens() } }
+            $('#reveal').onclick = () => grade('', true); $('#next').onclick = next;
+        }
+        function renderTokens() { $('#selected').innerHTML = selected.map(i => `<button data-i="${i}" lang="ga">${esc(tokens[i])}</button>`).join(''); $('#bank').innerHTML = window.bankOrder.filter(i => !selected.includes(i)).map(i => `<button data-i="${i}" lang="ga">${esc(tokens[i])}</button>`).join(''); document.querySelectorAll('#bank button').forEach(b => b.onclick = () => { if (!done) { selected.push(+b.dataset.i); renderTokens() } }); document.querySelectorAll('#selected button').forEach(b => b.onclick = () => { if (!done) { selected = selected.filter(i => i !== +b.dataset.i); renderTokens() } }) }
+        function norm(s) { s = s.normalize('NFC').toLowerCase().replace(/[’‘']/g, '').replace(/[.,;:!?“”"()[\]—–-]/g, ' ').replace(/\s+/g, ' ').trim(); return $('#strict').checked ? s : s.normalize('NFD').replace(/[\u0300-\u036f]/g, '') }
+        function grade(answer, reveal = false) { if (done) return; if (!reveal && !answer.trim()) return; done = true; let q = deck[pos], g = groups[q.g], expected = sessionMode === 'build' ? full(q) : q.a, ok = !reveal && norm(answer) === norm(expected); saved.attempts++; if (ok) { correct++; saved.correct++; saved.missed = saved.missed.filter(i => i !== q.id) } else if (!saved.missed.includes(q.id)) saved.missed.push(q.id); persist(); $('#feedback').className = 'feedback' + (ok ? '' : ' bad'); $('#feedback').innerHTML = `<h3>${ok ? 'Correct — maith thú!' : reveal ? 'Model answer' : 'Compare with the model'}</h3>${!ok && !reveal ? `<p>Your answer: <b>${esc(answer)}</b></p>` : ''}<p lang="ga" style="font-size:21px">${bracket(q)}</p><p>${esc(q.en)}</p><p>${esc(g.rule)}</p>${q.note ? `<p><b>This example:</b> ${esc(q.note)}</p>` : ''}<p class="muted">Connector pronunciation (approximate): ${esc(g.sound)}</p>${!ok && !reveal ? '<p class="muted">This exercise checks the supplied model; another construction may be valid in a different context.</p>' : ''}`; document.querySelectorAll('#answerArea button').forEach(b => b.disabled = true); if ($('#answer')) $('#answer').readOnly = true; $('#reveal').hidden = true; $('#next').hidden = false; $('#next').textContent = pos === deck.length - 1 ? 'See results →' : 'Next question →'; $('#next').focus() }
+        function next() { if (!done) return; pos++; if (pos < deck.length) show(); else { $('#quiz').innerHTML = `<span class="tag">Session complete</span><h2 style="margin-top:15px">${correct} / ${deck.length} correct</h2><p>${correct === deck.length ? 'All correct. Try another family or a different exercise.' : 'Review missed examples to practise these connections again.'}</p><div class="actions"><button class="primary" id="again">Practise again</button><button id="missedAgain">Review mistakes</button></div>`; $('#again').onclick = () => start(); $('#missedAgain').onclick = () => start(true); $('#missedAgain').disabled = !saved.missed.length } }
+        function reference() { const term = $('#search').value.toLowerCase(); $('#referenceCards').innerHTML = groups.map((g, i) => { const examples = data.filter(q => q.g === i); if (!JSON.stringify([g, examples]).toLowerCase().includes(term)) return ''; return `<article class="card"><span class="tag">${esc(g.meaning)}</span><h3 lang="ga">${esc(g.name)}</h3><p>${esc(g.rule)}</p><p class="muted">Approximate: ${esc(g.sound)}</p><details ${term ? 'open' : ''}><summary>${examples.length} examples</summary>${examples.map(q => `<div class="example"><p lang="ga">${bracket(q)}</p><p class="muted">${esc(q.en)}</p>${q.note ? `<p class="muted">${esc(q.note)}</p>` : ''}</div>`).join('')}</details></article>` }).join('') || '<p>No matching examples.</p>' }
+        document.querySelectorAll('nav button').forEach(b => b.onclick = () => { document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', String(x === b)));['practice', 'reference', 'about'].forEach(id => $('#' + id).hidden = id !== b.dataset.tab) });
+        $('#start').onclick = () => start(); $('#review').onclick = () => start(true); $('#hint').onchange = () => { if ($('#familyHint')) $('#familyHint').hidden = !$('#hint').checked }; $('#search').oninput = reference; $('#reset').onclick = () => { if (confirm('Reset all saved scores and mistakes?')) { saved = { attempts: 0, correct: 0, missed: [] }; persist() } }; $('#count').textContent = `${data.length} examples`; stats(); reference(); start();
+    </script>
+</body>
+
+</html>

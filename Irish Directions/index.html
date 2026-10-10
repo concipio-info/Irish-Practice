@@ -1,66 +1,750 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Treoracha — Irish Directions Practice</title><style>:root{--ink:#15231e;--green:#0b3d2e;--green2:#145c45;--gold:#f4d35e;--paper:#f7f6f0;--white:#fff;--muted:#65736d;--line:#d8ddd9;--good:#176b48;--bad:#a83b32;--shadow:0 18px 50px rgba(11,61,46,.12)}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eff4f0 0,#f8f6ee 60%,#edf3ef 100%);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}button,input,select{font:inherit}.topbar{background:var(--green);color:white;padding:22px max(24px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;border-bottom:5px solid var(--gold)}h1,h2,p{margin-top:0}.topbar h1{font-family:Georgia,serif;font-size:2rem;margin:0;letter-spacing:.01em}.eyebrow{display:block;color:var(--gold);font-size:.72rem;font-weight:800;letter-spacing:.18em;margin-bottom:2px}main{max-width:1180px;margin:0 auto;padding:28px 24px 60px}.stats{display:grid;grid-template-columns:repeat(3,130px) 1fr;gap:12px;margin-bottom:22px}.stats>div{background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:14px;padding:12px 16px}.stats span{font:bold 1.35rem Georgia,serif;display:block}.stats small,.question-meta,.context,.tip{color:var(--muted)}.progress-wrap{display:flex;flex-direction:column;justify-content:center}.progress-wrap small{margin-bottom:6px}progress{width:100%;height:10px;accent-color:var(--green2)}.workspace{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}.controls,.quiz-card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.controls{padding:22px}.controls h2{font:1.3rem Georgia,serif;margin-bottom:18px}.controls label:not(.check){display:block;font-size:.85rem;font-weight:700;margin-bottom:16px}.controls select{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink)}.check{display:flex;gap:9px;align-items:flex-start;margin:12px 0;font-size:.9rem}.tip{font-size:.83rem;border-top:1px solid var(--line);padding-top:16px;margin:18px 0 0}.quiz-card{padding:clamp(24px,5vw,56px);min-height:460px;position:relative;overflow:hidden}.quiz-card:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:var(--gold);opacity:.13;right:-75px;top:-85px}.question-meta{display:flex;gap:10px;align-items:center;font-size:.83rem;text-transform:uppercase;letter-spacing:.08em;font-weight:750}.question-meta span:first-child{background:var(--green);color:white;border-radius:999px;padding:5px 12px}.prompt{font:clamp(1.7rem,4vw,2.7rem)/1.2 Georgia,serif;margin:40px 0 12px;max-width:780px}.context{min-height:28px}.answer-row{display:flex;gap:10px;margin-top:30px}.answer-row input{flex:1;min-width:0;border:2px solid #aab5af;border-radius:12px;padding:14px 16px;font-size:1.1rem}.answer-row input:focus{outline:3px solid rgba(244,211,94,.7);border-color:var(--green)}button{cursor:pointer;border:0;border-radius:10px;padding:10px 16px;font-weight:750}.primary{background:var(--green);color:white}.primary:hover{background:var(--green2)}.ghost{background:transparent;color:inherit;border:1px solid currentColor}.text-button{padding:4px 0;background:transparent;color:var(--bad);font-size:.83rem}.feedback{margin-top:20px;padding:16px 18px;border-left:5px solid;border-radius:8px;background:#f3f6f4}.feedback.good{border-color:var(--good)}.feedback.bad{border-color:var(--bad)}.feedback strong{display:block;font-size:1.05rem}.pronunciation{color:var(--muted);font-style:italic}.actions{display:flex;justify-content:space-between;margin-top:22px}dialog{width:min(1060px,94vw);max-height:88vh;border:0;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.3)}dialog::backdrop{background:rgba(3,20,14,.72)}.dialog-head{display:flex;justify-content:space-between}.dialog-head h2{font:2rem Georgia,serif;margin:0}.icon-button{font-size:2rem;background:transparent;padding:0 8px}.table-wrap{overflow:auto;margin-top:18px}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}th{position:sticky;top:0;background:var(--green);color:white}td button{background:transparent;padding:2px;color:var(--green2);font-weight:800}.detail-row td{white-space:normal;background:#f4f6f4;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:760px){.topbar{padding:18px}.topbar h1{font-size:1.6rem}.topbar .ghost{font-size:.78rem;padding:8px}.stats{grid-template-columns:repeat(3,1fr)}.stats>div{padding:10px}.progress-wrap{grid-column:1/-1}.workspace{grid-template-columns:1fr}.controls{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.controls h2,.controls .tip{grid-column:1/-1}.quiz-card{min-height:430px}.answer-row{flex-direction:column}.answer-row button{padding:13px}}@media(max-width:460px){main{padding:18px 14px 40px}.controls{display:block}.stats{gap:7px}.stats small{font-size:.69rem}.quiz-card{padding:24px 18px}.prompt{font-size:1.65rem;margin-top:32px}}
+<!doctype html>
+<html lang="en">
 
-[hidden]{display:none!important}.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.choices button{background:#f3f6f4;border:2px solid var(--line);color:var(--green);min-height:56px}.choices button:hover:not(:disabled){border-color:var(--green)}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #b98900;outline-offset:3px}button:disabled{cursor:default;opacity:.7}.choices .correct{border-color:var(--good);background:#e0f3e8}.choices .wrong{border-color:var(--bad);background:#fbe7e5}.prompt{margin:22px 0 12px;font-size:1.8rem}.diagram{max-width:280px;margin:0 auto}.diagram svg{width:100%;height:210px}.topbar{gap:16px}.table-wrap td{white-space:normal}details{margin:20px 0}summary{cursor:pointer;font-weight:bold}.fadas{display:flex;gap:6px;margin-top:10px}.fadas button{background:#f4d35e;color:#15231e;padding:5px 12px}.reference-note{background:#f7f6f0;padding:16px;border-radius:12px}.footer{font-size:.85rem;color:var(--muted);margin-top:25px}.stats{grid-template-columns:repeat(3,1fr)}a{color:var(--green2)}.actions{gap:10px;flex-wrap:wrap}.context{margin-bottom:10px}.example{font-size:.95rem}.controls .primary{width:100%;margin-top:12px}@media(max-width:460px){.choices{grid-template-columns:1fr}.topbar{align-items:flex-start}.topbar .ghost{max-width:100px}.prompt{font-size:1.5rem}}
-</style></head><body>
-<header class="topbar"><div><span class="eyebrow">CLEACHTADH GAEILGE</span><h1>Treoracha</h1><span>Irish directions practice</span></div><button id="referenceBtn" class="ghost">Learn & reference</button></header>
-<main><section class="stats" aria-label="Practice progress"><div><span id="score">0 / 0</span><small>correct first time</small></div><div><span id="streak">0</span><small>current streak</small></div><div><span id="reviewCount">0</span><small>forms to review</small></div></section>
-<div class="workspace"><aside class="controls"><h2>Practice set</h2>
-<label>Topic<select id="topic"><option value="all">All directions</option><option value="compass">Compass: to / in / from</option><option value="relative">Compass: relative to a place</option><option value="turns">Facing & turning</option><option value="vertical">Up & down</option><option value="everyday">Everyday directions</option></select></label>
-<label>Exercise<select id="mode"><option value="choice">Choose the Irish</option><option value="type">Type the Irish</option><option value="meaning">Choose the meaning</option></select></label>
-<label class="check"><input id="pictures" type="checkbox" checked> Show diagrams</label><label class="check"><input id="weakOnly" type="checkbox"> Review missed forms only</label><button class="primary" id="restart">New practice round</button><button class="text-button" id="resetBtn">Reset saved progress</button>
-<p class="tip">Case and punctuation are ignored. Missing fadas are accepted with a reminder. Use Enter to check or move on.</p><p id="storage" class="tip">Progress is saved in this browser when available.</p></aside>
-<section class="quiz-card" aria-label="Practice question"><div class="question-meta"><span id="badge"></span><span id="counter"></span></div><div id="diagram" class="diagram"></div><h2 id="prompt" class="prompt" tabindex="-1"></h2><p id="context" class="context"></p><div id="choices" class="choices"></div>
-<form id="answerForm" hidden><label for="answer">Your Irish answer</label><div class="answer-row"><input id="answer" autocomplete="off" autocapitalize="none" spellcheck="false"><button id="checkAnswer" class="primary">Check</button></div><div class="fadas" aria-label="Insert accented letter"></div></form>
-<div id="feedback" class="feedback" role="status" hidden></div><div class="actions"><button id="reveal" class="ghost">Show answer</button><button id="next" class="primary" hidden>Next question →</button></div></section></div>
-<p class="footer">Works offline. Diagrams are original inline SVG. Standard Irish forms are taught; usage can vary by dialect.</p></main>
-<dialog id="referenceDialog"><div class="dialog-head"><h2>Learn the directions</h2><button class="icon-button" id="closeReference" aria-label="Close reference">×</button></div><p class="reference-note"><strong>Three different ideas:</strong> where you are going, where something is, and where something comes from. For example: <b lang="ga">suas</b> = upwards; <b lang="ga">thuas</b> = up above; <b lang="ga">anuas</b> = down from above. <b lang="ga">Ó thuaidh</b> means northwards here: do not interpret its <b>ó</b> as “from”.</p>
-<p>Compass directions are fixed. Left and right depend on your facing direction. In the compass diagrams, English N/E/S/W labels anchor the map; a gold arrow shows your heading and a green arrow shows movement. Dots show locations. In origin exercises the arrow points <em>towards</em> the centre.</p><div id="referenceContent"></div><details><summary>Language notes & sources</summary><p>Exercises use standard teaching distinctions. In actual speech, directional forms can overlap and vary by dialect. <span lang="ga">Siar</span> can also mean backwards; context determines the meaning. <span lang="ga">Ar ais</span> means back/return, which need not mean walking backwards. Examples use brackets to group grammatical units.</p><p>Vocabulary checked against <a href="https://www.teanglann.ie/en/fgb/thoir" target="_blank" rel="noopener noreferrer">Teanglann: thoir</a>, <a href="https://www.teanglann.ie/en/fgb/thuaidh" target="_blank" rel="noopener noreferrer">thuaidh</a>, <a href="https://www.teanglann.ie/en/fgb/aduaidh" target="_blank" rel="noopener noreferrer">aduaidh</a>, <a href="https://www.teanglann.ie/en/fgb/lastuaidh" target="_blank" rel="noopener noreferrer">lastuaidh</a> and <a href="https://grammar.ie/other/compass/" target="_blank" rel="noopener noreferrer">Grammar.ie: compass directions</a>. These optional links require internet; practice does not.</p></details></dialog>
-<script>
-'use strict';
-const compass=[
-['north','ó thuaidh','thuaidh','aduaidh',0],['north-east','soir ó thuaidh','thoir thuaidh','anoir aduaidh',45],['east','soir','thoir','anoir',90],['south-east','soir ó dheas','thoir theas','anoir aneas',135],['south','ó dheas','theas','aneas',180],['south-west','siar ó dheas','thiar theas','aniar aneas',225],['west','siar','thiar','aniar',270],['north-west','siar ó thuaidh','thiar thuaidh','aniar aduaidh',315]];
-const cards=[];
-function add(topic,en,ga,note,example='',diagram=null,alts=[]){cards.push({id:String(cards.length),topic,en,ga,note,example,diagram,alts});}
-compass.forEach(([en,to,at,from,angle])=>{
-add('compass','Go '+en+'.',to,'Give only the direction: movement towards '+en+'.','[Téigh] ['+to+'].',{angle,kind:'to'});
-add('compass','Located in the '+en+'.',at,'Use the location form, not movement or origin.','[Tá an baile] ['+at+'].',{angle,kind:'at'});
-add('compass','Coming from the '+en+'.',from,'Use the origin form: from '+en+'.','[Tháinig sé] ['+from+'].',{angle,kind:'from'});
-});
-[['north','lastuaidh',0],['south','laisteas',180],['east','lastoir',90],['west','laistiar',270]].forEach(([en,ga,angle])=>add('relative',en+' of the town',ga+' den bhaile','A position relative to a named place. Den = de + an; baile becomes bhaile.','[Tá an teach] ['+ga+' [den bhaile]].',{angle,kind:'at'},[{'north':'ó thuaidh','south':'ó dheas','east':'soir','west':'siar'}[en]+' den bhaile']));
-compass.forEach(([en,to,at,from,angle],i)=>{
-[['left',-2,'ar chlé'],['right',2,'ar dheis'],['straight ahead',0,'díreach ar aghaidh'],['around',4,'thart']].forEach(([turn,offset,ga])=>{const target=compass[(i+offset+8)%8];add('turns','Facing '+en+', '+(turn==='straight ahead'?'continue straight ahead':'turn '+turn)+'. Which compass direction now?',target[1],'Give the compass direction of travel. Each left/right turn is 90°.','[Téigh] ['+target[1]+'].',{angle:target[4],facing:angle,kind:'turn'});});
-});
-[
-['Move upwards','suas','Movement to a higher place.','[Téigh] [suas].','up'],['Be up above','thuas','Location at a higher level.','[Tá sé] [thuas].','above'],['Come down from above','anuas','Origin above; movement down towards the reference point.','[Tar] [anuas].','fromAbove'],['Move downwards','síos','Movement to a lower place.','[Téigh] [síos].','down'],['Be down below','thíos','Location at a lower level.','[Tá sé] [thíos].','below'],['Come up from below','aníos','Origin below; movement up towards the reference point.','[Tar] [aníos].','fromBelow']
-].forEach(([en,ga,note,ex,kind])=>add('vertical',en,ga,note,ex,{kind}));
-[
-['to the left','ar chlé','Left relative to your own facing direction.','[Cas] [ar chlé].','left'],['to the right','ar dheis','Right relative to your own facing direction.','[Cas] [ar dheis].','right'],['straight ahead','díreach ar aghaidh','Continue forward without turning.','[Téigh] [díreach ar aghaidh].','ahead'],['back / return','ar ais','Return to an earlier place; not necessarily backwards.','[Tar] [ar ais].'],['backwards','ar gcúl','Movement backwards.','[Siúil] [ar gcúl].'],['forwards','ar aghaidh','Movement forward.','[Siúil] [ar aghaidh].'],['inwards / into','isteach','Movement from outside to inside.','[Tar] [isteach].'],['inside (location)','istigh','A position inside.','[Tá sé] [istigh].'],['outwards / out','amach','Movement from inside to outside.','[Téigh] [amach].'],['outside (location)','amuigh','A position outside.','[Tá sé] [amuigh].'],['here','anseo','A location near the speaker.','[Tá sé] [anseo].'],['there','ansin','A location away from the speaker.','[Tá sé] [ansin].'],['over there / yonder','ansiúd','A location farther away.','[Tá sé] [ansiúd].'],['homewards','abhaile','Movement towards home.','[Téigh] [abhaile].'],['at home','sa bhaile','Location at home.','[Tá sé] [sa bhaile].'],['towards me','i mo threo','In my direction.','[Siúil] [i mo threo].'],['away from me','uaim','Movement away from the speaker.','[Imigh] [uaim].'],['in front of me','os mo chomhair','Position in front of the speaker.','[Tá sé] [os mo chomhair].'],['behind me','taobh thiar díom','Position behind the speaker.','[Tá sé] [taobh thiar díom].'],['beside me','in aice liom','Position next to the speaker.','[Tá sé] [in aice liom].'],['across the road','trasna an bhóthair','Movement across the road.','[Téigh] [trasna [an bhóthair]].'],['through the door','tríd an doras','Movement through an opening.','[Téigh] [tríd [an doras]].'],['around the house','timpeall an tí','Movement around the house.','[Siúil] [timpeall [an tí]].'],['Turn around.','Cas thart.','An instruction to change to the opposite facing direction.','[Cas] [thart].']
-].forEach(([en,ga,note,ex,kind])=>add('everyday',en,ga,note,ex,kind?{kind}:null));
-const $=id=>document.getElementById(id), labels={compass:'Compass forms',relative:'Relative location',turns:'Facing & turning',vertical:'Up & down',everyday:'Everyday directions'};
-const key='irish-directions-v1';let saved={correct:0,total:0,streak:0,missed:[]};try{const s=JSON.parse(localStorage.getItem(key));if(s&&Number.isFinite(s.total)&&Number.isFinite(s.correct)&&Array.isArray(s.missed))saved=s;}catch(e){$('storage').textContent='Progress is available for this visit only.';}
-let queue=[],q,answered=false,number=0;
-function mix(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function norm(s){return s.toLowerCase().normalize('NFC').replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();}
-const bare=s=>norm(s).normalize('NFD').replace(/[̀-ͯ]/g,'');
-function stats(){ $('score').textContent=saved.correct+' / '+saved.total;$('streak').textContent=saved.streak;$('reviewCount').textContent=saved.missed.length;try{localStorage.setItem(key,JSON.stringify(saved));}catch(e){$('storage').textContent='Progress is available for this visit only.';}}
-function pool(){return cards.filter(c=>($('topic').value==='all'||c.topic===$('topic').value)&&(!$('weakOnly').checked||saved.missed.includes(c.id)));}
-function line(x1,y1,x2,y2,color='#145c45'){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="5" marker-end="url(#${color==='#b98900'?'gold':'arrow'})"/>`;}
-function diagram(d){if(!d)return '';let body='',caption='';const dot=(x,y)=>`<circle cx="${x}" cy="${y}" r="9" fill="#145c45"/>`;
-if(d.angle!==undefined){body='<circle cx="140" cy="108" r="77" fill="#f7f6f0" stroke="#d8ddd9"/>';[['N',140,18],['E',240,113],['S',140,205],['W',39,113]].forEach(([t,x,y])=>body+=`<text x="${x}" y="${y}" text-anchor="middle" fill="#15231e" font-size="16">${t}</text>`);let a=d.angle*Math.PI/180,x=140+65*Math.sin(a),y=108-65*Math.cos(a);body+=dot(140,108);if(d.kind==='at'){body+=dot(x,y);caption='Green dot: location relative to the centre.';}else if(d.kind==='from'){body+=line(x,y,140+13*Math.sin(a),108-13*Math.cos(a));caption='Arrow: travel from the outer point towards the centre.';}else if(d.kind==='turn'){let f=d.facing*Math.PI/180;body+=line(140,108,140+65*Math.sin(f),108-65*Math.cos(f),'#b98900');caption='Gold arrow: initial facing direction. Work out the new heading.';}else{body+=line(140,108,x,y);caption='Arrow: direction of travel.';}}
-else if(['left','right','ahead'].includes(d.kind)){body='<circle cx="140" cy="68" r="12" fill="none" stroke="#15231e" stroke-width="4"/><path d="M140 80V132 M111 100H169 M140 132L119 168 M140 132L161 168" fill="none" stroke="#15231e" stroke-width="4"/>';body+=d.kind==='left'?line(104,107,45,107):d.kind==='right'?line(176,107,235,107):line(190,155,190,50);caption='Back view: the person faces away from you. Left/right are their own.';}
-else {body='<path d="M65 108H215" stroke="#aab5af" stroke-width="2" stroke-dasharray="6 5"/>';let k=d.kind;body+=dot(140,108);if(k==='above'||k==='below')body+=dot(140,k==='above'?38:178);else if(k==='up')body+=line(140,100,140,30);else if(k==='down')body+=line(140,116,140,186);else if(k==='fromAbove')body+=line(140,30,140,92);else body+=line(140,186,140,124);caption=k==='above'||k==='below'?'Outer dot: location. Dashed line: reference level.':'Arrow: movement. Dashed line: reference level.';}
-return `<svg viewBox="0 0 280 220" role="img" aria-label="${caption}"><defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#145c45"/></marker><marker id="gold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#b98900"/></marker></defs>${body}</svg><p class="context" style="font-size:.8rem;text-align:center">${caption}</p>`;}
-function start(){queue=mix(pool());number=0;next();}
-function next(){if(!queue.length)queue=mix(pool());q=queue.pop();answered=false;$('feedback').hidden=true;$('next').hidden=true;$('reveal').hidden=!q;$('answerForm').hidden=true;$('choices').replaceChildren();$('diagram').innerHTML='';if(!q){$('badge').textContent='Review';$('counter').textContent='';$('prompt').textContent='No missed forms in this set.';$('context').textContent='Choose another topic or turn off “Review missed forms only”.';return;}number++;$('badge').textContent=labels[q.topic];$('counter').textContent='Question '+number;const reverse=$('mode').value==='meaning';$('prompt').textContent=reverse?q.ga:q.en;$('prompt').lang=reverse?'ga':'en';$('context').textContent=reverse?'Choose the meaning in this exercise.':q.topic==='turns'?q.note:'Give '+(q.ga.includes(' ')?'the Irish phrase':'the Irish word')+'. '+q.note;
-// No pictures in reverse mode: an arrow could disclose the English answer.
-$('diagram').innerHTML=$('pictures').checked&&!reverse?diagram(q.diagram):'';
-if($('mode').value==='type'){$('answerForm').hidden=false;$('answer').value='';$('answer').disabled=false;$('checkAnswer').disabled=false;$('answer').focus();}else{const field=reverse?'en':'ga',expected=q[field];let distractors=cards.filter(c=>c.topic===q.topic&&c[field]!==expected&&(!reverse||c.ga!==q.ga)&&!q.alts.includes(c.ga));let options=mix([expected,...mix([...new Set(distractors.map(c=>c[field]))]).slice(0,3)]);options.forEach(value=>{let b=document.createElement('button');b.textContent=value;b.lang=reverse?'en':'ga';b.onclick=()=>check(value,b);$('choices').append(b);});}}
-function check(value,button=null,reveal=false){if(answered||!q)return;answered=true;const reverse=$('mode').value==='meaning',expected=reverse?q.en:q.ga,accepted=reverse?[q.en]:[q.ga,...q.alts];let exact=accepted.some(a=>norm(a)===norm(value)),ok=!reveal&&(exact||accepted.some(a=>bare(a)===bare(value)));saved.total++;if(ok){saved.correct++;saved.streak++;saved.missed=saved.missed.filter(id=>id!==q.id);}else{saved.streak=0;if(!saved.missed.includes(q.id))saved.missed.push(q.id);}stats();$('feedback').hidden=false;$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').replaceChildren();let title=document.createElement('strong');title.textContent=reveal?'Answer revealed':ok?(exact?'Correct!':'Correct — remember the fada.'): 'Not quite.';let ans=document.createElement('p');ans.textContent=q.ga+' — '+q.en;let note=document.createElement('p');note.textContent=q.note;let ex=document.createElement('p');ex.className='example';ex.lang='ga';ex.textContent=q.example;$('feedback').append(title,ans,note,ex);$('choices').querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.textContent===expected)b.classList.add('correct');else if(b===button&&!ok)b.classList.add('wrong');});$('answer').disabled=true;$('checkAnswer').disabled=true;$('reveal').hidden=true;$('next').hidden=false;$('next').focus();}
-$('answerForm').onsubmit=e=>{e.preventDefault();if($('answer').value.trim())check($('answer').value);};$('next').onclick=next;$('reveal').onclick=()=>check('',null,true);$('restart').onclick=start;['topic','mode','weakOnly'].forEach(id=>$(id).onchange=start);$('pictures').onchange=()=>{$('diagram').innerHTML=q&&$('pictures').checked&&$('mode').value!=='meaning'?diagram(q.diagram):'';};$('resetBtn').onclick=()=>{if(confirm('Reset all saved scores and missed forms?')){saved={correct:0,total:0,streak:0,missed:[]};stats();start();}};
-for(const ch of 'áéíóú'){let b=document.createElement('button');b.type='button';b.textContent=ch;b.onclick=()=>{let a=$('answer');if(a.disabled)return;let s=a.selectionStart,e=a.selectionEnd;a.setRangeText(ch,s,e,'end');a.focus();};document.querySelector('.fadas').append(b);}
-$('referenceBtn').onclick=()=>$('referenceDialog').showModal();$('closeReference').onclick=()=>$('referenceDialog').close();
-let ref='<h3>Eight compass points</h3><div class="table-wrap"><table><thead><tr><th>Direction</th><th>Going to</th><th>Located in</th><th>Coming from</th></tr></thead><tbody>'+compass.map(c=>'<tr>'+c.slice(0,4).map((s,i)=>'<td'+(i?' lang="ga"':'')+'>'+s+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
-for(const group of ['relative','vertical','everyday']){ref+='<h3>'+labels[group]+'</h3><div class="table-wrap"><table><thead><tr><th>Meaning</th><th>Irish</th><th>Example / note</th></tr></thead><tbody>'+cards.filter(c=>c.topic===group).map(c=>`<tr><td>${c.en}</td><td lang="ga">${c.ga}</td><td><span lang="ga">${c.example}</span><br>${c.note}</td></tr>`).join('')+'</tbody></table></div>';}$('referenceContent').innerHTML=ref;stats();start();
-</script></body></html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Treoracha — Irish Directions Practice</title>
+    <style>
+        :root {
+            --ink: #15231e;
+            --green: #0b3d2e;
+            --green2: #145c45;
+            --gold: #f4d35e;
+            --paper: #f7f6f0;
+            --white: #fff;
+            --muted: #65736d;
+            --line: #d8ddd9;
+            --good: #176b48;
+            --bad: #a83b32;
+            --shadow: 0 18px 50px rgba(11, 61, 46, .12)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #eff4f0 0, #f8f6ee 60%, #edf3ef 100%);
+            color: var(--ink);
+            font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+            min-height: 100vh
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        .topbar {
+            background: var(--green);
+            color: white;
+            padding: 22px max(24px, calc((100vw - 1180px)/2));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 5px solid var(--gold)
+        }
+
+        h1,
+        h2,
+        p {
+            margin-top: 0
+        }
+
+        .topbar h1 {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            margin: 0;
+            letter-spacing: .01em
+        }
+
+        .eyebrow {
+            display: block;
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            margin-bottom: 2px
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 24px 60px
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 130px) 1fr;
+            gap: 12px;
+            margin-bottom: 22px
+        }
+
+        .stats>div {
+            background: rgba(255, 255, 255, .8);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 12px 16px
+        }
+
+        .stats span {
+            font: bold 1.35rem Georgia, serif;
+            display: block
+        }
+
+        .stats small,
+        .question-meta,
+        .context,
+        .tip {
+            color: var(--muted)
+        }
+
+        .progress-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .progress-wrap small {
+            margin-bottom: 6px
+        }
+
+        progress {
+            width: 100%;
+            height: 10px;
+            accent-color: var(--green2)
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 22px;
+            align-items: start
+        }
+
+        .controls,
+        .quiz-card {
+            background: rgba(255, 255, 255, .92);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            box-shadow: var(--shadow)
+        }
+
+        .controls {
+            padding: 22px
+        }
+
+        .controls h2 {
+            font: 1.3rem Georgia, serif;
+            margin-bottom: 18px
+        }
+
+        .controls label:not(.check) {
+            display: block;
+            font-size: .85rem;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .controls select {
+            display: block;
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: white;
+            color: var(--ink)
+        }
+
+        .check {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            margin: 12px 0;
+            font-size: .9rem
+        }
+
+        .tip {
+            font-size: .83rem;
+            border-top: 1px solid var(--line);
+            padding-top: 16px;
+            margin: 18px 0 0
+        }
+
+        .quiz-card {
+            padding: clamp(24px, 5vw, 56px);
+            min-height: 460px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .quiz-card:before {
+            content: "";
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: .13;
+            right: -75px;
+            top: -85px
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: .83rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 750
+        }
+
+        .question-meta span:first-child {
+            background: var(--green);
+            color: white;
+            border-radius: 999px;
+            padding: 5px 12px
+        }
+
+        .prompt {
+            font: clamp(1.7rem, 4vw, 2.7rem)/1.2 Georgia, serif;
+            margin: 40px 0 12px;
+            max-width: 780px
+        }
+
+        .context {
+            min-height: 28px
+        }
+
+        .answer-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px
+        }
+
+        .answer-row input {
+            flex: 1;
+            min-width: 0;
+            border: 2px solid #aab5af;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 1.1rem
+        }
+
+        .answer-row input:focus {
+            outline: 3px solid rgba(244, 211, 94, .7);
+            border-color: var(--green)
+        }
+
+        button {
+            cursor: pointer;
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 750
+        }
+
+        .primary {
+            background: var(--green);
+            color: white
+        }
+
+        .primary:hover {
+            background: var(--green2)
+        }
+
+        .ghost {
+            background: transparent;
+            color: inherit;
+            border: 1px solid currentColor
+        }
+
+        .text-button {
+            padding: 4px 0;
+            background: transparent;
+            color: var(--bad);
+            font-size: .83rem
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 16px 18px;
+            border-left: 5px solid;
+            border-radius: 8px;
+            background: #f3f6f4
+        }
+
+        .feedback.good {
+            border-color: var(--good)
+        }
+
+        .feedback.bad {
+            border-color: var(--bad)
+        }
+
+        .feedback strong {
+            display: block;
+            font-size: 1.05rem
+        }
+
+        .pronunciation {
+            color: var(--muted);
+            font-style: italic
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 22px
+        }
+
+        dialog {
+            width: min(1060px, 94vw);
+            max-height: 88vh;
+            border: 0;
+            border-radius: 20px;
+            padding: 26px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .3)
+        }
+
+        dialog::backdrop {
+            background: rgba(3, 20, 14, .72)
+        }
+
+        .dialog-head {
+            display: flex;
+            justify-content: space-between
+        }
+
+        .dialog-head h2 {
+            font: 2rem Georgia, serif;
+            margin: 0
+        }
+
+        .icon-button {
+            font-size: 2rem;
+            background: transparent;
+            padding: 0 8px
+        }
+
+        .table-wrap {
+            overflow: auto;
+            margin-top: 18px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .9rem
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--line);
+            white-space: nowrap
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: var(--green);
+            color: white
+        }
+
+        td button {
+            background: transparent;
+            padding: 2px;
+            color: var(--green2);
+            font-weight: 800
+        }
+
+        .detail-row td {
+            white-space: normal;
+            background: #f4f6f4;
+            color: var(--muted)
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0
+        }
+
+        @media(max-width:760px) {
+            .topbar {
+                padding: 18px
+            }
+
+            .topbar h1 {
+                font-size: 1.6rem
+            }
+
+            .topbar .ghost {
+                font-size: .78rem;
+                padding: 8px
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .stats>div {
+                padding: 10px
+            }
+
+            .progress-wrap {
+                grid-column: 1/-1
+            }
+
+            .workspace {
+                grid-template-columns: 1fr
+            }
+
+            .controls {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0 14px
+            }
+
+            .controls h2,
+            .controls .tip {
+                grid-column: 1/-1
+            }
+
+            .quiz-card {
+                min-height: 430px
+            }
+
+            .answer-row {
+                flex-direction: column
+            }
+
+            .answer-row button {
+                padding: 13px
+            }
+        }
+
+        @media(max-width:460px) {
+            main {
+                padding: 18px 14px 40px
+            }
+
+            .controls {
+                display: block
+            }
+
+            .stats {
+                gap: 7px
+            }
+
+            .stats small {
+                font-size: .69rem
+            }
+
+            .quiz-card {
+                padding: 24px 18px
+            }
+
+            .prompt {
+                font-size: 1.65rem;
+                margin-top: 32px
+            }
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px
+        }
+
+        .choices button {
+            background: #f3f6f4;
+            border: 2px solid var(--line);
+            color: var(--green);
+            min-height: 56px
+        }
+
+        .choices button:hover:not(:disabled) {
+            border-color: var(--green)
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #b98900;
+            outline-offset: 3px
+        }
+
+        button:disabled {
+            cursor: default;
+            opacity: .7
+        }
+
+        .choices .correct {
+            border-color: var(--good);
+            background: #e0f3e8
+        }
+
+        .choices .wrong {
+            border-color: var(--bad);
+            background: #fbe7e5
+        }
+
+        .prompt {
+            margin: 22px 0 12px;
+            font-size: 1.8rem
+        }
+
+        .diagram {
+            max-width: 280px;
+            margin: 0 auto
+        }
+
+        .diagram svg {
+            width: 100%;
+            height: 210px
+        }
+
+        .topbar {
+            gap: 16px
+        }
+
+        .table-wrap td {
+            white-space: normal
+        }
+
+        details {
+            margin: 20px 0
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold
+        }
+
+        .fadas {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px
+        }
+
+        .fadas button {
+            background: #f4d35e;
+            color: #15231e;
+            padding: 5px 12px
+        }
+
+        .reference-note {
+            background: #f7f6f0;
+            padding: 16px;
+            border-radius: 12px
+        }
+
+        .footer {
+            font-size: .85rem;
+            color: var(--muted);
+            margin-top: 25px
+        }
+
+        .stats {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        a {
+            color: var(--green2)
+        }
+
+        .actions {
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .context {
+            margin-bottom: 10px
+        }
+
+        .example {
+            font-size: .95rem
+        }
+
+        .controls .primary {
+            width: 100%;
+            margin-top: 12px
+        }
+
+        @media(max-width:460px) {
+            .choices {
+                grid-template-columns: 1fr
+            }
+
+            .topbar {
+                align-items: flex-start
+            }
+
+            .topbar .ghost {
+                max-width: 100px
+            }
+
+            .prompt {
+                font-size: 1.5rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div><span class="eyebrow">CLEACHTADH GAEILGE</span>
+            <h1>Treoracha</h1><span>Irish directions practice</span>
+        </div><button id="referenceBtn" class="ghost">Learn & reference</button>
+    </header>
+    <main>
+        <section class="stats" aria-label="Practice progress">
+            <div><span id="score">0 / 0</span><small>correct first time</small></div>
+            <div><span id="streak">0</span><small>current streak</small></div>
+            <div><span id="reviewCount">0</span><small>forms to review</small></div>
+        </section>
+        <div class="workspace">
+            <aside class="controls">
+                <h2>Practice set</h2>
+                <label>Topic<select id="topic">
+                        <option value="all">All directions</option>
+                        <option value="compass">Compass: to / in / from</option>
+                        <option value="relative">Compass: relative to a place</option>
+                        <option value="turns">Facing & turning</option>
+                        <option value="vertical">Up & down</option>
+                        <option value="everyday">Everyday directions</option>
+                    </select></label>
+                <label>Exercise<select id="mode">
+                        <option value="choice">Choose the Irish</option>
+                        <option value="type">Type the Irish</option>
+                        <option value="meaning">Choose the meaning</option>
+                    </select></label>
+                <label class="check"><input id="pictures" type="checkbox" checked> Show diagrams</label><label
+                    class="check"><input id="weakOnly" type="checkbox"> Review missed forms only</label><button
+                    class="primary" id="restart">New practice round</button><button class="text-button"
+                    id="resetBtn">Reset saved progress</button>
+                <p class="tip">Case and punctuation are ignored. Missing fadas are accepted with a reminder. Use Enter
+                    to check or move on.</p>
+                <p id="storage" class="tip">Progress is saved in this browser when available.</p>
+            </aside>
+            <section class="quiz-card" aria-label="Practice question">
+                <div class="question-meta"><span id="badge"></span><span id="counter"></span></div>
+                <div id="diagram" class="diagram"></div>
+                <h2 id="prompt" class="prompt" tabindex="-1"></h2>
+                <p id="context" class="context"></p>
+                <div id="choices" class="choices"></div>
+                <form id="answerForm" hidden><label for="answer">Your Irish answer</label>
+                    <div class="answer-row"><input id="answer" autocomplete="off" autocapitalize="none"
+                            spellcheck="false"><button id="checkAnswer" class="primary">Check</button></div>
+                    <div class="fadas" aria-label="Insert accented letter"></div>
+                </form>
+                <div id="feedback" class="feedback" role="status" hidden></div>
+                <div class="actions"><button id="reveal" class="ghost">Show answer</button><button id="next"
+                        class="primary" hidden>Next question →</button></div>
+            </section>
+        </div>
+        <p class="footer">Works offline. Diagrams are original inline SVG. Standard Irish forms are taught; usage can
+            vary by dialect.</p>
+    </main>
+    <dialog id="referenceDialog">
+        <div class="dialog-head">
+            <h2>Learn the directions</h2><button class="icon-button" id="closeReference"
+                aria-label="Close reference">×</button>
+        </div>
+        <p class="reference-note"><strong>Three different ideas:</strong> where you are going, where something is, and
+            where something comes from. For example: <b lang="ga">suas</b> = upwards; <b lang="ga">thuas</b> = up above;
+            <b lang="ga">anuas</b> = down from above. <b lang="ga">Ó thuaidh</b> means northwards here: do not interpret
+            its <b>ó</b> as “from”.</p>
+        <p>Compass directions are fixed. Left and right depend on your facing direction. In the compass diagrams,
+            English N/E/S/W labels anchor the map; a gold arrow shows your heading and a green arrow shows movement.
+            Dots show locations. In origin exercises the arrow points <em>towards</em> the centre.</p>
+        <div id="referenceContent"></div>
+        <details>
+            <summary>Language notes & sources</summary>
+            <p>Exercises use standard teaching distinctions. In actual speech, directional forms can overlap and vary by
+                dialect. <span lang="ga">Siar</span> can also mean backwards; context determines the meaning. <span
+                    lang="ga">Ar ais</span> means back/return, which need not mean walking backwards. Examples use
+                brackets to group grammatical units.</p>
+            <p>Vocabulary checked against <a href="https://www.teanglann.ie/en/fgb/thoir" target="_blank"
+                    rel="noopener noreferrer">Teanglann: thoir</a>, <a href="https://www.teanglann.ie/en/fgb/thuaidh"
+                    target="_blank" rel="noopener noreferrer">thuaidh</a>, <a
+                    href="https://www.teanglann.ie/en/fgb/aduaidh" target="_blank"
+                    rel="noopener noreferrer">aduaidh</a>, <a href="https://www.teanglann.ie/en/fgb/lastuaidh"
+                    target="_blank" rel="noopener noreferrer">lastuaidh</a> and <a
+                    href="https://grammar.ie/other/compass/" target="_blank" rel="noopener noreferrer">Grammar.ie:
+                    compass directions</a>. These optional links require internet; practice does not.</p>
+        </details>
+    </dialog>
+    <script>
+        'use strict';
+        const compass = [
+            ['north', 'ó thuaidh', 'thuaidh', 'aduaidh', 0], ['north-east', 'soir ó thuaidh', 'thoir thuaidh', 'anoir aduaidh', 45], ['east', 'soir', 'thoir', 'anoir', 90], ['south-east', 'soir ó dheas', 'thoir theas', 'anoir aneas', 135], ['south', 'ó dheas', 'theas', 'aneas', 180], ['south-west', 'siar ó dheas', 'thiar theas', 'aniar aneas', 225], ['west', 'siar', 'thiar', 'aniar', 270], ['north-west', 'siar ó thuaidh', 'thiar thuaidh', 'aniar aduaidh', 315]];
+        const cards = [];
+        function add(topic, en, ga, note, example = '', diagram = null, alts = []) { cards.push({ id: String(cards.length), topic, en, ga, note, example, diagram, alts }); }
+        compass.forEach(([en, to, at, from, angle]) => {
+            add('compass', 'Go ' + en + '.', to, 'Give only the direction: movement towards ' + en + '.', '[Téigh] [' + to + '].', { angle, kind: 'to' });
+            add('compass', 'Located in the ' + en + '.', at, 'Use the location form, not movement or origin.', '[Tá an baile] [' + at + '].', { angle, kind: 'at' });
+            add('compass', 'Coming from the ' + en + '.', from, 'Use the origin form: from ' + en + '.', '[Tháinig sé] [' + from + '].', { angle, kind: 'from' });
+        });
+        [['north', 'lastuaidh', 0], ['south', 'laisteas', 180], ['east', 'lastoir', 90], ['west', 'laistiar', 270]].forEach(([en, ga, angle]) => add('relative', en + ' of the town', ga + ' den bhaile', 'A position relative to a named place. Den = de + an; baile becomes bhaile.', '[Tá an teach] [' + ga + ' [den bhaile]].', { angle, kind: 'at' }, [{ 'north': 'ó thuaidh', 'south': 'ó dheas', 'east': 'soir', 'west': 'siar' }[en] + ' den bhaile']));
+        compass.forEach(([en, to, at, from, angle], i) => {
+            [['left', -2, 'ar chlé'], ['right', 2, 'ar dheis'], ['straight ahead', 0, 'díreach ar aghaidh'], ['around', 4, 'thart']].forEach(([turn, offset, ga]) => { const target = compass[(i + offset + 8) % 8]; add('turns', 'Facing ' + en + ', ' + (turn === 'straight ahead' ? 'continue straight ahead' : 'turn ' + turn) + '. Which compass direction now?', target[1], 'Give the compass direction of travel. Each left/right turn is 90°.', '[Téigh] [' + target[1] + '].', { angle: target[4], facing: angle, kind: 'turn' }); });
+        });
+        [
+            ['Move upwards', 'suas', 'Movement to a higher place.', '[Téigh] [suas].', 'up'], ['Be up above', 'thuas', 'Location at a higher level.', '[Tá sé] [thuas].', 'above'], ['Come down from above', 'anuas', 'Origin above; movement down towards the reference point.', '[Tar] [anuas].', 'fromAbove'], ['Move downwards', 'síos', 'Movement to a lower place.', '[Téigh] [síos].', 'down'], ['Be down below', 'thíos', 'Location at a lower level.', '[Tá sé] [thíos].', 'below'], ['Come up from below', 'aníos', 'Origin below; movement up towards the reference point.', '[Tar] [aníos].', 'fromBelow']
+        ].forEach(([en, ga, note, ex, kind]) => add('vertical', en, ga, note, ex, { kind }));
+        [
+            ['to the left', 'ar chlé', 'Left relative to your own facing direction.', '[Cas] [ar chlé].', 'left'], ['to the right', 'ar dheis', 'Right relative to your own facing direction.', '[Cas] [ar dheis].', 'right'], ['straight ahead', 'díreach ar aghaidh', 'Continue forward without turning.', '[Téigh] [díreach ar aghaidh].', 'ahead'], ['back / return', 'ar ais', 'Return to an earlier place; not necessarily backwards.', '[Tar] [ar ais].'], ['backwards', 'ar gcúl', 'Movement backwards.', '[Siúil] [ar gcúl].'], ['forwards', 'ar aghaidh', 'Movement forward.', '[Siúil] [ar aghaidh].'], ['inwards / into', 'isteach', 'Movement from outside to inside.', '[Tar] [isteach].'], ['inside (location)', 'istigh', 'A position inside.', '[Tá sé] [istigh].'], ['outwards / out', 'amach', 'Movement from inside to outside.', '[Téigh] [amach].'], ['outside (location)', 'amuigh', 'A position outside.', '[Tá sé] [amuigh].'], ['here', 'anseo', 'A location near the speaker.', '[Tá sé] [anseo].'], ['there', 'ansin', 'A location away from the speaker.', '[Tá sé] [ansin].'], ['over there / yonder', 'ansiúd', 'A location farther away.', '[Tá sé] [ansiúd].'], ['homewards', 'abhaile', 'Movement towards home.', '[Téigh] [abhaile].'], ['at home', 'sa bhaile', 'Location at home.', '[Tá sé] [sa bhaile].'], ['towards me', 'i mo threo', 'In my direction.', '[Siúil] [i mo threo].'], ['away from me', 'uaim', 'Movement away from the speaker.', '[Imigh] [uaim].'], ['in front of me', 'os mo chomhair', 'Position in front of the speaker.', '[Tá sé] [os mo chomhair].'], ['behind me', 'taobh thiar díom', 'Position behind the speaker.', '[Tá sé] [taobh thiar díom].'], ['beside me', 'in aice liom', 'Position next to the speaker.', '[Tá sé] [in aice liom].'], ['across the road', 'trasna an bhóthair', 'Movement across the road.', '[Téigh] [trasna [an bhóthair]].'], ['through the door', 'tríd an doras', 'Movement through an opening.', '[Téigh] [tríd [an doras]].'], ['around the house', 'timpeall an tí', 'Movement around the house.', '[Siúil] [timpeall [an tí]].'], ['Turn around.', 'Cas thart.', 'An instruction to change to the opposite facing direction.', '[Cas] [thart].']
+        ].forEach(([en, ga, note, ex, kind]) => add('everyday', en, ga, note, ex, kind ? { kind } : null));
+        const $ = id => document.getElementById(id), labels = { compass: 'Compass forms', relative: 'Relative location', turns: 'Facing & turning', vertical: 'Up & down', everyday: 'Everyday directions' };
+        const key = 'irish-directions-v1'; let saved = { correct: 0, total: 0, streak: 0, missed: [] }; try { const s = JSON.parse(localStorage.getItem(key)); if (s && Number.isFinite(s.total) && Number.isFinite(s.correct) && Array.isArray(s.missed)) saved = s; } catch (e) { $('storage').textContent = 'Progress is available for this visit only.'; }
+        let queue = [], q, answered = false, number = 0;
+        function mix(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { let j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
+        function norm(s) { return s.toLowerCase().normalize('NFC').replace(/[’‘]/g, "'").replace(/[.,!?;:]/g, '').replace(/\s+/g, ' ').trim(); }
+        const bare = s => norm(s).normalize('NFD').replace(/[̀-ͯ]/g, '');
+        function stats() { $('score').textContent = saved.correct + ' / ' + saved.total; $('streak').textContent = saved.streak; $('reviewCount').textContent = saved.missed.length; try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) { $('storage').textContent = 'Progress is available for this visit only.'; } }
+        function pool() { return cards.filter(c => ($('topic').value === 'all' || c.topic === $('topic').value) && (!$('weakOnly').checked || saved.missed.includes(c.id))); }
+        function line(x1, y1, x2, y2, color = '#145c45') { return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="5" marker-end="url(#${color === '#b98900' ? 'gold' : 'arrow'})"/>`; }
+        function diagram(d) {
+            if (!d) return ''; let body = '', caption = ''; const dot = (x, y) => `<circle cx="${x}" cy="${y}" r="9" fill="#145c45"/>`;
+            if (d.angle !== undefined) { body = '<circle cx="140" cy="108" r="77" fill="#f7f6f0" stroke="#d8ddd9"/>';[['N', 140, 18], ['E', 240, 113], ['S', 140, 205], ['W', 39, 113]].forEach(([t, x, y]) => body += `<text x="${x}" y="${y}" text-anchor="middle" fill="#15231e" font-size="16">${t}</text>`); let a = d.angle * Math.PI / 180, x = 140 + 65 * Math.sin(a), y = 108 - 65 * Math.cos(a); body += dot(140, 108); if (d.kind === 'at') { body += dot(x, y); caption = 'Green dot: location relative to the centre.'; } else if (d.kind === 'from') { body += line(x, y, 140 + 13 * Math.sin(a), 108 - 13 * Math.cos(a)); caption = 'Arrow: travel from the outer point towards the centre.'; } else if (d.kind === 'turn') { let f = d.facing * Math.PI / 180; body += line(140, 108, 140 + 65 * Math.sin(f), 108 - 65 * Math.cos(f), '#b98900'); caption = 'Gold arrow: initial facing direction. Work out the new heading.'; } else { body += line(140, 108, x, y); caption = 'Arrow: direction of travel.'; } }
+            else if (['left', 'right', 'ahead'].includes(d.kind)) { body = '<circle cx="140" cy="68" r="12" fill="none" stroke="#15231e" stroke-width="4"/><path d="M140 80V132 M111 100H169 M140 132L119 168 M140 132L161 168" fill="none" stroke="#15231e" stroke-width="4"/>'; body += d.kind === 'left' ? line(104, 107, 45, 107) : d.kind === 'right' ? line(176, 107, 235, 107) : line(190, 155, 190, 50); caption = 'Back view: the person faces away from you. Left/right are their own.'; }
+            else { body = '<path d="M65 108H215" stroke="#aab5af" stroke-width="2" stroke-dasharray="6 5"/>'; let k = d.kind; body += dot(140, 108); if (k === 'above' || k === 'below') body += dot(140, k === 'above' ? 38 : 178); else if (k === 'up') body += line(140, 100, 140, 30); else if (k === 'down') body += line(140, 116, 140, 186); else if (k === 'fromAbove') body += line(140, 30, 140, 92); else body += line(140, 186, 140, 124); caption = k === 'above' || k === 'below' ? 'Outer dot: location. Dashed line: reference level.' : 'Arrow: movement. Dashed line: reference level.'; }
+            return `<svg viewBox="0 0 280 220" role="img" aria-label="${caption}"><defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#145c45"/></marker><marker id="gold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#b98900"/></marker></defs>${body}</svg><p class="context" style="font-size:.8rem;text-align:center">${caption}</p>`;
+        }
+        function start() { queue = mix(pool()); number = 0; next(); }
+        function next() {
+            if (!queue.length) queue = mix(pool()); q = queue.pop(); answered = false; $('feedback').hidden = true; $('next').hidden = true; $('reveal').hidden = !q; $('answerForm').hidden = true; $('choices').replaceChildren(); $('diagram').innerHTML = ''; if (!q) { $('badge').textContent = 'Review'; $('counter').textContent = ''; $('prompt').textContent = 'No missed forms in this set.'; $('context').textContent = 'Choose another topic or turn off “Review missed forms only”.'; return; } number++; $('badge').textContent = labels[q.topic]; $('counter').textContent = 'Question ' + number; const reverse = $('mode').value === 'meaning'; $('prompt').textContent = reverse ? q.ga : q.en; $('prompt').lang = reverse ? 'ga' : 'en'; $('context').textContent = reverse ? 'Choose the meaning in this exercise.' : q.topic === 'turns' ? q.note : 'Give ' + (q.ga.includes(' ') ? 'the Irish phrase' : 'the Irish word') + '. ' + q.note;
+            // No pictures in reverse mode: an arrow could disclose the English answer.
+            $('diagram').innerHTML = $('pictures').checked && !reverse ? diagram(q.diagram) : '';
+            if ($('mode').value === 'type') { $('answerForm').hidden = false; $('answer').value = ''; $('answer').disabled = false; $('checkAnswer').disabled = false; $('answer').focus(); } else { const field = reverse ? 'en' : 'ga', expected = q[field]; let distractors = cards.filter(c => c.topic === q.topic && c[field] !== expected && (!reverse || c.ga !== q.ga) && !q.alts.includes(c.ga)); let options = mix([expected, ...mix([...new Set(distractors.map(c => c[field]))]).slice(0, 3)]); options.forEach(value => { let b = document.createElement('button'); b.textContent = value; b.lang = reverse ? 'en' : 'ga'; b.onclick = () => check(value, b); $('choices').append(b); }); }
+        }
+        function check(value, button = null, reveal = false) { if (answered || !q) return; answered = true; const reverse = $('mode').value === 'meaning', expected = reverse ? q.en : q.ga, accepted = reverse ? [q.en] : [q.ga, ...q.alts]; let exact = accepted.some(a => norm(a) === norm(value)), ok = !reveal && (exact || accepted.some(a => bare(a) === bare(value))); saved.total++; if (ok) { saved.correct++; saved.streak++; saved.missed = saved.missed.filter(id => id !== q.id); } else { saved.streak = 0; if (!saved.missed.includes(q.id)) saved.missed.push(q.id); } stats(); $('feedback').hidden = false; $('feedback').className = 'feedback ' + (ok ? 'good' : 'bad'); $('feedback').replaceChildren(); let title = document.createElement('strong'); title.textContent = reveal ? 'Answer revealed' : ok ? (exact ? 'Correct!' : 'Correct — remember the fada.') : 'Not quite.'; let ans = document.createElement('p'); ans.textContent = q.ga + ' — ' + q.en; let note = document.createElement('p'); note.textContent = q.note; let ex = document.createElement('p'); ex.className = 'example'; ex.lang = 'ga'; ex.textContent = q.example; $('feedback').append(title, ans, note, ex); $('choices').querySelectorAll('button').forEach(b => { b.disabled = true; if (b.textContent === expected) b.classList.add('correct'); else if (b === button && !ok) b.classList.add('wrong'); }); $('answer').disabled = true; $('checkAnswer').disabled = true; $('reveal').hidden = true; $('next').hidden = false; $('next').focus(); }
+        $('answerForm').onsubmit = e => { e.preventDefault(); if ($('answer').value.trim()) check($('answer').value); }; $('next').onclick = next; $('reveal').onclick = () => check('', null, true); $('restart').onclick = start;['topic', 'mode', 'weakOnly'].forEach(id => $(id).onchange = start); $('pictures').onchange = () => { $('diagram').innerHTML = q && $('pictures').checked && $('mode').value !== 'meaning' ? diagram(q.diagram) : ''; }; $('resetBtn').onclick = () => { if (confirm('Reset all saved scores and missed forms?')) { saved = { correct: 0, total: 0, streak: 0, missed: [] }; stats(); start(); } };
+        for (const ch of 'áéíóú') { let b = document.createElement('button'); b.type = 'button'; b.textContent = ch; b.onclick = () => { let a = $('answer'); if (a.disabled) return; let s = a.selectionStart, e = a.selectionEnd; a.setRangeText(ch, s, e, 'end'); a.focus(); }; document.querySelector('.fadas').append(b); }
+        $('referenceBtn').onclick = () => $('referenceDialog').showModal(); $('closeReference').onclick = () => $('referenceDialog').close();
+        let ref = '<h3>Eight compass points</h3><div class="table-wrap"><table><thead><tr><th>Direction</th><th>Going to</th><th>Located in</th><th>Coming from</th></tr></thead><tbody>' + compass.map(c => '<tr>' + c.slice(0, 4).map((s, i) => '<td' + (i ? ' lang="ga"' : '') + '>' + s + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+        for (const group of ['relative', 'vertical', 'everyday']) { ref += '<h3>' + labels[group] + '</h3><div class="table-wrap"><table><thead><tr><th>Meaning</th><th>Irish</th><th>Example / note</th></tr></thead><tbody>' + cards.filter(c => c.topic === group).map(c => `<tr><td>${c.en}</td><td lang="ga">${c.ga}</td><td><span lang="ga">${c.example}</span><br>${c.note}</td></tr>`).join('') + '</tbody></table></div>'; } $('referenceContent').innerHTML = ref; stats(); start();
+    </script>
+</body>
+
+</html>

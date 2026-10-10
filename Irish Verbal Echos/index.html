@@ -1,64 +1,440 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Abair Ar Ais — Irish Verbal Echoes</title><style>
-:root{color-scheme:light;--bg:#f5f3eb;--panel:#fffef9;--panel2:#f3f6ed;--line:#dce1d7;--text:#193d35;--dim:#62716a;--green:#17634b;--lime:#dcf09d;--red:#9a4531;--gold:#526338}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9fcaae;outline-offset:3px}main{width:min(900px,calc(100% - 32px));margin:36px auto 70px}.eyebrow{text-transform:uppercase;letter-spacing:.19em;font-size:.75rem;color:var(--green);font-weight:800}h1{font:700 clamp(2.3rem,6vw,4.3rem)/1.04 Georgia,serif;letter-spacing:-.04em;margin:12px 0}header p{color:var(--dim);max-width:680px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,32px);box-shadow:0 8px 32px #193d3510;margin:20px 0}.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.controls label{color:var(--dim);font-size:.86rem;font-weight:700}.controls select{width:100%;margin-top:7px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text)}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:50px;padding:5px 12px;color:var(--dim);font-size:.86rem}.progress{height:8px;border-radius:9px;background:#edf0e6;overflow:hidden;margin:20px 0}.progress span{display:block;background:var(--green);height:100%;width:0;transition:width .25s}.intent{color:var(--gold);font-size:1rem;font-weight:800;margin:18px 0 0}.question{font:700 clamp(1.65rem,4.2vw,2.65rem)/1.2 Georgia,serif;margin:11px 0 8px;letter-spacing:-.025em}.gloss{color:var(--dim);margin:0 0 20px}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin:20px 0}.choice,.action,.ghost{border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--text);background:var(--panel2);font-weight:700}.choice{min-height:62px;text-align:left}.choice:hover:not(:disabled),.ghost:hover{border-color:var(--green);background:#e8f1e5}.choice:disabled{cursor:default}.choice.correct{border-color:var(--green);background:#dcf09d}.choice.wrong{border-color:var(--red);background:#f8e7de}.action{background:var(--green);border-color:var(--green);color:#fff}.action:hover{background:#12513e}.ghost{background:transparent}.type-row{display:flex;gap:9px;margin:20px 0}.type-row input{min-width:0;flex:1;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff;color:var(--text)}.feedback{border-left:4px solid var(--green);background:#ebf0e1;padding:13px 17px;border-radius:0 12px 12px 0;margin:20px 0}.feedback.bad{border-color:var(--red);background:#f8e7de}.feedback strong{font-size:1.1rem}.feedback p{margin:6px 0 0}.feedback small{color:var(--dim)}.footer-row{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:20px}details{color:var(--dim)}details summary{color:var(--text);cursor:pointer;font-weight:700}details p{margin-bottom:0}.small{font-size:.88rem;color:var(--dim)}a{color:var(--green)}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}@media(max-width:600px){main{margin-top:22px}.controls{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.type-row{flex-direction:column}}
-</style></head><body><main><header><div class="eyebrow">Gaeilge · practice lab</div><h1>Abair Ar Ais</h1><p>Irish answers a yes-or-no question by echoing its verb. Hear or read the question, then give the affirmative or negative reply <em>about yourself</em>. Choose or type the complete reply.</p></header>
-<section class="panel"><div class="controls"><label>Answer mode<select id="mode"><option value="tap">Tap one of four</option><option value="type">Type the reply</option></select></label><label>Practice<select id="focus"><option value="all">All verb forms</option><option value="irregular">Irregular verbs</option><option value="regular">Regular verbs</option></select></label><label>Round length<select id="length"><option value="10">10 prompts</option><option value="20">20 prompts</option><option value="all">Full bank</option></select></label></div><div class="footer-row"><button class="ghost" id="restart">Start a fresh round</button></div><p class="small">The question says <em>tú</em> (“you”); reply as <em>mé</em> (“I”). In the present tense, the “I” ending is often built into the verb. Accents matter in typed mode; punctuation and case do not.</p></section>
-<section class="panel" id="game"><div class="row"><span class="pill" id="counter"></span><span class="pill" id="score"></span><span class="pill" id="streak"></span></div><div class="progress" aria-hidden="true"><span id="bar"></span></div><div class="row"><span class="eyebrow" id="tense"></span><button id="speak" class="ghost" type="button" title="Read question aloud using a system voice">🔊 Hear question</button></div><div class="intent" id="intent"></div><div class="question" lang="ga" id="question"></div><p class="gloss" id="translation"></p><div id="choices" class="choices"></div><form id="typeform" class="type-row" hidden><label for="typed" class="sr">Your Irish reply</label><input id="typed" lang="ga" autocomplete="off" autocapitalize="sentences" spellcheck="false" placeholder="Type your answer in Irish…"><button class="action" type="submit">Check</button></form><div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div><div class="footer-row"><button class="ghost" id="hint" type="button">Show a hint</button><button class="action" id="next" type="button" hidden>Next question →</button></div></section>
-<section class="panel" id="finish" hidden><div class="eyebrow">Round complete</div><h2 id="result"></h2><p id="resultText"></p><div class="footer-row"><button id="retry" class="ghost">Retry missed prompts</button><button id="again" class="action">New round</button></div></section>
-<details class="panel"><summary>How echo answers work</summary><p><strong>An bhfuil tú réidh?</strong> → <strong>Tá / Níl.</strong> For a question addressed to you, <em>Táim / Nílim</em> (“I am / I am not”) is also accepted here. Other verbs follow the question’s tense but may change their stem: <strong>An ndearna tú é?</strong> → <strong>Rinne mé / Ní dhearna mé.</strong> The latter answers mean “I did / I did not.” <em>Rinneadh</em> is an impersonal form (“was done”), so it is not the reply to “Did you do it?”</p><p>Audio uses your browser’s speech synthesis. A Gaeilge voice is used when one is installed; pronunciation can vary by device. All questions and answers work offline without audio.</p></details><p class="small">Form reference: <a href="https://www.focloir.ie/preview/table3.pdf" target="_blank" rel="noopener noreferrer">Foclóir.ie verb tables</a> · <a href="https://daltai.com/grammar/irregular-verbs/" target="_blank" rel="noopener noreferrer">Daltaí irregular verbs</a>. Standard spelling and forms; audio depends on the installed voice.</p></main>
-<script>
-'use strict';
-// [question, English gloss, tense, family, affirmative, negative, explanation]
-const BANK=[
-['An bhfuil tú réidh?','Are you ready?','Present','irregular','Táim','Nílim','The present question uses bhfuil, but an affirmative reply uses tá; for “I”, táim. Its negative is nílim.',['Tá','Níl']],
-['An bhfuil tú anseo?','Are you here?','Present','irregular','Táim','Nílim','An bhfuil becomes táim for “I am”, or nílim for “I am not”.',['Tá','Níl']],
-['An raibh tú sa bhaile inné?','Were you at home yesterday?','Past','irregular','Bhí mé','Ní raibh mé','Past tense of bí: the question has raibh; the affirmative changes to bhí, while the negative keeps raibh after ní.'],
-['An mbeidh tú saor amárach?','Will you be free tomorrow?','Future','irregular','Beidh mé','Ní bheidh mé','The future question has mbeidh; the reply uses beidh, or ní bheidh with lenition.'],
-['An mbíonn tú anseo go minic?','Are you often here?','Habitual present','irregular','Bím','Ní bhím','Bíonn asks about a regular habit. Reply as “I” with bím; lenite it after ní: ní bhím.'],
-['An ndearna tú é?','Did you do it?','Past','irregular','Rinne mé','Ní dhearna mé','The question uses dependent dearna; the affirmative changes to rinne. The negative is ní dhearna.'],
-['An ndéanann tú caife?','Do you make coffee?','Present','irregular','Déanaim','Ní dhéanaim','Reply as “I” using déanaim. After ní, d becomes dh: ní dhéanaim.'],
-['An ndéanfaidh tú é?','Will you do it?','Future','irregular','Déanfaidh mé','Ní dhéanfaidh mé','Future déanfaidh becomes ní dhéanfaidh in the negative.'],
-['An ndeachaigh tú abhaile?','Did you go home?','Past','irregular','Chuaigh mé','Ní dheachaigh mé','The question has dependent deachaigh. Affirmative chuaigh; negative ní dheachaigh.'],
-['An dtéann tú ag siúl?','Do you go walking?','Present','irregular','Téim','Ní théim','For “I go”, use téim; after ní it becomes ní théim.'],
-['An rachaidh tú linn?','Will you go with us?','Future','irregular','Rachaidh mé','Ní rachaidh mé','Both answers use the future stem rachaidh; add ní for the negative.'],
-['An bhfaca tú é?','Did you see it?','Past','irregular','Chonaic mé','Ní fhaca mé','The question has dependent faca; affirmative chonaic, negative ní fhaca.'],
-['An bhfeiceann tú é?','Do you see it?','Present','irregular','Feicim','Ní fheicim','For “I see”, use feicim; the negative lenites f: ní fheicim.'],
-['An bhfeicfidh tú é?','Will you see it?','Future','irregular','Feicfidh mé','Ní fheicfidh mé','The future is feicfidh; lenite f after ní: ní fheicfidh.'],
-['An bhfuair tú an litir?','Did you get the letter?','Past','irregular','Fuair mé','Ní bhfuair mé','The positive uses fuair; its negative is ní bhfuair, retaining the dependent form.'],
-['An bhfaigheann tú post?','Do you get mail?','Present','irregular','Faighim','Ní fhaighim','The present “I” form is faighim; ní lenites it to ní fhaighim.'],
-['An bhfaighidh tú ticéad?','Will you get a ticket?','Future','irregular','Gheobhaidh mé','Ní bhfaighidh mé','Future faigh changes stem: affirmative gheobhaidh, but negative ní bhfaighidh.'],
-['An ndúirt tú é sin?','Did you say that?','Past','irregular','Dúirt mé','Ní dúirt mé','The question eclipses dúirt after an; the short answer has dúirt or ní dúirt.'],
-['An ndeir tú é sin go minic?','Do you say that often?','Present','irregular','Deirim','Ní deirim','For “I say”, use deirim; the negative is ní deirim.'],
-['An ndéarfaidh tú leis?','Will you tell him?','Future','irregular','Déarfaidh mé','Ní déarfaidh mé','Future “I will say” is déarfaidh mé; add ní for the negative.'],
-['Ar tháinig tú inné?','Did you come yesterday?','Past','irregular','Tháinig mé','Níor tháinig mé','This past question uses ar; the negative uses níor with tháinig.'],
-['An dtagann tú ar an Luan?','Do you come on Mondays?','Present','irregular','Tagaim','Ní thagaim','For “I come”, use tagaim; after ní, t becomes th: ní thagaim.'],
-['An dtiocfaidh tú amárach?','Will you come tomorrow?','Future','irregular','Tiocfaidh mé','Ní thiocfaidh mé','The future is tiocfaidh; its negative is ní thiocfaidh.'],
-['Ar ith tú bricfeasta?','Did you eat breakfast?','Past','irregular','D’ith mé','Níor ith mé','Past affirmative before a vowel takes d’; the negative uses níor without d’.'],
-['An itheann tú iasc?','Do you eat fish?','Present','irregular','Ithim','Ní ithim','Reply as “I” with ithim; vowels have no lenition after ní.'],
-['An íosfaidh tú anois?','Will you eat now?','Future','irregular','Íosfaidh mé','Ní íosfaidh mé','Future ith uses íosfaidh. After ní, a vowel does not lenite.'],
-['Ar thug tú an leabhar leat?','Did you bring the book?','Past','irregular','Thug mé','Níor thug mé','The past question uses ar thug; reply thug, or níor thug.'],
-['An dtugann tú cabhair dó?','Do you help him?','Present','irregular','Tugaim','Ní thugaim','For “I give”, use tugaim; after ní it becomes ní thugaim.'],
-['An dtabharfaidh tú an leabhar dom?','Will you give me the book?','Future','irregular','Tabharfaidh mé','Ní thabharfaidh mé','The future is tabharfaidh; lenite after ní.'],
-['Ar ól tú tae?','Did you drink tea?','Past','regular','D’ól mé','Níor ól mé','Past tense before a vowel takes d’ in the positive; níor ól has no d’.'],
-['An ólann tú tae?','Do you drink tea?','Present','regular','Ólaim','Ní ólaim','The first-person present is ólaim; after ní, an initial vowel stays unchanged.'],
-['An ólfaidh tú tae?','Will you drink tea?','Future','regular','Ólfaidh mé','Ní ólfaidh mé','Add ní to negate this future form; an initial vowel stays unchanged.'],
-['Ar léigh tú é?','Did you read it?','Past','regular','Léigh mé','Níor léigh mé','Past questions with regular verbs use ar; negatives use níor.'],
-['An léann tú gach lá?','Do you read every day?','Present','regular','Léim','Ní léim','The first-person present is léim; l does not lenite after ní.'],
-['An léifidh tú an leabhar?','Will you read the book?','Future','regular','Léifidh mé','Ní léifidh mé','The future is léifidh; l remains unchanged after ní.'],
-['Ar cheannaigh tú an ticéad?','Did you buy the ticket?','Past','regular','Cheannaigh mé','Níor cheannaigh mé','The past stem is lenited in both the affirmative and after níor.'],
-['An gceannaíonn tú arán?','Do you buy bread?','Present','regular','Ceannaím','Ní cheannaím','The first-person present is ceannaím; after ní, c becomes ch.'],
-['An gceannóidh tú é?','Will you buy it?','Future','regular','Ceannóidh mé','Ní cheannóidh mé','The future is ceannóidh; lenite c after ní.'],
-['Ar dhún tú an doras?','Did you close the door?','Past','regular','Dhún mé','Níor dhún mé','Past tense uses dhún in the affirmative and after níor.'],
-['An ndúnann tú an doras?','Do you close the door?','Present','regular','Dúnaim','Ní dhúnaim','The first-person present is dúnaim; after ní, d becomes dh.'],
-['An ndúnfaidh tú an doras?','Will you close the door?','Future','regular','Dúnfaidh mé','Ní dhúnfaidh mé','The future is dúnfaidh; lenite d after ní.'],
-['Ar scríobh tú an litir?','Did you write the letter?','Past','regular','Scríobh mé','Níor scríobh mé','Initial sc does not lenite here; past negative adds níor.'],
-['An scríobhann tú gach lá?','Do you write every day?','Present','regular','Scríobhaim','Ní scríobhaim','The first-person present is scríobhaim; initial sc does not lenite after ní.'],
-['An scríobhfaidh tú amárach?','Will you write tomorrow?','Future','regular','Scríobhfaidh mé','Ní scríobhfaidh mé','Future scríobhfaidh keeps initial sc after ní.']
-].map(([q,en,tense,family,yes,no,why,short=[]],id)=>({q,en,tense,family,yes,no,why,short,id}));
-const $=s=>document.querySelector(s), mode=$('#mode'),focus=$('#focus'),length=$('#length');let deck=[],index=0,correct=0,streak=0,missed=[],current=null,answered=false,options=[];const shuffle=a=>{let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};const norm=s=>s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/[‘’]/g,"'").replace(/[.!?]+$/g,'').replace(/\s+/g,' ');const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function fresh(){const filtered=BANK.filter(x=>focus.value==='all'||x.family===focus.value);let items=shuffle(filtered.flatMap(item=>[{item,pol:'yes'},{item,pol:'no'}]));let target=length.value==='all'?items.length:Number(length.value);deck=items.slice(0,target);index=correct=streak=0;missed=[];$('#finish').hidden=true;$('#game').hidden=false;render()}
-function render(){if(index>=deck.length){done();return}current=deck[index];answered=false;$('#typeform').querySelector('button').disabled=false;const {item,pol}=current;$('#counter').textContent=`${index+1} / ${deck.length}`;$('#score').textContent=`${correct} correct`;$('#streak').textContent=`${streak} streak`;$('#bar').style.width=`${index/deck.length*100}%`;$('#tense').textContent=`${item.tense} · ${item.family}`;$('#intent').textContent=pol==='yes'?'Reply YES — as yourself':'Reply NO — as yourself';$('#question').textContent=item.q;$('#translation').textContent=item.en;$('#feedback').hidden=true;$('#hint').hidden=false;$('#next').hidden=true;$('#typeform').hidden=mode.value!=='type';$('#choices').hidden=mode.value!=='tap';$('#typed').value='';if(mode.value==='type'){$('#typed').focus()}else{const answer=item[pol];const distractorSet=[item[pol==='yes'?'no':'yes'],...shuffle(BANK.filter(x=>x.id!==item.id).map(x=>x[pol]))].filter((s,i,a)=>s!==answer&&a.indexOf(s)===i);options=shuffle([answer,...distractorSet.slice(0,3)]);$('#choices').replaceChildren(...options.map(v=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=v;b.addEventListener('click',()=>check(v,b));return b}))}}
-function check(value,button){if(answered)return;answered=true;const {item,pol}=current,expected=item[pol],accepted=[expected,...(item.short.length?[item.short[pol==='yes'?0:1]]:[])];const ok=accepted.some(a=>norm(a)===norm(value));if(ok){correct++;streak++}else{streak=0;missed.push(current)}$('#score').textContent=`${correct} correct`;$('#streak').textContent=`${streak} streak`;const f=$('#feedback');f.hidden=false;f.classList.toggle('bad',!ok);f.innerHTML=`<strong>${ok?'Correct!':'Not quite.'}</strong><p>Reply: <b lang="ga">${esc(expected)}</b>${item.short.length?` <small>(also ${esc(item.short[pol==='yes'?0:1])})</small>`:''}</p><p>${esc(item.why)}</p>`;$('#hint').hidden=true;$('#next').hidden=false;if(button)button.classList.add(ok?'correct':'wrong');document.querySelectorAll('.choice').forEach(b=>{b.disabled=true;if(b.textContent===expected)b.classList.add('correct')});$('#typeform').querySelector('button').disabled=true;$('#bar').style.width=`${(index+1)/deck.length*100}%`;$('#next').focus()}
-function done(){$('#game').hidden=true;$('#finish').hidden=false;$('#result').textContent=`${correct} / ${deck.length} correct`;$('#resultText').textContent=missed.length?`${missed.length} prompt${missed.length===1?'':'s'} to practise again. Each has a short explanation after your reply.`:'Excellent — you answered every prompt correctly.';$('#retry').hidden=!missed.length}
-$('#typeform').addEventListener('submit',e=>{e.preventDefault();if(!answered&&$('#typed').value.trim())check($('#typed').value)});$('#next').addEventListener('click',()=>{index++;$('#typeform').querySelector('button').disabled=false;render()});$('#hint').addEventListener('click',()=>{let t=current.item[current.pol];let f=$('#feedback');f.hidden=false;f.classList.remove('bad');f.innerHTML=`<strong>Hint</strong><p>Starts with <b lang="ga">${esc(t.split(' ')[0].slice(0,Math.max(2,Math.ceil(t.split(' ')[0].length/2))))}…</b> · ${esc(current.item.tense)} · answer as “I”.</p>`});$('#restart').addEventListener('click',fresh);$('#again').addEventListener('click',fresh);$('#retry').addEventListener('click',()=>{deck=shuffle(missed);index=correct=streak=0;missed=[];$('#finish').hidden=true;$('#game').hidden=false;render()});[mode,focus,length].forEach(el=>el.addEventListener('change',fresh));$('#speak').addEventListener('click',()=>{if(!('speechSynthesis'in window)){alert('Speech synthesis is not available in this browser.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(current.item.q);u.lang='ga-IE';u.rate=.85;const voices=speechSynthesis.getVoices();u.voice=voices.find(v=>v.lang.toLowerCase()==='ga-ie')||voices.find(v=>v.lang.toLowerCase().startsWith('ga'))||null;speechSynthesis.speak(u)});document.addEventListener('keydown',e=>{if(e.target.matches('input,select')||$('#game').hidden)return;if(e.key==='Enter'&&answered){e.preventDefault();$('#next').click()}else if(mode.value==='tap'&&!answered&&/^[1-4]$/.test(e.key)){document.querySelectorAll('.choice')[Number(e.key)-1]?.click()}else if(e.key.toLowerCase()==='p'){$('#speak').click()}});fresh();
-</script></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Abair Ar Ais — Irish Verbal Echoes</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f5f3eb;
+            --panel: #fffef9;
+            --panel2: #f3f6ed;
+            --line: #dce1d7;
+            --text: #193d35;
+            --dim: #62716a;
+            --green: #17634b;
+            --lime: #dcf09d;
+            --red: #9a4531;
+            --gold: #526338
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, sans-serif
+        }
+
+        button,
+        input,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #9fcaae;
+            outline-offset: 3px
+        }
+
+        main {
+            width: min(900px, calc(100% - 32px));
+            margin: 36px auto 70px
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: .19em;
+            font-size: .75rem;
+            color: var(--green);
+            font-weight: 800
+        }
+
+        h1 {
+            font: 700 clamp(2.3rem, 6vw, 4.3rem)/1.04 Georgia, serif;
+            letter-spacing: -.04em;
+            margin: 12px 0
+        }
+
+        header p {
+            color: var(--dim);
+            max-width: 680px
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: clamp(18px, 4vw, 32px);
+            box-shadow: 0 8px 32px #193d3510;
+            margin: 20px 0
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px
+        }
+
+        .controls label {
+            color: var(--dim);
+            font-size: .86rem;
+            font-weight: 700
+        }
+
+        .controls select {
+            width: 100%;
+            margin-top: 7px;
+            background: var(--panel2);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px;
+            color: var(--text)
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .pill {
+            border: 1px solid var(--line);
+            border-radius: 50px;
+            padding: 5px 12px;
+            color: var(--dim);
+            font-size: .86rem
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 9px;
+            background: #edf0e6;
+            overflow: hidden;
+            margin: 20px 0
+        }
+
+        .progress span {
+            display: block;
+            background: var(--green);
+            height: 100%;
+            width: 0;
+            transition: width .25s
+        }
+
+        .intent {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 18px 0 0
+        }
+
+        .question {
+            font: 700 clamp(1.65rem, 4.2vw, 2.65rem)/1.2 Georgia, serif;
+            margin: 11px 0 8px;
+            letter-spacing: -.025em
+        }
+
+        .gloss {
+            color: var(--dim);
+            margin: 0 0 20px
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px;
+            margin: 20px 0
+        }
+
+        .choice,
+        .action,
+        .ghost {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 13px 15px;
+            color: var(--text);
+            background: var(--panel2);
+            font-weight: 700
+        }
+
+        .choice {
+            min-height: 62px;
+            text-align: left
+        }
+
+        .choice:hover:not(:disabled),
+        .ghost:hover {
+            border-color: var(--green);
+            background: #e8f1e5
+        }
+
+        .choice:disabled {
+            cursor: default
+        }
+
+        .choice.correct {
+            border-color: var(--green);
+            background: #dcf09d
+        }
+
+        .choice.wrong {
+            border-color: var(--red);
+            background: #f8e7de
+        }
+
+        .action {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff
+        }
+
+        .action:hover {
+            background: #12513e
+        }
+
+        .ghost {
+            background: transparent
+        }
+
+        .type-row {
+            display: flex;
+            gap: 9px;
+            margin: 20px 0
+        }
+
+        .type-row input {
+            min-width: 0;
+            flex: 1;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 12px;
+            background: #fff;
+            color: var(--text)
+        }
+
+        .feedback {
+            border-left: 4px solid var(--green);
+            background: #ebf0e1;
+            padding: 13px 17px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0
+        }
+
+        .feedback.bad {
+            border-color: var(--red);
+            background: #f8e7de
+        }
+
+        .feedback strong {
+            font-size: 1.1rem
+        }
+
+        .feedback p {
+            margin: 6px 0 0
+        }
+
+        .feedback small {
+            color: var(--dim)
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 20px
+        }
+
+        details {
+            color: var(--dim)
+        }
+
+        details summary {
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        details p {
+            margin-bottom: 0
+        }
+
+        .small {
+            font-size: .88rem;
+            color: var(--dim)
+        }
+
+        a {
+            color: var(--green)
+        }
+
+        .sr {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0)
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        @media(max-width:600px) {
+            main {
+                margin-top: 22px
+            }
+
+            .controls {
+                grid-template-columns: 1fr
+            }
+
+            .choices {
+                grid-template-columns: 1fr
+            }
+
+            .type-row {
+                flex-direction: column
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <div class="eyebrow">Gaeilge · practice lab</div>
+            <h1>Abair Ar Ais</h1>
+            <p>Irish answers a yes-or-no question by echoing its verb. Hear or read the question, then give the
+                affirmative or negative reply <em>about yourself</em>. Choose or type the complete reply.</p>
+        </header>
+        <section class="panel">
+            <div class="controls"><label>Answer mode<select id="mode">
+                        <option value="tap">Tap one of four</option>
+                        <option value="type">Type the reply</option>
+                    </select></label><label>Practice<select id="focus">
+                        <option value="all">All verb forms</option>
+                        <option value="irregular">Irregular verbs</option>
+                        <option value="regular">Regular verbs</option>
+                    </select></label><label>Round length<select id="length">
+                        <option value="10">10 prompts</option>
+                        <option value="20">20 prompts</option>
+                        <option value="all">Full bank</option>
+                    </select></label></div>
+            <div class="footer-row"><button class="ghost" id="restart">Start a fresh round</button></div>
+            <p class="small">The question says <em>tú</em> (“you”); reply as <em>mé</em> (“I”). In the present tense,
+                the “I” ending is often built into the verb. Accents matter in typed mode; punctuation and case do not.
+            </p>
+        </section>
+        <section class="panel" id="game">
+            <div class="row"><span class="pill" id="counter"></span><span class="pill" id="score"></span><span
+                    class="pill" id="streak"></span></div>
+            <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+            <div class="row"><span class="eyebrow" id="tense"></span><button id="speak" class="ghost" type="button"
+                    title="Read question aloud using a system voice">🔊 Hear question</button></div>
+            <div class="intent" id="intent"></div>
+            <div class="question" lang="ga" id="question"></div>
+            <p class="gloss" id="translation"></p>
+            <div id="choices" class="choices"></div>
+            <form id="typeform" class="type-row" hidden><label for="typed" class="sr">Your Irish reply</label><input
+                    id="typed" lang="ga" autocomplete="off" autocapitalize="sentences" spellcheck="false"
+                    placeholder="Type your answer in Irish…"><button class="action" type="submit">Check</button></form>
+            <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+            <div class="footer-row"><button class="ghost" id="hint" type="button">Show a hint</button><button
+                    class="action" id="next" type="button" hidden>Next question →</button></div>
+        </section>
+        <section class="panel" id="finish" hidden>
+            <div class="eyebrow">Round complete</div>
+            <h2 id="result"></h2>
+            <p id="resultText"></p>
+            <div class="footer-row"><button id="retry" class="ghost">Retry missed prompts</button><button id="again"
+                    class="action">New round</button></div>
+        </section>
+        <details class="panel">
+            <summary>How echo answers work</summary>
+            <p><strong>An bhfuil tú réidh?</strong> → <strong>Tá / Níl.</strong> For a question addressed to you,
+                <em>Táim / Nílim</em> (“I am / I am not”) is also accepted here. Other verbs follow the question’s tense
+                but may change their stem: <strong>An ndearna tú é?</strong> → <strong>Rinne mé / Ní dhearna
+                    mé.</strong> The latter answers mean “I did / I did not.” <em>Rinneadh</em> is an impersonal form
+                (“was done”), so it is not the reply to “Did you do it?”</p>
+            <p>Audio uses your browser’s speech synthesis. A Gaeilge voice is used when one is installed; pronunciation
+                can vary by device. All questions and answers work offline without audio.</p>
+        </details>
+        <p class="small">Form reference: <a href="https://www.focloir.ie/preview/table3.pdf" target="_blank"
+                rel="noopener noreferrer">Foclóir.ie verb tables</a> · <a
+                href="https://daltai.com/grammar/irregular-verbs/" target="_blank" rel="noopener noreferrer">Daltaí
+                irregular verbs</a>. Standard spelling and forms; audio depends on the installed voice.</p>
+    </main>
+    <script>
+        'use strict';
+        // [question, English gloss, tense, family, affirmative, negative, explanation]
+        const BANK = [
+            ['An bhfuil tú réidh?', 'Are you ready?', 'Present', 'irregular', 'Táim', 'Nílim', 'The present question uses bhfuil, but an affirmative reply uses tá; for “I”, táim. Its negative is nílim.', ['Tá', 'Níl']],
+            ['An bhfuil tú anseo?', 'Are you here?', 'Present', 'irregular', 'Táim', 'Nílim', 'An bhfuil becomes táim for “I am”, or nílim for “I am not”.', ['Tá', 'Níl']],
+            ['An raibh tú sa bhaile inné?', 'Were you at home yesterday?', 'Past', 'irregular', 'Bhí mé', 'Ní raibh mé', 'Past tense of bí: the question has raibh; the affirmative changes to bhí, while the negative keeps raibh after ní.'],
+            ['An mbeidh tú saor amárach?', 'Will you be free tomorrow?', 'Future', 'irregular', 'Beidh mé', 'Ní bheidh mé', 'The future question has mbeidh; the reply uses beidh, or ní bheidh with lenition.'],
+            ['An mbíonn tú anseo go minic?', 'Are you often here?', 'Habitual present', 'irregular', 'Bím', 'Ní bhím', 'Bíonn asks about a regular habit. Reply as “I” with bím; lenite it after ní: ní bhím.'],
+            ['An ndearna tú é?', 'Did you do it?', 'Past', 'irregular', 'Rinne mé', 'Ní dhearna mé', 'The question uses dependent dearna; the affirmative changes to rinne. The negative is ní dhearna.'],
+            ['An ndéanann tú caife?', 'Do you make coffee?', 'Present', 'irregular', 'Déanaim', 'Ní dhéanaim', 'Reply as “I” using déanaim. After ní, d becomes dh: ní dhéanaim.'],
+            ['An ndéanfaidh tú é?', 'Will you do it?', 'Future', 'irregular', 'Déanfaidh mé', 'Ní dhéanfaidh mé', 'Future déanfaidh becomes ní dhéanfaidh in the negative.'],
+            ['An ndeachaigh tú abhaile?', 'Did you go home?', 'Past', 'irregular', 'Chuaigh mé', 'Ní dheachaigh mé', 'The question has dependent deachaigh. Affirmative chuaigh; negative ní dheachaigh.'],
+            ['An dtéann tú ag siúl?', 'Do you go walking?', 'Present', 'irregular', 'Téim', 'Ní théim', 'For “I go”, use téim; after ní it becomes ní théim.'],
+            ['An rachaidh tú linn?', 'Will you go with us?', 'Future', 'irregular', 'Rachaidh mé', 'Ní rachaidh mé', 'Both answers use the future stem rachaidh; add ní for the negative.'],
+            ['An bhfaca tú é?', 'Did you see it?', 'Past', 'irregular', 'Chonaic mé', 'Ní fhaca mé', 'The question has dependent faca; affirmative chonaic, negative ní fhaca.'],
+            ['An bhfeiceann tú é?', 'Do you see it?', 'Present', 'irregular', 'Feicim', 'Ní fheicim', 'For “I see”, use feicim; the negative lenites f: ní fheicim.'],
+            ['An bhfeicfidh tú é?', 'Will you see it?', 'Future', 'irregular', 'Feicfidh mé', 'Ní fheicfidh mé', 'The future is feicfidh; lenite f after ní: ní fheicfidh.'],
+            ['An bhfuair tú an litir?', 'Did you get the letter?', 'Past', 'irregular', 'Fuair mé', 'Ní bhfuair mé', 'The positive uses fuair; its negative is ní bhfuair, retaining the dependent form.'],
+            ['An bhfaigheann tú post?', 'Do you get mail?', 'Present', 'irregular', 'Faighim', 'Ní fhaighim', 'The present “I” form is faighim; ní lenites it to ní fhaighim.'],
+            ['An bhfaighidh tú ticéad?', 'Will you get a ticket?', 'Future', 'irregular', 'Gheobhaidh mé', 'Ní bhfaighidh mé', 'Future faigh changes stem: affirmative gheobhaidh, but negative ní bhfaighidh.'],
+            ['An ndúirt tú é sin?', 'Did you say that?', 'Past', 'irregular', 'Dúirt mé', 'Ní dúirt mé', 'The question eclipses dúirt after an; the short answer has dúirt or ní dúirt.'],
+            ['An ndeir tú é sin go minic?', 'Do you say that often?', 'Present', 'irregular', 'Deirim', 'Ní deirim', 'For “I say”, use deirim; the negative is ní deirim.'],
+            ['An ndéarfaidh tú leis?', 'Will you tell him?', 'Future', 'irregular', 'Déarfaidh mé', 'Ní déarfaidh mé', 'Future “I will say” is déarfaidh mé; add ní for the negative.'],
+            ['Ar tháinig tú inné?', 'Did you come yesterday?', 'Past', 'irregular', 'Tháinig mé', 'Níor tháinig mé', 'This past question uses ar; the negative uses níor with tháinig.'],
+            ['An dtagann tú ar an Luan?', 'Do you come on Mondays?', 'Present', 'irregular', 'Tagaim', 'Ní thagaim', 'For “I come”, use tagaim; after ní, t becomes th: ní thagaim.'],
+            ['An dtiocfaidh tú amárach?', 'Will you come tomorrow?', 'Future', 'irregular', 'Tiocfaidh mé', 'Ní thiocfaidh mé', 'The future is tiocfaidh; its negative is ní thiocfaidh.'],
+            ['Ar ith tú bricfeasta?', 'Did you eat breakfast?', 'Past', 'irregular', 'D’ith mé', 'Níor ith mé', 'Past affirmative before a vowel takes d’; the negative uses níor without d’.'],
+            ['An itheann tú iasc?', 'Do you eat fish?', 'Present', 'irregular', 'Ithim', 'Ní ithim', 'Reply as “I” with ithim; vowels have no lenition after ní.'],
+            ['An íosfaidh tú anois?', 'Will you eat now?', 'Future', 'irregular', 'Íosfaidh mé', 'Ní íosfaidh mé', 'Future ith uses íosfaidh. After ní, a vowel does not lenite.'],
+            ['Ar thug tú an leabhar leat?', 'Did you bring the book?', 'Past', 'irregular', 'Thug mé', 'Níor thug mé', 'The past question uses ar thug; reply thug, or níor thug.'],
+            ['An dtugann tú cabhair dó?', 'Do you help him?', 'Present', 'irregular', 'Tugaim', 'Ní thugaim', 'For “I give”, use tugaim; after ní it becomes ní thugaim.'],
+            ['An dtabharfaidh tú an leabhar dom?', 'Will you give me the book?', 'Future', 'irregular', 'Tabharfaidh mé', 'Ní thabharfaidh mé', 'The future is tabharfaidh; lenite after ní.'],
+            ['Ar ól tú tae?', 'Did you drink tea?', 'Past', 'regular', 'D’ól mé', 'Níor ól mé', 'Past tense before a vowel takes d’ in the positive; níor ól has no d’.'],
+            ['An ólann tú tae?', 'Do you drink tea?', 'Present', 'regular', 'Ólaim', 'Ní ólaim', 'The first-person present is ólaim; after ní, an initial vowel stays unchanged.'],
+            ['An ólfaidh tú tae?', 'Will you drink tea?', 'Future', 'regular', 'Ólfaidh mé', 'Ní ólfaidh mé', 'Add ní to negate this future form; an initial vowel stays unchanged.'],
+            ['Ar léigh tú é?', 'Did you read it?', 'Past', 'regular', 'Léigh mé', 'Níor léigh mé', 'Past questions with regular verbs use ar; negatives use níor.'],
+            ['An léann tú gach lá?', 'Do you read every day?', 'Present', 'regular', 'Léim', 'Ní léim', 'The first-person present is léim; l does not lenite after ní.'],
+            ['An léifidh tú an leabhar?', 'Will you read the book?', 'Future', 'regular', 'Léifidh mé', 'Ní léifidh mé', 'The future is léifidh; l remains unchanged after ní.'],
+            ['Ar cheannaigh tú an ticéad?', 'Did you buy the ticket?', 'Past', 'regular', 'Cheannaigh mé', 'Níor cheannaigh mé', 'The past stem is lenited in both the affirmative and after níor.'],
+            ['An gceannaíonn tú arán?', 'Do you buy bread?', 'Present', 'regular', 'Ceannaím', 'Ní cheannaím', 'The first-person present is ceannaím; after ní, c becomes ch.'],
+            ['An gceannóidh tú é?', 'Will you buy it?', 'Future', 'regular', 'Ceannóidh mé', 'Ní cheannóidh mé', 'The future is ceannóidh; lenite c after ní.'],
+            ['Ar dhún tú an doras?', 'Did you close the door?', 'Past', 'regular', 'Dhún mé', 'Níor dhún mé', 'Past tense uses dhún in the affirmative and after níor.'],
+            ['An ndúnann tú an doras?', 'Do you close the door?', 'Present', 'regular', 'Dúnaim', 'Ní dhúnaim', 'The first-person present is dúnaim; after ní, d becomes dh.'],
+            ['An ndúnfaidh tú an doras?', 'Will you close the door?', 'Future', 'regular', 'Dúnfaidh mé', 'Ní dhúnfaidh mé', 'The future is dúnfaidh; lenite d after ní.'],
+            ['Ar scríobh tú an litir?', 'Did you write the letter?', 'Past', 'regular', 'Scríobh mé', 'Níor scríobh mé', 'Initial sc does not lenite here; past negative adds níor.'],
+            ['An scríobhann tú gach lá?', 'Do you write every day?', 'Present', 'regular', 'Scríobhaim', 'Ní scríobhaim', 'The first-person present is scríobhaim; initial sc does not lenite after ní.'],
+            ['An scríobhfaidh tú amárach?', 'Will you write tomorrow?', 'Future', 'regular', 'Scríobhfaidh mé', 'Ní scríobhfaidh mé', 'Future scríobhfaidh keeps initial sc after ní.']
+        ].map(([q, en, tense, family, yes, no, why, short = []], id) => ({ q, en, tense, family, yes, no, why, short, id }));
+        const $ = s => document.querySelector(s), mode = $('#mode'), focus = $('#focus'), length = $('#length'); let deck = [], index = 0, correct = 0, streak = 0, missed = [], current = null, answered = false, options = []; const shuffle = a => { let b = [...a]; for (let i = b.length - 1; i > 0; i--) { let j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]] } return b }; const norm = s => s.normalize('NFC').trim().toLocaleLowerCase('ga').replace(/[‘’]/g, "'").replace(/[.!?]+$/g, '').replace(/\s+/g, ' '); const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        function fresh() { const filtered = BANK.filter(x => focus.value === 'all' || x.family === focus.value); let items = shuffle(filtered.flatMap(item => [{ item, pol: 'yes' }, { item, pol: 'no' }])); let target = length.value === 'all' ? items.length : Number(length.value); deck = items.slice(0, target); index = correct = streak = 0; missed = []; $('#finish').hidden = true; $('#game').hidden = false; render() }
+        function render() { if (index >= deck.length) { done(); return } current = deck[index]; answered = false; $('#typeform').querySelector('button').disabled = false; const { item, pol } = current; $('#counter').textContent = `${index + 1} / ${deck.length}`; $('#score').textContent = `${correct} correct`; $('#streak').textContent = `${streak} streak`; $('#bar').style.width = `${index / deck.length * 100}%`; $('#tense').textContent = `${item.tense} · ${item.family}`; $('#intent').textContent = pol === 'yes' ? 'Reply YES — as yourself' : 'Reply NO — as yourself'; $('#question').textContent = item.q; $('#translation').textContent = item.en; $('#feedback').hidden = true; $('#hint').hidden = false; $('#next').hidden = true; $('#typeform').hidden = mode.value !== 'type'; $('#choices').hidden = mode.value !== 'tap'; $('#typed').value = ''; if (mode.value === 'type') { $('#typed').focus() } else { const answer = item[pol]; const distractorSet = [item[pol === 'yes' ? 'no' : 'yes'], ...shuffle(BANK.filter(x => x.id !== item.id).map(x => x[pol]))].filter((s, i, a) => s !== answer && a.indexOf(s) === i); options = shuffle([answer, ...distractorSet.slice(0, 3)]); $('#choices').replaceChildren(...options.map(v => { const b = document.createElement('button'); b.type = 'button'; b.className = 'choice'; b.textContent = v; b.addEventListener('click', () => check(v, b)); return b })) } }
+        function check(value, button) { if (answered) return; answered = true; const { item, pol } = current, expected = item[pol], accepted = [expected, ...(item.short.length ? [item.short[pol === 'yes' ? 0 : 1]] : [])]; const ok = accepted.some(a => norm(a) === norm(value)); if (ok) { correct++; streak++ } else { streak = 0; missed.push(current) } $('#score').textContent = `${correct} correct`; $('#streak').textContent = `${streak} streak`; const f = $('#feedback'); f.hidden = false; f.classList.toggle('bad', !ok); f.innerHTML = `<strong>${ok ? 'Correct!' : 'Not quite.'}</strong><p>Reply: <b lang="ga">${esc(expected)}</b>${item.short.length ? ` <small>(also ${esc(item.short[pol === 'yes' ? 0 : 1])})</small>` : ''}</p><p>${esc(item.why)}</p>`; $('#hint').hidden = true; $('#next').hidden = false; if (button) button.classList.add(ok ? 'correct' : 'wrong'); document.querySelectorAll('.choice').forEach(b => { b.disabled = true; if (b.textContent === expected) b.classList.add('correct') }); $('#typeform').querySelector('button').disabled = true; $('#bar').style.width = `${(index + 1) / deck.length * 100}%`; $('#next').focus() }
+        function done() { $('#game').hidden = true; $('#finish').hidden = false; $('#result').textContent = `${correct} / ${deck.length} correct`; $('#resultText').textContent = missed.length ? `${missed.length} prompt${missed.length === 1 ? '' : 's'} to practise again. Each has a short explanation after your reply.` : 'Excellent — you answered every prompt correctly.'; $('#retry').hidden = !missed.length }
+        $('#typeform').addEventListener('submit', e => { e.preventDefault(); if (!answered && $('#typed').value.trim()) check($('#typed').value) }); $('#next').addEventListener('click', () => { index++; $('#typeform').querySelector('button').disabled = false; render() }); $('#hint').addEventListener('click', () => { let t = current.item[current.pol]; let f = $('#feedback'); f.hidden = false; f.classList.remove('bad'); f.innerHTML = `<strong>Hint</strong><p>Starts with <b lang="ga">${esc(t.split(' ')[0].slice(0, Math.max(2, Math.ceil(t.split(' ')[0].length / 2))))}…</b> · ${esc(current.item.tense)} · answer as “I”.</p>` }); $('#restart').addEventListener('click', fresh); $('#again').addEventListener('click', fresh); $('#retry').addEventListener('click', () => { deck = shuffle(missed); index = correct = streak = 0; missed = []; $('#finish').hidden = true; $('#game').hidden = false; render() });[mode, focus, length].forEach(el => el.addEventListener('change', fresh)); $('#speak').addEventListener('click', () => { if (!('speechSynthesis' in window)) { alert('Speech synthesis is not available in this browser.'); return } speechSynthesis.cancel(); let u = new SpeechSynthesisUtterance(current.item.q); u.lang = 'ga-IE'; u.rate = .85; const voices = speechSynthesis.getVoices(); u.voice = voices.find(v => v.lang.toLowerCase() === 'ga-ie') || voices.find(v => v.lang.toLowerCase().startsWith('ga')) || null; speechSynthesis.speak(u) }); document.addEventListener('keydown', e => { if (e.target.matches('input,select') || $('#game').hidden) return; if (e.key === 'Enter' && answered) { e.preventDefault(); $('#next').click() } else if (mode.value === 'tap' && !answered && /^[1-4]$/.test(e.key)) { document.querySelectorAll('.choice')[Number(e.key) - 1]?.click() } else if (e.key.toLowerCase() === 'p') { $('#speak').click() } }); fresh();
+    </script>
+</body>
+
+</html>

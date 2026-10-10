@@ -1,16 +1,22 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Practise the core Irish prepositional pronouns with examples, pronunciation and adaptive review.">
+  <meta name="description"
+    content="Practise the core Irish prepositional pronouns with examples, pronunciation and adaptive review.">
   <title>Réamhfhocail — Irish Prepositional Pronouns</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3d2e'/%3E%3Cpath d='M19 45V18h13c9 0 14 4 14 12 0 6-3 10-9 11l10 4H36l-9-7v7zm8-14h5c4 0 6-1 6-4s-2-4-6-4h-5z' fill='%23f4d35e'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b3d2e'/%3E%3Cpath d='M19 45V18h13c9 0 14 4 14 12 0 6-3 10-9 11l10 4H36l-9-7v7zm8-14h5c4 0 6-1 6-4s-2-4-6-4h-5z' fill='%23f4d35e'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <header class="topbar">
-    <div><span class="eyebrow">CLEACHTADH GAEILGE</span><h1>Réamhfhocail</h1></div>
+    <div><span class="eyebrow">CLEACHTADH GAEILGE</span>
+      <h1>Réamhfhocail</h1>
+    </div>
     <button id="referenceBtn" class="ghost">Reference table</button>
   </header>
 
@@ -25,8 +31,15 @@
     <section class="workspace">
       <aside class="controls">
         <h2>Practice set</h2>
-        <label>Preposition<select id="prepFilter"><option value="all">All 14 prepositions</option></select></label>
-        <label>Question type<select id="mode"><option value="mixed">Mixed practice</option><option value="form">English → Irish form</option><option value="sentence">Complete the sentence</option><option value="meaning">Irish → English meaning</option></select></label>
+        <label>Preposition<select id="prepFilter">
+            <option value="all">All 14 prepositions</option>
+          </select></label>
+        <label>Question type<select id="mode">
+            <option value="mixed">Mixed practice</option>
+            <option value="form">English → Irish form</option>
+            <option value="sentence">Complete the sentence</option>
+            <option value="meaning">Irish → English meaning</option>
+          </select></label>
         <label class="check"><input id="weakOnly" type="checkbox"> Focus on forms I miss</label>
         <button id="resetBtn" class="text-button">Reset saved progress</button>
         <p class="tip"><strong>Tip:</strong> fada marks matter, but an answer without them is accepted and flagged.</p>
@@ -38,16 +51,22 @@
         <p id="context" class="context"></p>
         <form id="answerForm">
           <label class="sr-only" for="answer">Your answer</label>
-          <div class="answer-row"><input id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type in Irish…"><button type="submit" class="primary">Check</button></div>
+          <div class="answer-row"><input id="answer" autocomplete="off" autocapitalize="none" spellcheck="false"
+              placeholder="Type in Irish…"><button type="submit" class="primary">Check</button></div>
         </form>
         <div id="feedback" class="feedback" hidden></div>
-        <div class="actions"><button id="hintBtn" class="ghost">Show hint</button><button id="nextBtn" class="primary" hidden>Next question</button></div>
+        <div class="actions"><button id="hintBtn" class="ghost">Show hint</button><button id="nextBtn" class="primary"
+            hidden>Next question</button></div>
       </section>
     </section>
   </main>
 
   <dialog id="referenceDialog">
-    <div class="dialog-head"><div><span class="eyebrow">14 CORE SETS</span><h2>Reference table</h2></div><button id="closeReference" class="icon-button" aria-label="Close">×</button></div>
+    <div class="dialog-head">
+      <div><span class="eyebrow">14 CORE SETS</span>
+        <h2>Reference table</h2>
+      </div><button id="closeReference" class="icon-button" aria-label="Close">×</button>
+    </div>
     <p>Select a row to see its example and pronunciation.</p>
     <div id="referenceContent"></div>
   </dialog>
@@ -55,4 +74,5 @@
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>

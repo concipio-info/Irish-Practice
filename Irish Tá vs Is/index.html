@@ -1,64 +1,500 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tá or Is? · Irish practice</title>
-<style>
-:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#183a35;background:#f4f3eb;font-size:16px}*{box-sizing:border-box}body{margin:0}button,select{font:inherit}button{cursor:pointer}header{background:#133e36;color:#fff;padding:26px max(20px,calc((100vw - 1040px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px}header h1{font-size:clamp(27px,4vw,42px);line-height:1;margin:6px 0}header p{color:#d2e8dc;margin:0}.logo{font-size:12px;font-weight:800;letter-spacing:.14em;color:#b5e0c1;text-transform:uppercase}.shell{max-width:1040px;margin:32px auto;padding:0 20px 50px}.intro{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:white;border:1px solid #dfdfd5;border-radius:19px;box-shadow:0 8px 26px #193f3010}.rule{padding:24px}.rule b{font-size:30px;color:#126b54}.rule h2{margin:10px 0 7px;font-size:19px}.rule p{line-height:1.5;margin:0 0 12px;color:#46625b}.example{border-top:1px solid #e6ece7;padding-top:12px;font-weight:700}.example small{display:block;font-weight:400;color:#55736b;margin-top:3px}.note{background:#e9efe4;border-left:4px solid #5d9179;padding:14px 18px;margin:16px 0 22px;border-radius:8px;line-height:1.5}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}.toolbar label{font-size:14px;font-weight:700}.toolbar select{margin-left:8px;border-radius:9px;border:1px solid #c8d6cd;padding:9px;background:white;color:#153c34}.stats{display:flex;gap:14px;color:#47675d;font-size:14px;font-weight:700}.quiz{padding:30px;min-height:410px}.topline{display:flex;justify-content:space-between;gap:12px;color:#607970;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.bar{height:7px;background:#e8eee8;border-radius:99px;margin:16px 0 26px;overflow:hidden}.fill{height:100%;background:#1b8765;transition:width .25s}.english{font-size:clamp(20px,3vw,27px);font-weight:750;margin:0 0 16px;color:#203d36}.cloze{font-family:Georgia,serif;font-size:clamp(27px,4vw,37px);line-height:1.4;margin:0 0 7px;color:#123d33}.blank{border-bottom:3px solid #dfa84c;display:inline-block;min-width:95px;text-align:center;color:#0d7559}.hint{color:#657e74;margin:0 0 24px;font-size:14px}.choices{display:flex;gap:12px;flex-wrap:wrap}.choice,.next,.secondary{border-radius:11px;padding:13px 25px;font-weight:800;border:2px solid #1a755a;background:#fff;color:#176149;min-width:125px}.choice:hover:not(:disabled),.secondary:hover{background:#e7f4eb}.choice:focus-visible,.next:focus-visible,.secondary:focus-visible,select:focus-visible{outline:3px solid #e8ae4d;outline-offset:3px}.choice:disabled{cursor:default;opacity:.57}.choice.correct{background:#dcf2e4;border-color:#15905c;color:#15553f;opacity:1}.choice.wrong{background:#fbe8dc;border-color:#ce6644;color:#813f29;opacity:1}.feedback{margin-top:24px;padding:20px;border-radius:13px;background:#edf7ef;border:1px solid #cde7d5}.feedback.wrong{background:#fff5ee;border-color:#ebd3c6}.feedback h3{margin:0 0 9px}.feedback p{line-height:1.5;margin:7px 0}.group{font-family:Georgia,serif;font-size:19px;color:#164e3f}.subtle{font-size:13px;color:#5e766c}.next{background:#167455;color:#fff;margin-top:18px}.next:hover{background:#0e5d43}.secondary{min-width:unset;padding:9px 14px;font-size:14px}.end{text-align:center;padding:42px 15px}.end h2{font-size:30px}.end p{line-height:1.5}.learn{margin-top:26px;padding:24px 30px}.learn h2{margin:0 0 14px}.learn ul{padding-left:22px;line-height:1.65;margin:0}.learn a{color:#116b52}footer{font-size:13px;color:#70877e;margin-top:22px;text-align:center}@media(max-width:620px){header{padding:24px 20px}.intro{grid-template-columns:1fr}.quiz{padding:22px}.toolbar{align-items:flex-start}.stats{width:100%}.choice{flex:1}.rule{padding:20px}}
-</style></head><body><header><div><div class="logo">Gaeilge · grammar practice</div><h1>Tá or Is?</h1><p>Choose the Irish “to be” that fits the meaning.</p></div><div aria-hidden="true" style="font-size:44px">☘</div></header><main class="shell"><section class="intro" aria-label="Quick rules"><div class="card rule"><b>Tá</b><h2>A state, place, or action</h2><p>Use a form of <i>bí</i> with an adjective, a location, or an ongoing action. Possession often uses <i>ag</i>.</p><div class="example">Tá mé tuirseach. <small>I am tired.</small></div></div><div class="card rule"><b>Is</b><h2>A category or identity</h2><p>Use the copula to classify someone or identify who or what they are. It also appears in several set expressions.</p><div class="example">Is múinteoir í. <small>She is a teacher.</small></div></div></section><div class="note"><strong>Useful nuance:</strong> “Is dochtúir é” and “Tá sé ina dhochtúir” can both mean “He is a doctor”. The second uses the separate <i>ina + noun</i> construction. Judge each sentence by its whole pattern, rather than by the English “is” alone.</div><div class="toolbar"><label for="topic">Practice <select id="topic"><option value="all">All topics</option><option value="state">States & location</option><option value="identity">Identity & classification</option><option value="pattern">Everyday patterns</option><option value="nuance">Tricky contrasts</option></select></label><div class="stats"><span id="score">0 / 0 correct</span><span id="streak">Streak 0</span></div></div><section class="card quiz" id="quiz" aria-live="polite"></section><section class="card learn"><h2>Remember the pattern</h2><ul><li><strong>Tá + adjective:</strong> <i>Tá an tae te</i> (the tea is hot).</li><li><strong>Tá + place:</strong> <i>Tá an leabhar ar an mbord</i> (the book is on the table).</li><li><strong>Is + noun:</strong> <i>Is ceoltóir í</i> (she is a musician).</li><li><strong>Is + identity:</strong> <i>Is í Máire an múinteoir</i> (Máire is the teacher).</li><li><strong>Special expressions:</strong> <i>Is maith liom</i> (I like), <i>Is as Corcaigh mé</i> (I am from Cork).</li></ul><p class="subtle">Scope: present affirmative sentences. Questions, negatives and past forms introduce more forms than <i>tá</i> and <i>is</i>.</p><p class="subtle">Grammar reference: <a href="https://irishlanguage.ie/an-caighdean-oifigiuil-the-copula/" target="_blank" rel="noopener noreferrer">An Caighdeán Oifigiúil, Chapter 7 (copula)</a> and <a href="https://irishlanguage.ie/the-copula-an-chopail/" target="_blank" rel="noopener noreferrer">the learner's guide to the copula</a>.</p></section><footer>Runs entirely in this file. No sign-in or internet connection needed to practise.</footer></main>
-<script>
-'use strict';
-// Each item supplies the exact remainder of the sentence so that the only choice is Tá/Is.
-const Q=[
-['state','I am tired.','mé tuirseach.','Tá','Tuirseach is an adjective describing a current state.','[Tá mé] [tuirseach].','taw may TIR-shakh'],
-['state','The tea is hot.','an tae te.','Tá','Te describes the temperature of the tea.','[Tá an tae] [te].','taw un tay teh'],
-['state','She is happy.','sí sásta.','Tá','Sásta describes how she feels.','[Tá sí] [sásta].','taw shee SAW-stuh'],
-['state','The door is open.','an doras oscailte.','Tá','Oscailte describes the present condition of the door.','[Tá an doras] [oscailte].','taw un DUR-us US-kil-tyuh'],
-['state','The room is quiet.','an seomra ciúin.','Tá','Ciúin is an adjective describing the room.','[Tá an seomra] [ciúin].','taw un SHOHM-ruh kyoon'],
-['state','The book is on the table.','an leabhar ar an mbord.','Tá','Ar an mbord tells us where the book is.','[Tá an leabhar] [ar an mbord].','taw un LYOW-ur er un mord'],
-['state','I am at home.','mé sa bhaile.','Tá','Sa bhaile gives your location.','[Tá mé] [sa bhaile].','taw may suh WAH-lyuh'],
-['state','They are in the garden.','siad sa ghairdín.','Tá','Sa ghairdín tells us where they are.','[Tá siad] [sa ghairdín].','taw SHEE-ud suh ghar-DEEN'],
-['state','There is a shop here.','siopa anseo.','Tá','This states the existence and location of a shop.','[Tá siopa] [anseo].','taw SHUP-uh un-SHUH'],
-['state','I am reading.','mé ag léamh.','Tá','Ag + verbal noun expresses an action in progress.','[Tá mé] [ag léamh].','taw may eg LAYV'],
-['state','They are working.','siad ag obair.','Tá','Ag obair describes an ongoing action.','[Tá siad] [ag obair].','taw SHEE-ud eg UB-ir'],
-['state','She is sleeping.','sí ina codladh.','Tá','Ina codladh is the conventional expression for being asleep.','[Tá sí] [ina codladh].','taw shee in-uh KUL-uh'],
-['identity','She is a musician.','ceoltóir í.','Is','Ceoltóir names the kind of person she is: a classification.','[Is ceoltóir] [í].','iss KYOHL-tohr ee'],
-['identity','He is a teacher.','múinteoir é.','Is','Múinteoir is a noun naming a profession.','[Is múinteoir] [é].','iss MOON-chohr ay'],
-['identity','I am a student.','mac léinn mé.','Is','Mac léinn classifies you as a student.','[Is mac léinn] [mé].','iss mok LAYN may'],
-['identity','They are doctors.','dochtúirí iad.','Is','Dochtúirí is a noun naming their profession.','[Is dochtúirí] [iad].','iss dukh-TOO-ree EE-ud'],
-['identity','It is a cat.','cat é.','Is','Cat names the kind of animal it is.','[Is cat] [é].','iss kot ay'],
-['identity','It is an interesting book.','leabhar suimiúil é.','Is','Leabhar suimiúil is a noun phrase classifying it as a kind of book.','[Is leabhar suimiúil] [é].','iss LYOW-ur SIM-ool ay'],
-['identity','Máire is the teacher.','í Máire an múinteoir.','Is','This identifies the particular teacher. With a definite identity, the pronoun í appears before Máire.','[Is í Máire] [an múinteoir].','iss ee MAW-ruh un MOON-chohr'],
-['identity','Seán is the doctor.','é Seán an dochtúir.','Is','This identifies a particular doctor; é precedes the name in this construction.','[Is é Seán] [an dochtúir].','iss ay SHAWN un dukh-TOOR'],
-['identity','This is my brother.','é seo mo dheartháir.','Is','This identifies a person. The copula takes the pattern Is é seo...','[Is é seo] [mo dheartháir].','iss ay shuh muh YAR-hawr'],
-['identity','That is the answer.','é sin an freagra.','Is','This identifies a particular answer, using Is é sin...','[Is é sin] [an freagra].','iss ay shin un FRAG-ruh'],
-['pattern','I like music.','maith liom ceol.','Is','Is maith liom is the fixed expression for “I like”.','[Is maith liom] [ceol].','iss mah lum kyohl'],
-['pattern','She likes tea.','maith léi tae.','Is','Is maith léi is the fixed expression for “she likes”.','[Is maith léi] [tae].','iss mah lay tay'],
-['pattern','I prefer coffee.','fearr liom caife.','Is','Is fearr liom is the usual expression for “I prefer”.','[Is fearr liom] [caife].','iss fyarr lum KAF-uh'],
-['pattern','It is possible.','féidir é.','Is','Is féidir is a set expression meaning “it is possible” or “one can”.','[Is féidir] [é].','iss FAY-djir ay'],
-['pattern','I am from Cork.','as Corcaigh mé.','Is','Origin is commonly expressed by Is as + place + person.','[Is as Corcaigh] [mé].','iss oss KUR-kee may'],
-['pattern','He is from Ireland.','as Éirinn é.','Is','Origin uses the copular expression Is as...','[Is as Éirinn] [é].','iss oss AY-rin ay'],
-['pattern','I am called Liam.','mise Liam.','Is','Is mise Liam identifies who you are; mise is emphatic “I”.','[Is mise] [Liam].','iss MISH-uh LEE-um'],
-['pattern','I have a book.','leabhar agam.','Tá','Possession commonly uses Tá + thing + ag + owner: literally a book is at me.','[Tá leabhar] [agam].','taw LYOW-ur AG-um'],
-['pattern','She has a dog.','madra aici.','Tá','Aici (“at her”) is part of the usual possession pattern with tá.','[Tá madra] [aici].','taw MOD-ruh EK-ee'],
-['pattern','I am hungry.','ocras orm.','Tá','The Irish pattern is Tá ocras orm, literally hunger is on me.','[Tá ocras] [orm].','taw UK-rus UR-um'],
-['pattern','He is twenty years old.','sé fiche bliain d’aois.','Tá','Age is expressed with tá + age + d’aois.','[Tá sé] [fiche bliain d’aois].','taw shay FIH-huh BLEE-un deesh'],
-['nuance','He is a doctor. (Use the “in his profession” construction.)','sé ina dhochtúir.','Tá','Ina dhochtúir uses i + possessive + profession. With this pattern, use tá; compare Is dochtúir é.','[Tá sé] [ina dhochtúir].','taw shay in-uh GHUKH-toor'],
-['nuance','He is a doctor. (Classify him directly.)','dochtúir é.','Is','Direct classification with a noun uses is. Compare Tá sé ina dhochtúir.','[Is dochtúir] [é].','iss DUKH-toor ay'],
-['nuance','Máire is in the school.','Máire sa scoil.','Tá','This gives Máire’s physical location. Compare Is múinteoir í Máire for her profession.','[Tá Máire] [sa scoil].','taw MAW-ruh suh SKU-il'],
-['nuance','Máire is a teacher.','múinteoir í Máire.','Is','This states what Máire does or is by category; múinteoir is a noun.','[Is múinteoir] [í Máire].','iss MOON-chohr ee MAW-ruh'],
-['nuance','The car is red.','an carr dearg.','Tá','Dearg is an adjective describing a property. Even a lasting property can use tá.','[Tá an carr] [dearg].','taw un kowr JAR-ug'],
-['nuance','It is a red car.','carr dearg é.','Is','Carr dearg is a noun phrase, classifying it as a red car.','[Is carr dearg] [é].','iss kowr JAR-ug ay'],
-['nuance','This food is good.','an bia seo go maith.','Tá','Go maith describes the food’s quality in this tá construction.','[Tá an bia seo] [go maith].','taw un BEE-uh shuh guh mah'],
-['nuance','It is good food.','bia maith é.','Is','Bia maith is a noun phrase meaning “good food”, so this classifies it.','[Is bia maith] [é].','iss BEE-uh mah ay'],
-['nuance','The water is cold.','an t-uisce fuar.','Tá','Fuar is an adjective describing the water.','[Tá an t-uisce] [fuar].','taw un TISH-kuh FOO-ur'],
-['nuance','It is cold water.','uisce fuar é.','Is','Uisce fuar is a noun phrase classifying it as cold water.','[Is uisce fuar] [é].','iss ISH-kuh FOO-ur ay']
-];
-const topic=document.getElementById('topic'),box=document.getElementById('quiz'),scoreEl=document.getElementById('score'),streakEl=document.getElementById('streak');
-let deck=[],current=null,answered=false,seen=0,correct=0,streak=0,missed=[],retry=false;
-function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function init(list){deck=shuffle(list||Q.filter(q=>topic.value==='all'||q[0]===topic.value));seen=correct=streak=0;missed=[];retry=!!list;update();next()}
-function update(){scoreEl.textContent=`${correct} / ${seen} correct`;streakEl.textContent=`Streak ${streak}`}
-function next(){answered=false;if(!deck.length){end();return}current=deck.pop();let n=seen+1,total=seen+deck.length+1;box.innerHTML=`<div class="topline"><span>${retry?'Review missed':'Question'} ${n} of ${total}</span><span>${esc(current[0])}</span></div><div class="bar" aria-hidden="true"><div class="fill" style="width:${Math.round((seen/total)*100)}%"></div></div><p class="english">${esc(current[1])}</p><p class="cloze"><span class="blank" id="blank">___</span> ${esc(current[2])}</p><p class="hint">Choose the form that completes the Irish sentence.</p><div class="choices"><button class="choice" data-answer="Tá">Tá</button><button class="choice" data-answer="Is">Is</button></div><div id="result" role="status" aria-live="polite"></div>`;box.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.answer)))}
-function choose(value){if(answered)return;answered=true;seen++;const ok=value===current[3];if(ok){correct++;streak++}else{streak=0;missed.push(current)}update();document.getElementById('blank').textContent=current[3];box.querySelectorAll('.choice').forEach(b=>{b.disabled=true;if(b.dataset.answer===current[3])b.classList.add('correct');else if(b.dataset.answer===value)b.classList.add('wrong')});document.getElementById('result').innerHTML=`<div class="feedback ${ok?'':'wrong'}"><h3>${ok?'Correct!':'Not quite — use '+esc(current[3])+'.'}</h3><p class="group">${esc(current[5])}</p><p>${esc(current[4])}</p><p class="subtle">Approximate pronunciation: ${esc(current[6])}</p></div><button class="next" id="next">${deck.length?'Next question':'See results'} →</button>`;document.getElementById('next').focus();document.getElementById('next').addEventListener('click',next)}
-function end(){const percent=Math.round(100*correct/seen)||0;box.innerHTML=`<div class="end"><div class="logo">Session complete</div><h2>${percent}% correct</h2><p>You got ${correct} of ${seen} right.${missed.length?' Review your missed sentences to reinforce the patterns.':' Nice work!'}</p><div class="choices" style="justify-content:center">${missed.length?'<button class="next" id="review">Review missed</button>':''}<button class="secondary" id="again">New round</button></div></div>`;document.getElementById('again').addEventListener('click',()=>init());if(missed.length)document.getElementById('review').addEventListener('click',()=>init(missed))}
-topic.addEventListener('change',()=>init());document.addEventListener('keydown',e=>{if(answered||e.altKey||e.ctrlKey||e.metaKey||e.target.tagName==='SELECT')return;if(e.key==='1')box.querySelector('[data-answer="Tá"]')?.click();if(e.key==='2')box.querySelector('[data-answer="Is"]')?.click()});init();
-</script></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tá or Is? · Irish practice</title>
+    <style>
+        :root {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            color: #183a35;
+            background: #f4f3eb;
+            font-size: 16px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0
+        }
+
+        button,
+        select {
+            font: inherit
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        header {
+            background: #133e36;
+            color: #fff;
+            padding: 26px max(20px, calc((100vw - 1040px)/2));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px
+        }
+
+        header h1 {
+            font-size: clamp(27px, 4vw, 42px);
+            line-height: 1;
+            margin: 6px 0
+        }
+
+        header p {
+            color: #d2e8dc;
+            margin: 0
+        }
+
+        .logo {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            color: #b5e0c1;
+            text-transform: uppercase
+        }
+
+        .shell {
+            max-width: 1040px;
+            margin: 32px auto;
+            padding: 0 20px 50px
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dfdfd5;
+            border-radius: 19px;
+            box-shadow: 0 8px 26px #193f3010
+        }
+
+        .rule {
+            padding: 24px
+        }
+
+        .rule b {
+            font-size: 30px;
+            color: #126b54
+        }
+
+        .rule h2 {
+            margin: 10px 0 7px;
+            font-size: 19px
+        }
+
+        .rule p {
+            line-height: 1.5;
+            margin: 0 0 12px;
+            color: #46625b
+        }
+
+        .example {
+            border-top: 1px solid #e6ece7;
+            padding-top: 12px;
+            font-weight: 700
+        }
+
+        .example small {
+            display: block;
+            font-weight: 400;
+            color: #55736b;
+            margin-top: 3px
+        }
+
+        .note {
+            background: #e9efe4;
+            border-left: 4px solid #5d9179;
+            padding: 14px 18px;
+            margin: 16px 0 22px;
+            border-radius: 8px;
+            line-height: 1.5
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px
+        }
+
+        .toolbar label {
+            font-size: 14px;
+            font-weight: 700
+        }
+
+        .toolbar select {
+            margin-left: 8px;
+            border-radius: 9px;
+            border: 1px solid #c8d6cd;
+            padding: 9px;
+            background: white;
+            color: #153c34
+        }
+
+        .stats {
+            display: flex;
+            gap: 14px;
+            color: #47675d;
+            font-size: 14px;
+            font-weight: 700
+        }
+
+        .quiz {
+            padding: 30px;
+            min-height: 410px
+        }
+
+        .topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: #607970;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .07em
+        }
+
+        .bar {
+            height: 7px;
+            background: #e8eee8;
+            border-radius: 99px;
+            margin: 16px 0 26px;
+            overflow: hidden
+        }
+
+        .fill {
+            height: 100%;
+            background: #1b8765;
+            transition: width .25s
+        }
+
+        .english {
+            font-size: clamp(20px, 3vw, 27px);
+            font-weight: 750;
+            margin: 0 0 16px;
+            color: #203d36
+        }
+
+        .cloze {
+            font-family: Georgia, serif;
+            font-size: clamp(27px, 4vw, 37px);
+            line-height: 1.4;
+            margin: 0 0 7px;
+            color: #123d33
+        }
+
+        .blank {
+            border-bottom: 3px solid #dfa84c;
+            display: inline-block;
+            min-width: 95px;
+            text-align: center;
+            color: #0d7559
+        }
+
+        .hint {
+            color: #657e74;
+            margin: 0 0 24px;
+            font-size: 14px
+        }
+
+        .choices {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .choice,
+        .next,
+        .secondary {
+            border-radius: 11px;
+            padding: 13px 25px;
+            font-weight: 800;
+            border: 2px solid #1a755a;
+            background: #fff;
+            color: #176149;
+            min-width: 125px
+        }
+
+        .choice:hover:not(:disabled),
+        .secondary:hover {
+            background: #e7f4eb
+        }
+
+        .choice:focus-visible,
+        .next:focus-visible,
+        .secondary:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #e8ae4d;
+            outline-offset: 3px
+        }
+
+        .choice:disabled {
+            cursor: default;
+            opacity: .57
+        }
+
+        .choice.correct {
+            background: #dcf2e4;
+            border-color: #15905c;
+            color: #15553f;
+            opacity: 1
+        }
+
+        .choice.wrong {
+            background: #fbe8dc;
+            border-color: #ce6644;
+            color: #813f29;
+            opacity: 1
+        }
+
+        .feedback {
+            margin-top: 24px;
+            padding: 20px;
+            border-radius: 13px;
+            background: #edf7ef;
+            border: 1px solid #cde7d5
+        }
+
+        .feedback.wrong {
+            background: #fff5ee;
+            border-color: #ebd3c6
+        }
+
+        .feedback h3 {
+            margin: 0 0 9px
+        }
+
+        .feedback p {
+            line-height: 1.5;
+            margin: 7px 0
+        }
+
+        .group {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            color: #164e3f
+        }
+
+        .subtle {
+            font-size: 13px;
+            color: #5e766c
+        }
+
+        .next {
+            background: #167455;
+            color: #fff;
+            margin-top: 18px
+        }
+
+        .next:hover {
+            background: #0e5d43
+        }
+
+        .secondary {
+            min-width: unset;
+            padding: 9px 14px;
+            font-size: 14px
+        }
+
+        .end {
+            text-align: center;
+            padding: 42px 15px
+        }
+
+        .end h2 {
+            font-size: 30px
+        }
+
+        .end p {
+            line-height: 1.5
+        }
+
+        .learn {
+            margin-top: 26px;
+            padding: 24px 30px
+        }
+
+        .learn h2 {
+            margin: 0 0 14px
+        }
+
+        .learn ul {
+            padding-left: 22px;
+            line-height: 1.65;
+            margin: 0
+        }
+
+        .learn a {
+            color: #116b52
+        }
+
+        footer {
+            font-size: 13px;
+            color: #70877e;
+            margin-top: 22px;
+            text-align: center
+        }
+
+        @media(max-width:620px) {
+            header {
+                padding: 24px 20px
+            }
+
+            .intro {
+                grid-template-columns: 1fr
+            }
+
+            .quiz {
+                padding: 22px
+            }
+
+            .toolbar {
+                align-items: flex-start
+            }
+
+            .stats {
+                width: 100%
+            }
+
+            .choice {
+                flex: 1
+            }
+
+            .rule {
+                padding: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="logo">Gaeilge · grammar practice</div>
+            <h1>Tá or Is?</h1>
+            <p>Choose the Irish “to be” that fits the meaning.</p>
+        </div>
+        <div aria-hidden="true" style="font-size:44px">☘</div>
+    </header>
+    <main class="shell">
+        <section class="intro" aria-label="Quick rules">
+            <div class="card rule"><b>Tá</b>
+                <h2>A state, place, or action</h2>
+                <p>Use a form of <i>bí</i> with an adjective, a location, or an ongoing action. Possession often uses
+                    <i>ag</i>.</p>
+                <div class="example">Tá mé tuirseach. <small>I am tired.</small></div>
+            </div>
+            <div class="card rule"><b>Is</b>
+                <h2>A category or identity</h2>
+                <p>Use the copula to classify someone or identify who or what they are. It also appears in several set
+                    expressions.</p>
+                <div class="example">Is múinteoir í. <small>She is a teacher.</small></div>
+            </div>
+        </section>
+        <div class="note"><strong>Useful nuance:</strong> “Is dochtúir é” and “Tá sé ina dhochtúir” can both mean “He is
+            a doctor”. The second uses the separate <i>ina + noun</i> construction. Judge each sentence by its whole
+            pattern, rather than by the English “is” alone.</div>
+        <div class="toolbar"><label for="topic">Practice <select id="topic">
+                    <option value="all">All topics</option>
+                    <option value="state">States & location</option>
+                    <option value="identity">Identity & classification</option>
+                    <option value="pattern">Everyday patterns</option>
+                    <option value="nuance">Tricky contrasts</option>
+                </select></label>
+            <div class="stats"><span id="score">0 / 0 correct</span><span id="streak">Streak 0</span></div>
+        </div>
+        <section class="card quiz" id="quiz" aria-live="polite"></section>
+        <section class="card learn">
+            <h2>Remember the pattern</h2>
+            <ul>
+                <li><strong>Tá + adjective:</strong> <i>Tá an tae te</i> (the tea is hot).</li>
+                <li><strong>Tá + place:</strong> <i>Tá an leabhar ar an mbord</i> (the book is on the table).</li>
+                <li><strong>Is + noun:</strong> <i>Is ceoltóir í</i> (she is a musician).</li>
+                <li><strong>Is + identity:</strong> <i>Is í Máire an múinteoir</i> (Máire is the teacher).</li>
+                <li><strong>Special expressions:</strong> <i>Is maith liom</i> (I like), <i>Is as Corcaigh mé</i> (I am
+                    from Cork).</li>
+            </ul>
+            <p class="subtle">Scope: present affirmative sentences. Questions, negatives and past forms introduce more
+                forms than <i>tá</i> and <i>is</i>.</p>
+            <p class="subtle">Grammar reference: <a href="https://irishlanguage.ie/an-caighdean-oifigiuil-the-copula/"
+                    target="_blank" rel="noopener noreferrer">An Caighdeán Oifigiúil, Chapter 7 (copula)</a> and <a
+                    href="https://irishlanguage.ie/the-copula-an-chopail/" target="_blank" rel="noopener noreferrer">the
+                    learner's guide to the copula</a>.</p>
+        </section>
+        <footer>Runs entirely in this file. No sign-in or internet connection needed to practise.</footer>
+    </main>
+    <script>
+        'use strict';
+        // Each item supplies the exact remainder of the sentence so that the only choice is Tá/Is.
+        const Q = [
+            ['state', 'I am tired.', 'mé tuirseach.', 'Tá', 'Tuirseach is an adjective describing a current state.', '[Tá mé] [tuirseach].', 'taw may TIR-shakh'],
+            ['state', 'The tea is hot.', 'an tae te.', 'Tá', 'Te describes the temperature of the tea.', '[Tá an tae] [te].', 'taw un tay teh'],
+            ['state', 'She is happy.', 'sí sásta.', 'Tá', 'Sásta describes how she feels.', '[Tá sí] [sásta].', 'taw shee SAW-stuh'],
+            ['state', 'The door is open.', 'an doras oscailte.', 'Tá', 'Oscailte describes the present condition of the door.', '[Tá an doras] [oscailte].', 'taw un DUR-us US-kil-tyuh'],
+            ['state', 'The room is quiet.', 'an seomra ciúin.', 'Tá', 'Ciúin is an adjective describing the room.', '[Tá an seomra] [ciúin].', 'taw un SHOHM-ruh kyoon'],
+            ['state', 'The book is on the table.', 'an leabhar ar an mbord.', 'Tá', 'Ar an mbord tells us where the book is.', '[Tá an leabhar] [ar an mbord].', 'taw un LYOW-ur er un mord'],
+            ['state', 'I am at home.', 'mé sa bhaile.', 'Tá', 'Sa bhaile gives your location.', '[Tá mé] [sa bhaile].', 'taw may suh WAH-lyuh'],
+            ['state', 'They are in the garden.', 'siad sa ghairdín.', 'Tá', 'Sa ghairdín tells us where they are.', '[Tá siad] [sa ghairdín].', 'taw SHEE-ud suh ghar-DEEN'],
+            ['state', 'There is a shop here.', 'siopa anseo.', 'Tá', 'This states the existence and location of a shop.', '[Tá siopa] [anseo].', 'taw SHUP-uh un-SHUH'],
+            ['state', 'I am reading.', 'mé ag léamh.', 'Tá', 'Ag + verbal noun expresses an action in progress.', '[Tá mé] [ag léamh].', 'taw may eg LAYV'],
+            ['state', 'They are working.', 'siad ag obair.', 'Tá', 'Ag obair describes an ongoing action.', '[Tá siad] [ag obair].', 'taw SHEE-ud eg UB-ir'],
+            ['state', 'She is sleeping.', 'sí ina codladh.', 'Tá', 'Ina codladh is the conventional expression for being asleep.', '[Tá sí] [ina codladh].', 'taw shee in-uh KUL-uh'],
+            ['identity', 'She is a musician.', 'ceoltóir í.', 'Is', 'Ceoltóir names the kind of person she is: a classification.', '[Is ceoltóir] [í].', 'iss KYOHL-tohr ee'],
+            ['identity', 'He is a teacher.', 'múinteoir é.', 'Is', 'Múinteoir is a noun naming a profession.', '[Is múinteoir] [é].', 'iss MOON-chohr ay'],
+            ['identity', 'I am a student.', 'mac léinn mé.', 'Is', 'Mac léinn classifies you as a student.', '[Is mac léinn] [mé].', 'iss mok LAYN may'],
+            ['identity', 'They are doctors.', 'dochtúirí iad.', 'Is', 'Dochtúirí is a noun naming their profession.', '[Is dochtúirí] [iad].', 'iss dukh-TOO-ree EE-ud'],
+            ['identity', 'It is a cat.', 'cat é.', 'Is', 'Cat names the kind of animal it is.', '[Is cat] [é].', 'iss kot ay'],
+            ['identity', 'It is an interesting book.', 'leabhar suimiúil é.', 'Is', 'Leabhar suimiúil is a noun phrase classifying it as a kind of book.', '[Is leabhar suimiúil] [é].', 'iss LYOW-ur SIM-ool ay'],
+            ['identity', 'Máire is the teacher.', 'í Máire an múinteoir.', 'Is', 'This identifies the particular teacher. With a definite identity, the pronoun í appears before Máire.', '[Is í Máire] [an múinteoir].', 'iss ee MAW-ruh un MOON-chohr'],
+            ['identity', 'Seán is the doctor.', 'é Seán an dochtúir.', 'Is', 'This identifies a particular doctor; é precedes the name in this construction.', '[Is é Seán] [an dochtúir].', 'iss ay SHAWN un dukh-TOOR'],
+            ['identity', 'This is my brother.', 'é seo mo dheartháir.', 'Is', 'This identifies a person. The copula takes the pattern Is é seo...', '[Is é seo] [mo dheartháir].', 'iss ay shuh muh YAR-hawr'],
+            ['identity', 'That is the answer.', 'é sin an freagra.', 'Is', 'This identifies a particular answer, using Is é sin...', '[Is é sin] [an freagra].', 'iss ay shin un FRAG-ruh'],
+            ['pattern', 'I like music.', 'maith liom ceol.', 'Is', 'Is maith liom is the fixed expression for “I like”.', '[Is maith liom] [ceol].', 'iss mah lum kyohl'],
+            ['pattern', 'She likes tea.', 'maith léi tae.', 'Is', 'Is maith léi is the fixed expression for “she likes”.', '[Is maith léi] [tae].', 'iss mah lay tay'],
+            ['pattern', 'I prefer coffee.', 'fearr liom caife.', 'Is', 'Is fearr liom is the usual expression for “I prefer”.', '[Is fearr liom] [caife].', 'iss fyarr lum KAF-uh'],
+            ['pattern', 'It is possible.', 'féidir é.', 'Is', 'Is féidir is a set expression meaning “it is possible” or “one can”.', '[Is féidir] [é].', 'iss FAY-djir ay'],
+            ['pattern', 'I am from Cork.', 'as Corcaigh mé.', 'Is', 'Origin is commonly expressed by Is as + place + person.', '[Is as Corcaigh] [mé].', 'iss oss KUR-kee may'],
+            ['pattern', 'He is from Ireland.', 'as Éirinn é.', 'Is', 'Origin uses the copular expression Is as...', '[Is as Éirinn] [é].', 'iss oss AY-rin ay'],
+            ['pattern', 'I am called Liam.', 'mise Liam.', 'Is', 'Is mise Liam identifies who you are; mise is emphatic “I”.', '[Is mise] [Liam].', 'iss MISH-uh LEE-um'],
+            ['pattern', 'I have a book.', 'leabhar agam.', 'Tá', 'Possession commonly uses Tá + thing + ag + owner: literally a book is at me.', '[Tá leabhar] [agam].', 'taw LYOW-ur AG-um'],
+            ['pattern', 'She has a dog.', 'madra aici.', 'Tá', 'Aici (“at her”) is part of the usual possession pattern with tá.', '[Tá madra] [aici].', 'taw MOD-ruh EK-ee'],
+            ['pattern', 'I am hungry.', 'ocras orm.', 'Tá', 'The Irish pattern is Tá ocras orm, literally hunger is on me.', '[Tá ocras] [orm].', 'taw UK-rus UR-um'],
+            ['pattern', 'He is twenty years old.', 'sé fiche bliain d’aois.', 'Tá', 'Age is expressed with tá + age + d’aois.', '[Tá sé] [fiche bliain d’aois].', 'taw shay FIH-huh BLEE-un deesh'],
+            ['nuance', 'He is a doctor. (Use the “in his profession” construction.)', 'sé ina dhochtúir.', 'Tá', 'Ina dhochtúir uses i + possessive + profession. With this pattern, use tá; compare Is dochtúir é.', '[Tá sé] [ina dhochtúir].', 'taw shay in-uh GHUKH-toor'],
+            ['nuance', 'He is a doctor. (Classify him directly.)', 'dochtúir é.', 'Is', 'Direct classification with a noun uses is. Compare Tá sé ina dhochtúir.', '[Is dochtúir] [é].', 'iss DUKH-toor ay'],
+            ['nuance', 'Máire is in the school.', 'Máire sa scoil.', 'Tá', 'This gives Máire’s physical location. Compare Is múinteoir í Máire for her profession.', '[Tá Máire] [sa scoil].', 'taw MAW-ruh suh SKU-il'],
+            ['nuance', 'Máire is a teacher.', 'múinteoir í Máire.', 'Is', 'This states what Máire does or is by category; múinteoir is a noun.', '[Is múinteoir] [í Máire].', 'iss MOON-chohr ee MAW-ruh'],
+            ['nuance', 'The car is red.', 'an carr dearg.', 'Tá', 'Dearg is an adjective describing a property. Even a lasting property can use tá.', '[Tá an carr] [dearg].', 'taw un kowr JAR-ug'],
+            ['nuance', 'It is a red car.', 'carr dearg é.', 'Is', 'Carr dearg is a noun phrase, classifying it as a red car.', '[Is carr dearg] [é].', 'iss kowr JAR-ug ay'],
+            ['nuance', 'This food is good.', 'an bia seo go maith.', 'Tá', 'Go maith describes the food’s quality in this tá construction.', '[Tá an bia seo] [go maith].', 'taw un BEE-uh shuh guh mah'],
+            ['nuance', 'It is good food.', 'bia maith é.', 'Is', 'Bia maith is a noun phrase meaning “good food”, so this classifies it.', '[Is bia maith] [é].', 'iss BEE-uh mah ay'],
+            ['nuance', 'The water is cold.', 'an t-uisce fuar.', 'Tá', 'Fuar is an adjective describing the water.', '[Tá an t-uisce] [fuar].', 'taw un TISH-kuh FOO-ur'],
+            ['nuance', 'It is cold water.', 'uisce fuar é.', 'Is', 'Uisce fuar is a noun phrase classifying it as cold water.', '[Is uisce fuar] [é].', 'iss ISH-kuh FOO-ur ay']
+        ];
+        const topic = document.getElementById('topic'), box = document.getElementById('quiz'), scoreEl = document.getElementById('score'), streakEl = document.getElementById('streak');
+        let deck = [], current = null, answered = false, seen = 0, correct = 0, streak = 0, missed = [], retry = false;
+        function shuffle(a) { let b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[b[i], b[j]] = [b[j], b[i]] } return b }
+        function esc(s) { return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
+        function init(list) { deck = shuffle(list || Q.filter(q => topic.value === 'all' || q[0] === topic.value)); seen = correct = streak = 0; missed = []; retry = !!list; update(); next() }
+        function update() { scoreEl.textContent = `${correct} / ${seen} correct`; streakEl.textContent = `Streak ${streak}` }
+        function next() { answered = false; if (!deck.length) { end(); return } current = deck.pop(); let n = seen + 1, total = seen + deck.length + 1; box.innerHTML = `<div class="topline"><span>${retry ? 'Review missed' : 'Question'} ${n} of ${total}</span><span>${esc(current[0])}</span></div><div class="bar" aria-hidden="true"><div class="fill" style="width:${Math.round((seen / total) * 100)}%"></div></div><p class="english">${esc(current[1])}</p><p class="cloze"><span class="blank" id="blank">___</span> ${esc(current[2])}</p><p class="hint">Choose the form that completes the Irish sentence.</p><div class="choices"><button class="choice" data-answer="Tá">Tá</button><button class="choice" data-answer="Is">Is</button></div><div id="result" role="status" aria-live="polite"></div>`; box.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => choose(b.dataset.answer))) }
+        function choose(value) { if (answered) return; answered = true; seen++; const ok = value === current[3]; if (ok) { correct++; streak++ } else { streak = 0; missed.push(current) } update(); document.getElementById('blank').textContent = current[3]; box.querySelectorAll('.choice').forEach(b => { b.disabled = true; if (b.dataset.answer === current[3]) b.classList.add('correct'); else if (b.dataset.answer === value) b.classList.add('wrong') }); document.getElementById('result').innerHTML = `<div class="feedback ${ok ? '' : 'wrong'}"><h3>${ok ? 'Correct!' : 'Not quite — use ' + esc(current[3]) + '.'}</h3><p class="group">${esc(current[5])}</p><p>${esc(current[4])}</p><p class="subtle">Approximate pronunciation: ${esc(current[6])}</p></div><button class="next" id="next">${deck.length ? 'Next question' : 'See results'} →</button>`; document.getElementById('next').focus(); document.getElementById('next').addEventListener('click', next) }
+        function end() { const percent = Math.round(100 * correct / seen) || 0; box.innerHTML = `<div class="end"><div class="logo">Session complete</div><h2>${percent}% correct</h2><p>You got ${correct} of ${seen} right.${missed.length ? ' Review your missed sentences to reinforce the patterns.' : ' Nice work!'}</p><div class="choices" style="justify-content:center">${missed.length ? '<button class="next" id="review">Review missed</button>' : ''}<button class="secondary" id="again">New round</button></div></div>`; document.getElementById('again').addEventListener('click', () => init()); if (missed.length) document.getElementById('review').addEventListener('click', () => init(missed)) }
+        topic.addEventListener('change', () => init()); document.addEventListener('keydown', e => { if (answered || e.altKey || e.ctrlKey || e.metaKey || e.target.tagName === 'SELECT') return; if (e.key === '1') box.querySelector('[data-answer="Tá"]')?.click(); if (e.key === '2') box.querySelector('[data-answer="Is"]')?.click() }); init();
+    </script>
+</body>
+
+</html>
